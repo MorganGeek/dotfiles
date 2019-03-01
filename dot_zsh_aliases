@@ -21,6 +21,7 @@ alias myissues='mb'
 alias me='mb'
 alias hack='hacker'
 alias done='task_done'
+alias h='cd $HOME'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
