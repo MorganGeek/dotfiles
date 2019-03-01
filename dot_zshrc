@@ -98,4 +98,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk use java 8.0.202-zulu
 eval "$(fasd --init auto)"
-
+unlink "$HOME/Library/Application Support/Code/User/settings.json"
+ln -s "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+cm apply
