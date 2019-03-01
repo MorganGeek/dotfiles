@@ -23,6 +23,7 @@ alias hack='hacker'
 alias done='task_done'
 alias h='cd $HOME'
 alias sshpub='cat ~/.ssh/id_rsa.pub'
+alias diff='colordiff'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
