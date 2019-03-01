@@ -13,6 +13,7 @@ alias backlogs="jira jql \"status = New AND project IN (CICD, TOOL) AND Created 
 alias backlog=toollist
 alias jirasearch='issues'
 alias agenda='calendar'
+alias b='backlog'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
