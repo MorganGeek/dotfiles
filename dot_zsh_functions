@@ -1,0 +1,24 @@
+function google() {
+    open -na "Google Chrome" --args "https://www.google.com/search?q=$*"
+}
+function stackoverflow() {
+    open -na "Google Chrome" --args "https://www.google.com/search?q=site:stackoverflow.com $*"
+}
+function github() {
+    open -na "Google Chrome" --args "https://github.com/search?q=$*"
+}
+function hacker() {
+    open -na "Google Chrome" --args "https://hn.algolia.com/?sort=byDate&query=$*"
+}
+function gmail() {
+    open -na "Google Chrome" --args "https://mail.google.com/mail/u/0"
+}
+function gmail2() {
+    open -na "Google Chrome" --args "https://mail.google.com/mail/u/1"
+}
+function tooling() {
+    open -na "Google Chrome" --args "https://issues.collibra.com/secure/RapidBoard.jspa?rapidView=449&projectKey=TOOL&view=planning.nodetail"
+}
+function issues() {
+    jira jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
+}

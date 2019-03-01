@@ -1,0 +1,25 @@
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+# My custom aliases
+alias gcls='git clone --depth 1 --recurse-submodules'
+alias cm='chezmoi'
+alias grep='rg'
+alias npmlist='npm list -g --depth 0'
+alias toollist="jira jql \"project = 'Internal Tooling'\""
+alias backlogs="jira jql \"status = New AND project IN (CICD, TOOL) AND Created > -2w ORDER BY Priority DESC\""
+alias backlog=toollist
+
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
