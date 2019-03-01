@@ -14,6 +14,12 @@ alias backlog=toollist
 alias jirasearch='issues'
 alias agenda='calendar'
 alias b='backlog'
+alias mails="gmail && gmail2"
+alias mybacklog="jira my-issues && asana"
+alias mb='mybacklog'
+alias myissues='mb'
+alias me='mb'
+alias hack='hacker'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
