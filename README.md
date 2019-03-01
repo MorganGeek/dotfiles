@@ -35,7 +35,12 @@ git clone https://github.com/AlexisBRENON/oh-my-zsh-reminder ~/.oh-my-zsh/custom
 ```
 
 ### install Meslo font
-Get it from `https://github.com/powerline/fonts/blob/master/Meslo%20Slashed/Meslo%20LG%20M%20Regular%20for%20Powerline.ttf` and configure it as default in iTerm2 Set this font in iTerm2 (14px is my personal preference) (iTerm → Preferences → Profiles → Text → Change Font).
+Get it from `https://github.com/powerline/fonts/blob/master/Meslo%20Slashed/Meslo%20LG%20M%20Regular%20for%20Powerline.ttf` and install it. 
+
+Mackup is already configured to sync the Font preferences in VSCode and iTerm2
+
+#### In case the VSCode settings are not in sync with the dotfiles : 
+`ln -s ~/.config/Code/User/settings.json "/Users/morganwattiez/Library/Application Support/Code/User/settings.json"`
 
 ### OSX Defaults
 ```
@@ -46,3 +51,5 @@ defaults write http://com.apple .screencapture location ~/Downloads
 
 ### Install NPM dependencies
 `npm install -g jira-node-cli`
+
+
