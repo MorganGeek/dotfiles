@@ -24,6 +24,23 @@ alias done='task_done'
 alias h='cd $HOME'
 alias sshpub='cat ~/.ssh/id_rsa.pub'
 alias diff='colordiff'
+alias chgrp='chgrp --preserve-root'  # Parenting changing perms on /
+alias chmod='chmod --preserve-root'
+alias cp='cp -i' # confirmation before overwrite #
+alias mv='mv -i' # confirmation before overwrite
+alias rm='rm -I --preserve-root'    # Parenting deletion on /
+alias df='df -H'
+alias du='du -ch'
+alias headers='curl -I --compress'  # Find out if remote server supports gzip / mod_deflate or not #
+alias hist='history'
+alias path='echo -e ${PATH//:/\\n}' # Explode and display current PATH
+alias ping='ping -c 5'              # Stop after sending count ECHO_REQUEST packets
+alias p='ps -ef | grep -i '         # Show matching processes. Usage : p <process name>
+alias root='sudo -i'
+alias s=ls
+alias sl=ll
+alias ssla="openssl x509 -alias -noout -in"  # Usage : ssla <cert>
+alias v=vi
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
