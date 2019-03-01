@@ -25,3 +25,6 @@ function issues() {
 function calendar() {
     open -na "Google Chrome" --args "https://calendar.google.com/calendar/r?tab=mc"
 }
+function asana() {
+    open -na "Google Chrome" --args "https://app.asana.com"
+}
