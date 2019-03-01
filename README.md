@@ -30,7 +30,6 @@ fi
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9
-gsed  's#ZSH_THEME="robbyrussell"#ZSH_THEME="powerlevel9k/powerlevel9k"#g' -i ~/.zshrc
 git clone https://github.com/AlexisBRENON/oh-my-zsh-reminder ~/.oh-my-zsh/custom/plugins/reminder
 ```
 
@@ -43,5 +42,3 @@ defaults write http://com.apple .screencapture location ~/Downloads
 
 ### Install NPM dependencies
 `npm install -g jira-node-cli`
-
-
