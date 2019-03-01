@@ -22,3 +22,6 @@ function tooling() {
 function issues() {
     jira jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
 }
+function calendar() {
+    open -na "Google Chrome" --args "https://calendar.google.com/calendar/r?tab=mc"
+}

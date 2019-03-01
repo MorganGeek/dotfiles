@@ -11,7 +11,8 @@ alias npmlist='npm list -g --depth 0'
 alias toollist="jira jql \"project = 'Internal Tooling'\""
 alias backlogs="jira jql \"status = New AND project IN (CICD, TOOL) AND Created > -2w ORDER BY Priority DESC\""
 alias backlog=toollist
-
+alias jirasearch='issues'
+alias agenda='calendar'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
