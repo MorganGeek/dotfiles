@@ -8,19 +8,7 @@ sdk install java 8.0.202-zulu
 
 ### Install Docker Desktop for Mac
 ```
-docker_app=$(find /Applications/ \
-                  -name "Docker.app" -maxdepth 1 -mindepth 1 -type d)
-if [ -z "$docker_app" ]; then
-   curl -o ~/Downloads/Docker.dmg -sL https://download.docker.com/mac/stable/Docker.dmg
-   hdiutil verify ~/Downloads/Docker.dmg
-   hdiutil attach ~/Downloads/Docker.dmg -nobrowse
-   cp -R /Volumes/Docker/Docker.app /Applications/
-   hdiutil detach /Volumes/Docker
-   rm ~/Downloads/Docker.dmg
-   sudo /Applications/Docker.app/Contents/MacOS/Docker --quit-after-install --unattended
-else
-   echo "Docker for Mac is already installed."
-fi
+~/.scripts/bootstrap.sh
 ```
 
 ### Install dependencies (apps, fonts, ...) with Brew
