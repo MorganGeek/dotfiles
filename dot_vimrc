@@ -1,1 +1,4 @@
 syntax on
+set number
+colorscheme desert
+set laststatus=2

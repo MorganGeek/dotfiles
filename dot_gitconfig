@@ -1,3 +1,21 @@
 [user]
 	name = Morgan Wattiez
 	email = morgan.wattiez@collibra.com
+
+[alias]
+	tags = log --no-walk --tags --pretty=\"%h %d %s\" --decorate=full
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	st = status
+	contrib = ! git log --pretty=format:'%aN' | sort | uniq -c | sort -nr
+	whois = ! sh -c 'git log -i --pretty=\"format:%an <%ae>\" --author=\"\" | sort -u' -
+	di = diff -w --color-words=.
+	ac = ! git add . && git commit -v
+	unstage = reset HEAD
+	ru = clean -f
+	b = branch -vvar
+	follow = ! sh -c 'git checkout -t origin/$1' -
+	unfollow = ! git checkout master && git branch -d
+	sortdiff = ! sh -c 'git diff  | grep ^[+-] | sort --key=1.2 | uniq -u -s1'
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\"  --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
