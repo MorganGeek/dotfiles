@@ -10,6 +10,7 @@ cask "zoomus"
 cask "visual-studio-code"
 cask "pgadmin4"
 cask "sloth"
+cask "xmind"
 
 # Fonts
 cask "font-meslo-for-powerline"
