@@ -39,4 +39,7 @@ sudo pip3 install --upgrade pip
 ```
 
 ### Install AWS-CLI
-`pip3 install boto3`
+```
+pip3 install boto3
+pip3 install awscli
+```
