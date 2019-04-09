@@ -30,3 +30,13 @@ defaults write http://com.apple .screencapture location ~/Downloads
 
 ### Install NPM dependencies
 `npm install -g jira-node-cli`
+
+### Install pip
+```
+sudo easy_install pip
+sudo pip install --upgrade pip
+sudo pip3 install --upgrade pip
+```
+
+### Install AWS-CLI
+`pip3 install boto3`
