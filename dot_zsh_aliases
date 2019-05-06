@@ -10,6 +10,7 @@ alias grep='rg'
 alias npmlist='npm list -g --depth 0'
 alias toollist="jira jql \"project = 'Internal Tooling'\""
 alias backlogs="jira jql \"status = New AND project IN (CICD, TOOL) AND Created > -2w ORDER BY Priority DESC\""
+alias newissues='jira jql " project IN (CICD, TOOL) AND Created > -2w ORDER BY Priority DESC"'
 alias backlog=toollist
 alias jirasearch='issues'
 alias agenda='calendar'
@@ -40,7 +41,7 @@ alias s=ls
 alias sl=ll
 alias ssla="openssl x509 -alias -noout -in"  # Usage : ssla <cert>
 alias v=vi
-
+alias tunnel='sshuttle --dns -r "$(whoami)@management.collibra.com" 0/0'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
