@@ -10,7 +10,8 @@ alias grep='rg'
 alias npmlist='npm list -g --depth 0'
 alias toollist="jira jql \"project = 'Internal Tooling'\""
 alias backlogs="jira jql \"status = New AND project IN (CICD, TOOL) AND Created > -2w ORDER BY Priority DESC\""
-alias newissues='jira jql " project IN (CICD, TOOL) AND Created > -2w ORDER BY Created DESC, Priority DESC"'
+alias newissues='jira jql "project IN (CICD, TOOL) AND Created > -2w ORDER BY Created DESC, Priority DESC"'
+alias workingon="jira jql \"assignee = currentUser() AND resolution = Unresolved AND status not in ('In Review', 'Done', 'In Testing', 'Waiting For Build') OR QA = currentUser() AND status = 'In Testing' ORDER BY updated DESC\""
 alias backlog=toollist
 alias jirasearch='issues'
 alias agenda='calendar'
