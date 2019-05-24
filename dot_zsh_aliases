@@ -27,6 +27,7 @@ alias hack='hacker'
 alias done='task_done'
 alias h='cd $HOME'
 alias sshpub='cat ~/.ssh/id_rsa.pub'
+alias mgmt='ssh $(whoami)@management.collibra.com -i ~/.ssh/id_rsa'
 alias diff='colordiff'
 alias cp='cp -i' # confirmation before overwrite #
 alias mv='mv -i' # confirmation before overwrite
