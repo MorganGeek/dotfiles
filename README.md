@@ -14,10 +14,6 @@ sdk install java 8.0.202-zulu
 ### Install dependencies (apps, fonts, ...) with Brew
 `brew bundle`
 
-#### Enable Sleepwatcher 
-`brew services start sleepwatcher`
-`/usr/local/sbin/sleepwatcher --resume ~/.scripts/resume.sh`
-
 ### Install Oh My Zsh
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
