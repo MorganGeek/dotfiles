@@ -94,11 +94,14 @@ source $ZSH/oh-my-zsh.sh
 . ~/.zsh_functions
 . ~/.scripts/bootstrap.sh
 
+eval "$(fasd --init auto)"
+unlink "$HOME/Library/Application Support/Code/User/settings.json"
+ln -s "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+#cm apply
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!! https://github.com/sdkman/sdkman-cli/issues/613
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk use java 8.0.202-zulu
-eval "$(fasd --init auto)"
-unlink "$HOME/Library/Application Support/Code/User/settings.json"
-ln -s "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-cm apply
+
+sh ~/.scripts/resume.sh
