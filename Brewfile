@@ -11,7 +11,8 @@ cask "visual-studio-code"
 cask "pgadmin4"
 cask "sloth"
 cask "xmind"
-
+cask "vlc"
+ 
 # Fonts
 cask "font-meslo-for-powerline"
 
