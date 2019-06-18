@@ -45,7 +45,8 @@ alias ssla="openssl x509 -alias -noout -in"  # Usage : ssla <cert>
 alias v=vi
 alias tunnel='sshuttle --dns -r "$(whoami)@management.collibra.com" 0/0'
 alias ls='lsd'
-
+alias pip3='/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/pip'
+alias pip='pip3'
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
@@ -56,3 +57,4 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+

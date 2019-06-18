@@ -35,11 +35,17 @@ defaults write http://com.apple .screencapture location ~/Downloads
 ```
 sudo easy_install pip
 sudo pip install --upgrade pip
+
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+sudo python3 get-pip.py
 sudo pip3 install --upgrade pip
+ln -s /usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
+export PATH=$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/
 ```
 
 ### Install AWS-CLI
 ```
 pip3 install boto3
 pip3 install awscli
+pip3 install pipenv
 ```
