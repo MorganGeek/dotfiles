@@ -49,3 +49,6 @@ pip3 install boto3
 pip3 install awscli
 pip3 install pipenv
 ```
+
+### If Yubico is installed, run this : 
+`sudo ansible-playbook ~/Code/dotfiles/mac_playbook.yaml`

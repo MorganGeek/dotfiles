@@ -4,9 +4,21 @@
   become_method: sudo
   become: yes
   tasks:
-   - name: Ensure yubikey is needed for authentication
+   - name: Ensure yubikey is needed for authentication at login screen
      lineinfile:
-       path: /etc/pam.d/authorization
+       path: "{{ item }}"
        regexp: '^auth.*pam_yubico.so.*'
        line: "auth       required       /usr/local/lib/security/pam_yubico.so mode=challenge-response"
        insertbefore: "^account    required       pam_opendirectory.so"
+     with_items:
+       - /etc/pam.d/screensaver
+       - /etc/pam.d/authorization
+
+   - name: Ensure touch id is enough to authenticate with sudo
+     lineinfile:
+       path: "{{ item }}"
+       regexp: '^auth.*sufficient.*pam_tid.so.*'
+       line: "auth       sufficient     pam_tid.so"
+       insertafter: "^#.*"
+     with_items:
+       - /etc/pam.d/sudo
