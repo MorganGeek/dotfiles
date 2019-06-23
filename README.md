@@ -31,7 +31,7 @@ defaults write http://com.apple .screencapture location ~/Downloads
 ### Install NPM dependencies
 `npm install -g jira-node-cli`
 
-### Install pip
+### Install pip and pipenv
 ```
 sudo easy_install pip
 sudo pip install --upgrade pip
@@ -41,14 +41,20 @@ sudo python3 get-pip.py
 sudo pip3 install --upgrade pip
 ln -s /usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
 export PATH=$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/
+pip3 install pipenv
 ```
 
 ### Install AWS-CLI
 ```
 pip3 install boto3
 pip3 install awscli
-pip3 install pipenv
 ```
 
 ### If Yubico is installed, run this :
 `sudo ansible-playbook ~/Code/dotfiles/macsecure_playbook.yaml`
+
+## Upgrades
+
+### Upgrade dependencies with Brew
+`brew outdated | xargs brew upgrade`
+
