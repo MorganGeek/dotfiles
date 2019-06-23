@@ -3,7 +3,29 @@
   connection: local
   become_method: sudo
   become: yes
+
   tasks:
+   - name: Check yubikey binaries are installed
+     stat:
+       path: "{{ item }}"
+     with_items:
+      - /usr/local/bin/ykpamcfg
+      - "/Applications/YubiKey\ Manager.app/Contents/MacOS/ykman"
+
+   - name: Check Yubico is recognized
+     shell: "'/Applications/YubiKey Manager.app/Contents/MacOS/ykman' list | awk '{print $6}'"
+     register: yubicoChallenge
+     failed_when: "yubicoChallenge.rc != 0 or yubicoChallenge.stdout == ''"
+
+   - name: Get current user
+     become: false
+     local_action: command whoami
+     register: username_on_host
+
+   - name: Check yubico challenge exists
+     stat:
+       path: "/Users/{{ username_on_host.stdout }}/.yubico/challenge-{{ yubicoChallenge.stdout }}"
+
    - name: Ensure yubikey is needed for authentication at login screen
      lineinfile:
        path: "{{ item }}"
