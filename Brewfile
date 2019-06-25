@@ -12,7 +12,7 @@ cask "pgadmin4"
 cask "sloth"
 cask "xmind"
 cask "vlc"
- 
+
 # Fonts
 cask "font-meslo-for-powerline"
 
@@ -39,3 +39,4 @@ brew "ansible"
 brew "lsd"
 brew "swi-prolog"
 brew "logtalk"
+brex "terraform"
