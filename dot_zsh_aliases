@@ -3,31 +3,49 @@
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
-# My custom aliases
+# Git, dotfiles, ripgrep, Node.JS
 alias gcls='git clone --depth 1 --recurse-submodules'
 alias cm='chezmoi'
 alias grep='rg'
 alias npmlist='npm list -g --depth 0'
+
+# Jira
+alias jirasearch='issues'
 alias toollist="jira jql \"project = 'Internal Tooling'\""
 alias backlogs="jira jql \"status = New AND project IN (CICD, TOOL) AND Created > -2w ORDER BY Priority DESC\""
-alias newissues='jira jql "project IN (CICD, TOOL) AND Created > -2w ORDER BY Created DESC, Priority DESC"'
-alias workingon="jira jql \"assignee = currentUser() AND resolution = Unresolved AND status not in ('In Review', 'Done', 'In Testing', 'Waiting For Build') OR QA = currentUser() AND status = 'In Testing' ORDER BY updated DESC\""
-alias backlog=toollist
-alias jirasearch='issues'
-alias agenda='calendar'
-alias b='backlog'
-alias mails="gmail && gmail2"
-alias mybacklog="jira my-issues && asana"
 alias bakclogs='backlogs'
+alias lastissues='jira jql "project IN (CICD, TOOL) AND Created > -2w ORDER BY Created DESC, Priority DESC"'
+alias workingon="jira jql \"assignee = currentUser() AND resolution = Unresolved AND status not in ('In Review', 'Done', 'In Testing', 'Waiting For Build') OR QA = currentUser() AND status = 'In Testing' ORDER BY updated DESC\""
+alias newissues="jira jql \"project IN (CICD, TOOL) AND Created > -2w AND resolution = Unresolved AND status not in ('In Progress') ORDER BY Created DESC, Priority DESC\""
+alias backlog=toollist
 alias bakclog='backlog'
+alias b='backlog'
+alias mybacklog="jira my-issues && asana"
 alias mb='mybacklog'
 alias myissues='mb'
 alias me='mb'
+
+# News
 alias hack='hacker'
+
+# Events
+alias agenda='calendar'
+alias mails="gmail && gmail2"
+alias mailperso="gmail2"
+alias mailpro="gmail"
+
+# To do / Done
 alias done='task_done'
-alias h='cd $HOME'
-alias sshpub='cat ~/.ssh/id_rsa.pub'
+
+# Management / Security / SSH / SSL
 alias mgmt='ssh $(whoami)@management.collibra.com -i ~/.ssh/id_rsa'
+alias m='mgmt'
+alias tunnel='sshuttle --dns -r "$(whoami)@management.collibra.com" 0/0'
+alias sshpub='cat ~/.ssh/id_rsa.pub'
+alias ssla="openssl x509 -alias -noout -in"  # Usage : ssla <cert>
+
+# Misc
+alias h='cd $HOME'
 alias diff='colordiff'
 alias cp='cp -i' # confirmation before overwrite #
 alias mv='mv -i' # confirmation before overwrite
@@ -41,13 +59,10 @@ alias p='ps -ef | grep -i '         # Show matching processes. Usage : p <proces
 alias root='sudo -i'
 alias s=ls
 alias sl=ll
-alias ssla="openssl x509 -alias -noout -in"  # Usage : ssla <cert>
 alias v=vi
-alias tunnel='sshuttle --dns -r "$(whoami)@management.collibra.com" 0/0'
 alias ls='lsd'
 alias pip='pip3'
 alias c='cat'
-alias m='mgmt'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
@@ -60,3 +75,4 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
+# This is the end ;( ... for now ;D
