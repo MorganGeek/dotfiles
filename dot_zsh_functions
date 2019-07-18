@@ -28,3 +28,12 @@ function calendar() {
 function asana() {
     open -na "Google Chrome" --args "https://app.asana.com"
 }
+function bookmarks() {
+    open -na "Google Chrome" --args "https://github.com/MorganGeek/bookmarks/blob/master/README.md"
+}
+function spotify() {
+    open -na "Google Chrome" --args "https://open.spotify.com/search/results/$*"
+}
+function lob() {
+    open -na "Google Chrome" --args "https://lobste.rs"
+}
