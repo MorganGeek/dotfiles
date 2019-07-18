@@ -47,6 +47,7 @@ alias tunnel='sshuttle --dns -r "$(whoami)@management.collibra.com" 0/0'
 alias ls='lsd'
 alias pip='pip3'
 alias c='cat'
+alias m='mgmt'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
