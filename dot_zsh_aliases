@@ -24,6 +24,7 @@ alias mybacklog="jira my-issues && asana"
 alias mb='mybacklog'
 alias myissues='mb'
 alias me='mb'
+alias j='jira open'
 
 # News
 alias hack='hacker'
