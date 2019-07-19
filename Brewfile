@@ -13,6 +13,7 @@ cask "sloth"
 cask "xmind"
 cask "vlc"
 cask "spectacle"
+cask "firefox"
 
 # Fonts
 cask "font-meslo-for-powerline"
