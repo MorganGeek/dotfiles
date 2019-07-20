@@ -36,7 +36,7 @@ alias mailperso="gmail2"
 alias mailpro="gmail"
 
 # To do / Done
-alias done='task_done'
+#alias done='task_done'
 
 # Management / Security / SSH / SSL
 alias mgmt='ssh $(whoami)@management.collibra.com -i ~/.ssh/id_rsa'

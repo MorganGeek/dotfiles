@@ -14,11 +14,24 @@ sdk install java 8.0.202-zulu
 ### Install dependencies (apps, fonts, ...) with Brew
 `brew bundle`
 
-### Install Oh My Zsh
+### Install Oh My Zsh and some cool dependencies
 ```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9
 git clone https://github.com/AlexisBRENON/oh-my-zsh-reminder ~/.oh-my-zsh/custom/plugins/reminder
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+```
+#### In order to upgrade it, just run
+`upgrade_oh_my_zsh`
+
+### In cases of `\n` irrors with zsh
+https://github.com/robbyrussell/oh-my-zsh/issues/6764#issuecomment-384045008
+```
+cd $ZSH
+git config core.autocrlf false
+git rm --cached -r .
+git reset --hard
 ```
 
 ### OSX Defaults
