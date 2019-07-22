@@ -8,7 +8,7 @@ sdk install java 8.0.202-zulu
 
 ### Install Docker Desktop for Mac
 ```
-~/.scripts/bootstrap.sh
+~/.scripts/executable_bootstrap.sh
 ```
 
 ### Install dependencies (apps, fonts, ...) with Brew
@@ -25,7 +25,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 #### In order to upgrade it, just run
 `upgrade_oh_my_zsh`
 
-### In cases of `\n` irrors with zsh
+### In cases of `\n` errors with zsh
 https://github.com/robbyrussell/oh-my-zsh/issues/6764#issuecomment-384045008
 ```
 cd $ZSH

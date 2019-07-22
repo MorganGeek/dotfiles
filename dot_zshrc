@@ -62,7 +62,7 @@ ZSH_COLORIZE_STYLE="monokai"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(reminder git sdk zsh-syntax-highlighting zsh-autosuggestions ansible brew colorize docker pipenv pip python terraform aws)
+plugins=(reminder common-aliases extract git sdk zsh-syntax-highlighting zsh-autosuggestions ansible brew colorize docker pipenv pip python terraform aws)
 
 source $ZSH/oh-my-zsh.sh
 
