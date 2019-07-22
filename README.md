@@ -36,7 +36,7 @@ git reset --hard
 
 ### OSX Defaults
 ```
-./.macos
+sudo sh .macos
 ```
 
 ### Install NPM dependencies
