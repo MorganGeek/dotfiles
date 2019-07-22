@@ -36,9 +36,7 @@ git reset --hard
 
 ### OSX Defaults
 ```
-defaults write http://com.apple .screencapture location ~/Downloads
-#defaults write com.apple.PowerChime ChimeOnNoHardware -bool true # still KO after closing lid
-#killall PowerChime
+./.macos
 ```
 
 ### Install NPM dependencies

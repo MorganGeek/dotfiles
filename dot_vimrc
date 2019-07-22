@@ -1,10 +1,44 @@
+" Enable syntax highlighting
 syntax on
+" Enable line numbers
 set number
+" Enable desert theme
 colorscheme desert
+" Always show status line
 set laststatus=2
+
+" Highlight unwanted spaces :
+" 1. highlight trailing whitespace in red
+" 2. have this highlighting not appear whilst you are typing in insert mode
+" 3. have the highlighting of whitespace apply when you open new buffers
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches() 
+autocmd BufWinLeave * call clearmatches()
+
+" Don’t create backups when editing files in certain directories
+set backupskip=/tmp/*,/private/tmp/*
+" Ignore case of searches
+set ignorecase
+" Highlight current line
+set cursorline
+" Highlight dynamically as pattern is typed
+set incsearch
+" Highlight searches
+set hlsearch
+" Disable error bells
+set noerrorbells
+" Enable mouse in all modes
+set mouse=a
+" Don’t show the intro message when starting Vim
+set shortmess=atI
+" Show the filename in the window titlebar
+set title
+" Start scrolling three lines before the horizontal window border
+set scrolloff=3
+
+" Default colors for highlighting search result
+hi Search ctermfg=White
+hi Search ctermbg=DarkMagenta

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Save screenshots to the ~/Downloads folder
+defaults write http://com.apple.screencapture location ~/Downloads
+# Finder: show hidden files by default
+#defaults write com.apple.finder AppleShowAllFiles -bool true
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# Finder: show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+#defaults write com.apple.PowerChime ChimeOnNoHardware -bool true # still KO after closing lid
+#killall PowerChime
+
+# Avoid creating .DS_Store files on network or USB volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
