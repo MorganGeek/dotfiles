@@ -37,3 +37,7 @@ function spotify() {
 function lob() {
     open -na "Google Chrome" --args "https://lobste.rs"
 }
+function logtalk() {
+    path_swilgt=$(find /usr/local/Cellar/logtalk -name "*swilgt.sh" 2>/dev/null)
+    sh "$path_swilgt"
+}
