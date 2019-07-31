@@ -94,12 +94,15 @@ source $ZSH/oh-my-zsh.sh
 . ~/.zsh_functions
 . ~/.scripts/executable_bootstrap.sh
 
+
 eval "$(fasd --init auto)"
 unlink "$HOME/Library/Application Support/Code/User/settings.json"
 ln -s "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 #cm apply
 
 sh ~/.scripts/resume.sh
+# check if we have new jira issues
+istherenewissues
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!! https://github.com/sdkman/sdkman-cli/issues/613
 export SDKMAN_DIR="$HOME/.sdkman"
