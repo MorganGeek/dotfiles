@@ -78,5 +78,5 @@ function istherenewissues() {
     echo "$LASTISSUE" > .newjiraissue
 }
 function greppagedate() {
-    curl -sSL "$*" | \grep datetime | \grep -Eo '[[:digit:]]{4}' | head -n1
+    curl -sSL "$*" | \grep datetime | \grep -Eo '[[:digit:]]{4}' | sort -n | head -n1
 }
