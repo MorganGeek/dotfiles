@@ -78,7 +78,11 @@ function istherenewissues() {
     echo "$LASTISSUE" > .newjiraissue
 }
 function greppagedate() {
-    year=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "date|datetime" -A 1 | \grep -Eo '\b[[:digit:]]{4}\b' | head -n1)
+    year=$(echo "$*" | egrep -Eo '\b[[:digit:]]{4}\b')
+    if [ -z "$year" ]
+    then
+      year=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "date|datetime" -A 1 | \grep -Eo '\b[[:digit:]]{4}\b' | head -n1)
+    fi
     yearint=$(($year + 0))
     currentyear=$(echo `date +"%Y"`)
     if [[ $yearint -ge 1970 && $yearint -le $currentyear ]]
