@@ -29,15 +29,22 @@ brew "ripgrep"
 brew "twpayne/taps/chezmoi"
 brew "tmux"
 brew "node"
+# Fasd (pronounced similar to "fast") is a command-line productivity booster. https://github.com/clvv/fasd
 brew "fasd"
+# Simplistic interactive filtering tool https://github.com/peco/peco
 brew "peco"
+# Tig is an ncurses-based text-mode interface for git.
 brew "tig"
+# OS X: Get Full Path of File Using Realpath
 brew "realpath"
 brew "mackup"
+# Lynx is a fully featured World-Wide Web browser for terminal users. https://invisible-island.net/lynx/
 brew "lynx"
 brew "colordiff"
+# Proxy server that works as a poor man's VPN
 brew "sshuttle"
 brew "ansible"
+# Next gen ls command https://github.com/Peltoche/lsd
 brew "lsd"
 brew "swi-prolog"
 brew "logtalk"
