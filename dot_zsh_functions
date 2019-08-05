@@ -86,3 +86,14 @@ function greppagedate() {
       echo "$yearint"
     fi
 }
+# Extract a column from a tabular output
+# via https://blog.developer.atlassian.com/ten-tips-for-wonderful-bash-productivity/
+function col() {
+    awk -v col=$1 '{print $col}'
+}
+# Skip first x words in line
+# via https://blog.developer.atlassian.com/ten-tips-for-wonderful-bash-productivity/
+function skip {
+    n=$(($1 + 1))
+    cut -d' ' -f$n-
+}

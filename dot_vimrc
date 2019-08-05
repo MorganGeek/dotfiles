@@ -30,7 +30,6 @@ set incsearch
 set hlsearch
 " Disable error bells
 set noerrorbells
-
 " Don’t show the intro message when starting Vim
 set shortmess=atI
 " Show the filename in the window titlebar
