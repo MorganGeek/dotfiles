@@ -66,6 +66,7 @@ alias pip='pip3'
 alias c='cat'
 alias x='extract'
 alias current_year='`echo date +"%Y"`'
+alias meteo='weather'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"

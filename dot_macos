@@ -2,7 +2,7 @@
 # Save screenshots to the ~/Downloads folder
 defaults write http://com.apple.screencapture location ~/Downloads
 # Finder: show hidden files by default
-#defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.finder AppleShowAllFiles YES
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 # Finder: show path bar
