@@ -57,3 +57,10 @@ brew "asciidoc"
 brew "bash-snippets"
 # Mac App Store command line interface
 brew "mas"
+
+mas 'Keynote', id: 409183694
+mas 'iMovie', id: 408981434
+mas 'Microsoft Remote Desktop', id: 1295203466
+mas 'Pages', id: 409201541
+mas 'GarageBand', id: 682658836
+mas 'Numbers', id: 409203825
