@@ -55,3 +55,5 @@ brew "htop"
 brew "moreutils"
 brew "asciidoc"
 brew "bash-snippets"
+# Mac App Store command line interface
+brew "mas"
