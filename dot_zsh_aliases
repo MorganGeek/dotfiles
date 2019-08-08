@@ -28,6 +28,7 @@ alias j='jira open'
 
 # News
 alias hack='hacker'
+alias crypto='curl rate.sx'
 
 # Events
 alias agenda='calendar'
