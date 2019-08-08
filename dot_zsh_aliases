@@ -67,6 +67,7 @@ alias c='cat'
 alias x='extract'
 alias current_year='`echo date +"%Y"`'
 alias meteo='weather'
+alias learnmore="apropos . | sort --random-sort | awk 'NR == 1 {print$1}' | cut -d'(' -f 1 | xargs man"
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
