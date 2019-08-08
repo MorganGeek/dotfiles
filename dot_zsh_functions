@@ -106,3 +106,7 @@ function skip {
 function biggerthan() {
     find . -size "+$*" -type f -print0 | xargs -0 ls -Ssh | sort -z
 }
+# To automatically ls when changing directory
+function cd() {
+     builtin cd "$@" && ls -latr
+}
