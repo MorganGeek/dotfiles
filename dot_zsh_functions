@@ -101,3 +101,8 @@ function skip {
     n=$(($1 + 1))
     cut -d' ' -f$n-
 }
+
+# Find files bigger than X size and sort them by size
+function biggerthan() {
+    find . -size "+$*" -type f -print0 | xargs -0 ls -Ssh | sort -z
+}
