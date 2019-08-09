@@ -29,13 +29,13 @@ npm install -g jira-node-cli --save
 # Install pip and pipenv
 sudo easy_install pip
 sudo pip install --upgrade pip
-
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
 sudo pip3 install --upgrade pip
 ln -s /usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
 export PATH=$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/
 pip3 install pipenv
+pyenv install 3.6.0
 
 # Install AWS-CLI
 pip3 install boto3

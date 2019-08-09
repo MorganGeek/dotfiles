@@ -57,6 +57,8 @@ brew "asciidoc"
 brew "bash-snippets"
 # Mac App Store command line interface
 brew "mas"
+# Using pyenv to be able to install specific python versions https://stackoverflow.com/questions/49794432/how-to-setup-a-pipenv-python-3-6-project-if-os-python-version-is-3-5
+brew "pyenv"
 
 mas 'Keynote', id: 409183694
 mas 'iMovie', id: 408981434
