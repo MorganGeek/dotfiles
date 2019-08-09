@@ -10,8 +10,8 @@ sdk install java 8.0.202-zulu
 # Install dependencies (apps, fonts, ...) with Brew
 brew bundle
 
-# Install asciidoctor-pdf
-sudo gem install -n /usr/local/bin asciidoctor-pdf --pre
+# Install bundler for managing ruby dependencies and Gemfile
+sudo gem install bundler
 
 # Install Oh My Zsh and some cool dependencies
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
