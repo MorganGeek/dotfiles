@@ -1,3 +1,9 @@
+## Setup
+```
+git clone ssh://git@bitbucket.collibra.com/~morgan.wattiez/dotfiles.git ~/Code/dotfiles
+~/Code/dotfiles/dot_scripts/bootstrap.sh
+```
+
 ### Run
 run `.scripts/bootstrap.sh`
 
