@@ -1,0 +1,148 @@
+cask "java"
+cask "iterm2"
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+yum -y install https://zoom.us/client/latest/zoom_x86_64.rpm
+
+# Visual Studio Code
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+## Update package cache
+yum check-update
+yum install dnf -y
+dnf check-update
+sudo dnf install -y code
+
+# Enable EPEL repository
+sudo yum -y install epel-release
+
+# PGAdmin
+yum -y install https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-7-x86_64/pgdg-centos11-11-2.noarch.rpm
+yum -y install pgadmin4
+
+# Network tools
+yum -y install net-tools lsof iproute nmap
+# Mindmap Editor
+yum -y install https://www.xmind.net/xmind/downloads/XMind-ZEN-for-Linux-64bit.rpm 
+# VideoLAN 
+sudo yum -y install https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+yum -y install vlc
+# Install Spectacle
+#sudo yum -y install snapd
+#sudo systemctl enable --now snapd.socket
+#sudo ln -s /var/lib/snapd/snap /snap
+#sudo snap -y install spectacle
+
+# Browser
+yum -y install firefox
+
+# Fonts
+# clone
+git clone https://github.com/powerline/fonts.git --depth=1
+# install
+cd fonts
+./install.sh
+# clean-up a bit
+cd ..
+rm -rf fonts
+
+# Install ZSH
+sudo yum -y install zsh
+curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > /bin/git-ftp
+# Install git-ftp
+chmod 755 /bin/git-ftp
+
+# Install Golang
+yum install golang golang-godoc golang-vet golang-src golang-pkg-linux-amd64 -y
+echo 'export GOPATH="$HOME/go"' >> ~/.zshrc
+echo 'export PATH="$GOPATH/bin:$PATH"' >> ~/.zshrc
+. ~/.zshrc
+
+# Install Hugo
+mkdir $HOME/src
+cd $HOME/src
+git clone https://github.com/gohugoio/hugo.git
+cd hugo
+go install --tags extended
+cd $HOME
+
+# Inet utils
+yum -y install telnet ftp rsh traceroute
+# FTP UI
+yum -y install filezilla
+
+# Install SDK Man
+curl -s "https://get.sdkman.io" | bash
+source "/root/.sdkman/bin/sdkman-init.sh"
+
+# Install Plantuml
+sdk install java
+curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o /usr/local/bin/plantuml.jar && \
+    echo 'java -jar /usr/local/bin/plantuml.jar $@' > /usr/local/bin/plantuml && \
+    chmod +x /usr/local/bin/plantuml
+
+# Using pyenv to be able to install specific python versions https://stackoverflow.com/questions/49794432/how-to-setup-a-pipenv-python-3-6-project-if-os-python-version-is-3-5
+curl https://pyenv.run | bash
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+source ~/.zshrc
+yum -y install git gcc zlib-devel bzip2-devel readline-devel sqlite-devel openssl-devel
+# Install Python 3
+pyenv install 3.7.3
+pyenv global 3.7.3
+ln -snf /root/.pyenv/versions/3.7.3/bin/python  /usr/bin/python3.7
+
+# ripgrep
+sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
+sudo yum -y install ripgrep
+
+# chezmoi : dotfiles manager
+curl -sfL https://git.io/chezmoi | sh && ln -snf "$(pwd)/bin/chezmoi" /usr/local/bin/chezmoi
+
+yum -y install tmux
+yum -y install nodejs
+
+# Fasd (pronounced similar to "fast") is a command-line productivity booster. https://github.com/clvv/fasd
+sudo yum -y install fasd
+
+# Simplistic interactive filtering tool https://github.com/peco/peco
+go get github.com/peco/peco/cmd/peco
+
+# Tig is an ncurses-based text-mode interface for git.
+yum -y install tig
+
+pip install mackup
+
+# Lynx is a fully featured World-Wide Web browser for terminal users. https://invisible-island.net/lynx/
+yum -y install lynx
+yum -y install colordiff
+# Proxy server that works as a poor man's VPN
+yum -y install sshuttle
+yum -y install ansible
+
+# Prepare lsd install
+yum -y install cargo
+# Next gen ls command https://github.com/Peltoche/lsd
+cargo install lsd
+echo 'export PATH="/root/.cargo/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+
+# Prepare swipl install
+pyenv install 3.6.0
+ln -snf /root/.pyenv/versions/3.6.0/bin/python  /usr/bin/python3.6
+yum -y install cmake3
+git clone https://github.com/SWI-Prolog/swipl-devel.git
+cd swipl-devel
+git submodule update --init
+
+mkdir build
+cd build
+
+brew "logtalk"
+brew "terraform"
+brew "watch"
+brew "grep"
+brew "htop"
+brew "moreutils"
+brew "asciidoc"
+brew "bash-snippets"

@@ -1,7 +1,9 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
+# Tap for chezmoi
 tap "twpayne/taps"
+# Tap for real path
 tap "iveney/mocha"
 
 cask "java"

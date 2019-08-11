@@ -10,6 +10,17 @@ defaults write com.apple.finder ShowPathbar -bool true
 #defaults write com.apple.PowerChime ChimeOnNoHardware -bool true # still KO after closing lid
 #killall PowerChime
 
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=" "
+
+# Only show scrollbars when scrolling
+defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
+
+# Disable smart quotes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+# Disable smart dashes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
 # Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
