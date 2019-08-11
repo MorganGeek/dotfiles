@@ -1,3 +1,8 @@
+## Prerequisites
+
+### Centos
+`yum install git which zip unzip ruby -y`
+
 ## Setup
 ```
 git clone ssh://git@bitbucket.collibra.com/~morgan.wattiez/dotfiles.git ~/Code/dotfiles
@@ -34,5 +39,3 @@ git config core.autocrlf false
 git rm --cached -r .
 git reset --hard
 ```
-
-

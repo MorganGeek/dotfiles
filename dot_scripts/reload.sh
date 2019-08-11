@@ -1,6 +1,13 @@
 #!/usr/bin/env zsh
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+chmod +x ~/.scripts/*.sh
 source ~/.zshrc
-sdk use java 8.0.202-zulu
+sdk use java 8.0.222-zulu
 brew bundle
 # OSX Defaults
-sudo sh .macos
+case "$(uname -s)" in
+   Darwin)
+     sudo sh .macos
+     ;;
+esac

@@ -18,6 +18,7 @@ cask "firefox"
 # Fonts
 cask "font-meslo-for-powerline"
 
+brew "zsh"
 brew "git-ftp"
 brew "gnu-sed"
 brew "hugo"
