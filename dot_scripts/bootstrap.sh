@@ -110,7 +110,11 @@ sudo make install
 cd ~/
 
 # OSX Defaults
-sudo sh .macos
+case "$(uname -s)" in
+   Darwin)
+     sudo sh .macos
+     ;;
+esac
 
 # Customize /etc/hosts
 curl https://someonewhocares.org/hosts/hosts -o /etc/hosts
