@@ -1,5 +1,6 @@
 # Make sure Code directory exists
 mkdir -p ~/Code
+ln -snf ~/Code/dotfiles/dot_scripts ~/.scripts
 chmod +x ~/.scripts/*.sh
 
 # Install missing package (Linux)
@@ -22,8 +23,8 @@ case "$(uname -s)" in
    Linux)
      echo 'Linux'
      git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
-     mkdir ~/.linuxbrew/bin
-     ln -s ../Homebrew/bin/brew ~/.linuxbrew/bin
+     mkdir -p ~/.linuxbrew/bin
+     ln -snf ../Homebrew/bin/brew ~/.linuxbrew/bin
      eval $(~/.linuxbrew/bin/brew shellenv)
      ;;
    *)

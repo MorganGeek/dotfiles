@@ -1,7 +1,7 @@
 ## Prerequisites
 
 ### Centos
-`yum install git which zip unzip ruby -y`
+`yum install git which zip unzip ruby sudo -y`
 
 ## Setup
 ```
