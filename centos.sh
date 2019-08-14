@@ -131,53 +131,23 @@ echo 'export PATH="/root/.cargo/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 
 # Prepare swipl install
-pyenv install 3.6.0
-ln -snf /root/.pyenv/versions/3.6.0/bin/python  /usr/bin/python3.6
-yum -y install python36 # because pyenv installs python in a way that do not help installing cmake3
-yum -y install cmake3
-yum -y install ninja-build # Needed for cmake3 target 
-git clone https://github.com/SWI-Prolog/swipl-devel.git
-cd swipl-devel
-git submodule update --init
+yum -y install epel-release
+yum groupinstall -y "Development Tools"
+yum -y install ninja-build   libunwind   freetype-devel   gmp-devel   java-1.8.0-openjdk-devel   jpackage-utils   libICE-devel   libjpeg-turbo-devel   libSM-devel   libX11-devel   libXaw-devel   libXext-devel   libXft-devel   libXinerama-devel   libXmu-devel   libXpm-devel   libXrender-devel   libXt-devel   ncurses-devel   openssl-devel   pkgconfig   readline-devel   libedit-devel   unixODBC-devel   zlib-devel   uuid-devel   libarchive-devel   libyaml-devel
 
-mkdir build
-cd build
-yum install -y ninja-build
-dnf install -y \
-  cmake \
-  ninja-build \
-  libunwind \
-  freetype-devel \
-  gmp-devel \
-  java-1.8.0-openjdk-devel \
-  jpackage-utils \
-  libICE-devel \
-  libjpeg-turbo-devel \
-  libSM-devel \
-  libX11-devel \
-  libXaw-devel \
-  libXext-devel \
-  libXft-devel \
-  libXinerama-devel \
-  libXmu-devel \
-  libXpm-devel \
-  libXrender-devel \
-  libXt-devel \
-  ncurses-devel \
-  openssl-devel \
-  pkgconfig \
-  readline-devel \
-  libedit-devel \
-  unixODBC-devel \
-  zlib-devel \
-  uuid-devel \
-  libarchive-devel \
-  libyaml-devel
-ln -snf /usr/bin/cmake3 /usr/bin/cmake
-cmake3 -DCMAKE_INSTALL_PREFIX=/usr/local ..
-# TODO install swipl...
-#brew "logtalk"
+## Prepare cmake3 install
+#pyenv install 3.6.0
+#ln -snf /root/.pyenv/versions/3.6.0/bin/python  /usr/bin/python3.6
+#yum -y install python36 # because pyenv installs python in a way that do not help installing cmake3
 
+yum -y install cmake3 && ln -snf /usr/bin/cmake3 /usr/bin/cmake
+git clone --depth 1 https://github.com/SWI-Prolog/swipl.git && cd swipl && git submodule update --init && mkdir build && cd build
+
+cmake3 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -G Ninja ..
+ninja-build install
+# Now SWI-Prolog is ready, let's install logtalk
+yum -y install https://logtalk.org/files/logtalk-3.28.0-1.noarch.rpm
+# Logtalk should be available at /usr/local/share/ , for instance you can launch logtalk with swipl integration, using /usr/local/share/logtalk-3.28.0-stable/integration/swilgt.sh
 # Prepare terraform install
 yum -y install jq wget
 tf_current_version=$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')
