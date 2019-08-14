@@ -3,6 +3,9 @@ cask "iterm2"
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 yum -y install https://zoom.us/client/latest/zoom_x86_64.rpm
 
+# Install Development Tools
+sudo yum group -y install "Development Tools"
+
 # Visual Studio Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
@@ -130,19 +133,66 @@ source ~/.zshrc
 # Prepare swipl install
 pyenv install 3.6.0
 ln -snf /root/.pyenv/versions/3.6.0/bin/python  /usr/bin/python3.6
+yum -y install python36 # because pyenv installs python in a way that do not help installing cmake3
 yum -y install cmake3
+yum -y install ninja-build # Needed for cmake3 target 
 git clone https://github.com/SWI-Prolog/swipl-devel.git
 cd swipl-devel
 git submodule update --init
 
 mkdir build
 cd build
+yum install -y ninja-build
+dnf install -y \
+  cmake \
+  ninja-build \
+  libunwind \
+  freetype-devel \
+  gmp-devel \
+  java-1.8.0-openjdk-devel \
+  jpackage-utils \
+  libICE-devel \
+  libjpeg-turbo-devel \
+  libSM-devel \
+  libX11-devel \
+  libXaw-devel \
+  libXext-devel \
+  libXft-devel \
+  libXinerama-devel \
+  libXmu-devel \
+  libXpm-devel \
+  libXrender-devel \
+  libXt-devel \
+  ncurses-devel \
+  openssl-devel \
+  pkgconfig \
+  readline-devel \
+  libedit-devel \
+  unixODBC-devel \
+  zlib-devel \
+  uuid-devel \
+  libarchive-devel \
+  libyaml-devel
+ln -snf /usr/bin/cmake3 /usr/bin/cmake
+cmake3 -DCMAKE_INSTALL_PREFIX=/usr/local ..
+# TODO install swipl...
+#brew "logtalk"
 
-brew "logtalk"
-brew "terraform"
-brew "watch"
-brew "grep"
-brew "htop"
-brew "moreutils"
-brew "asciidoc"
-brew "bash-snippets"
+# Prepare terraform install
+yum -y install jq wget
+tf_current_version=$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')
+wget $(echo "https://releases.hashicorp.com/terraform/${tf_current_version}/terraform_${tf_current_version}_linux_amd64.zip")
+unzip "terraform_${tf_current_version}_linux_amd64.zip"
+sudo mv -v terraform /usr/local/bin/
+rm -f "terraform_${tf_current_version}_linux_amd64.zip"
+
+yum -y install htop
+yum -y install moreutils
+yum -y install asciidoc
+
+git clone https://github.com/alexanderepstein/Bash-Snippets
+cd Bash-Snippets
+git checkout v1.22.1
+./install.sh all
+rm -rf Bash-Snippets
+cd $HOME
