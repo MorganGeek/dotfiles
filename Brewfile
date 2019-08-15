@@ -64,6 +64,10 @@ brew "mas"
 brew "pyenv"
 # Google CLI https://github.com/jarun/googler
 brew "googler"
+# Install bat https://github.com/sharkdp/bat
+brew "bat"
+# https://github.com/jhspetersson/fselect
+brew "fselect"
 
 mas 'Keynote', id: 409183694
 mas 'iMovie', id: 408981434

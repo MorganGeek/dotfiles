@@ -25,8 +25,8 @@ yum -y install pgadmin4
 # Network tools
 yum -y install net-tools lsof iproute nmap
 # Mindmap Editor
-yum -y install https://www.xmind.net/xmind/downloads/XMind-ZEN-for-Linux-64bit.rpm 
-# VideoLAN 
+yum -y install https://www.xmind.net/xmind/downloads/XMind-ZEN-for-Linux-64bit.rpm
+# VideoLAN
 sudo yum -y install https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
 yum -y install vlc
 # Install Spectacle
@@ -169,3 +169,12 @@ cd $HOME
 
 # Install googler https://github.com/jarun/googler#installation
 sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v3.9/googler && sudo chmod +x /usr/local/bin/googler
+
+# Install BAT (cat with more power)
+wget https://github.com/sharkdp/bat/releases/download/v0.11.0/bat-v0.11.0-x86_64-unknown-linux-musl.tar.gz \
+     && tar -xzvf bat-v0.11.0-x86_64-unknown-linux-musl.tar.gz \
+     && mv bat-v0.11.0-x86_64-unknown-linux-musl/bat /usr/local/bin/ \
+     && rm -rf bat-v0.11.0-x86_64-unknown-linux-musl*
+
+# Install fselect
+cargo install fselect
