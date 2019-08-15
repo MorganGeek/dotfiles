@@ -50,7 +50,7 @@ ln -snf ~/Code/dotfiles/dot_zsh_functions ~/.zsh_functions
 ln -snf ~/Code/dotfiles/dot_zshrc ~/.zshrc
 ln -snf ~/Code/dotfiles/dot_zshrc.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
 ln -snf ~/Code/dotfiles/private_dot_ssh/config ~/.ssh/config
-
+ln -snf ~/Code/dotfiles/requirements.txt ~/requirements.txt
 # Other symblinks + Install Docker Desktop for Mac
 case "$(uname -s)" in
    Darwin)
@@ -128,20 +128,21 @@ sudo easy_install pip
 sudo pip install --upgrade pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
-sudo pip3 install --upgrade pip
 case "$(uname -s)" in
    Darwin)
      ln -snf /usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
      export PATH=$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/
      ;;
 esac
+sudo pip install --upgrade pip
+pip install -r requirements.txt
+
+# Install googler
+sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v3.9/googler && sudo chmod +x /usr/local/bin/googler
 
 # was used for some slack cli in python... https://pypi.org/project/slack-cli/
 # pip3 install pipenv
 # pyenv install 3.6.0
-
-# Install AWS-CLI
-pip3 install boto3 awscli
 
 # Upgrade
 ~/.scripts/upgrade.sh
