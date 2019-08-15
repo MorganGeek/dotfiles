@@ -12,7 +12,7 @@ tell application "System Events"
                 click
                 if exists menu item "Connecter" of menu 1 then
                     click menu item "Connecter" of menu 1
-                    return "Connecting..."
+                    return "Connecting to Bluetooth device..."
                 else
                     key code 53 -- Close main BT drop down if Connect wasn't present
                     return "Connect menu was not found, are you already connected?"

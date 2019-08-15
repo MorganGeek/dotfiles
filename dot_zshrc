@@ -96,18 +96,17 @@ eval "$(fasd --init auto)"
 
 #cm apply
 
+# check if we have new jira issues
+istherenewissues
+
 case "$(uname -s)" in
    Darwin)
-     echo 'Install Docker Desktop for Mac OS X'
      ~/.scripts/install_docker_for_mac.sh
      unlink "$HOME/Library/Application Support/Code/User/settings.json"
      ln -s "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
      sh ~/.scripts/resume.sh
      ;;
 esac
-
-# check if we have new jira issues
-istherenewissues
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!! https://github.com/sdkman/sdkman-cli/issues/613
 export SDKMAN_DIR="$HOME/.sdkman"
