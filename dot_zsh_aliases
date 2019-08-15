@@ -40,6 +40,8 @@ alias tsearchtimeline='twitter search timeline'
 # Search
 alias ddg='ddgr'
 alias goo='googler'
+alias se='sr -elvi'
+alias engines='sr -elvi'
 
 # Events
 alias agenda='calendar'

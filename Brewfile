@@ -68,6 +68,8 @@ brew "googler"
 brew "bat"
 # https://github.com/jhspetersson/fselect
 brew "fselect"
+# Add surfraw https://github.com/kisom/surfraw
+brew "surfraw"
 
 mas 'Keynote', id: 409183694
 mas 'iMovie', id: 408981434
