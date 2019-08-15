@@ -180,10 +180,10 @@ wget https://github.com/sharkdp/bat/releases/download/v0.11.0/bat-v0.11.0-x86_64
 cargo install fselect
 
 # surfraw
-git clone --depth 1 https://github.com/kisom/surfraw.git \
-    && cd surfraw
+git clone --depth 1 https://gitlab.com/surfraw/Surfraw.git \
+    && cd Surfraw
     && ./prebuild
     && ./configure
     && make && make install
     && cd .. \
-    && rm -rf surfraw
+    && rm -rf Surfraw
