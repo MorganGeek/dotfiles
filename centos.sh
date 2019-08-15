@@ -166,3 +166,6 @@ git checkout v1.22.1
 ./install.sh all
 rm -rf Bash-Snippets
 cd $HOME
+
+# Install googler https://github.com/jarun/googler#installation
+sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v3.9/googler && sudo chmod +x /usr/local/bin/googler

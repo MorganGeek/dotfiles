@@ -37,6 +37,10 @@ alias tsearch='twitter search all'
 alias tsearchfav='twitter search favorites'
 alias tsearchtimeline='twitter search timeline'
 
+# Search
+alias ddg='ddgr'
+alias goo='googler'
+
 # Events
 alias agenda='calendar'
 alias mails="gmail && gmail2"

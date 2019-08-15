@@ -137,9 +137,6 @@ esac
 sudo pip install --upgrade pip
 pip install -r requirements.txt
 
-# Install googler
-sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v3.9/googler && sudo chmod +x /usr/local/bin/googler
-
 # was used for some slack cli in python... https://pypi.org/project/slack-cli/
 # pip3 install pipenv
 # pyenv install 3.6.0
