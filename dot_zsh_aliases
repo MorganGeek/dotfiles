@@ -51,7 +51,7 @@ alias mailpro="gmail"
 
 # Viewing files
 alias cat='bat'
-
+alias preview="fzf --preview 'bat --color \"always\" {}'"
 # To do / Done
 #alias done='task_done'
 

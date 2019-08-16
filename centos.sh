@@ -196,6 +196,6 @@ yum -y install prettyping
 # Glances + nmon for monitoring
 yum -y install nmon glances
 # Install Fuzzy finder
-git clone --depth 1 https://github.com/junegunn/fzf.git && cd fzf
-yes | ./install
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+yes | ~/.fzf/install
 exec $SHELL
