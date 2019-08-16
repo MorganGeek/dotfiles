@@ -100,12 +100,10 @@ eval "$(fasd --init auto)"
 istherenewissues
 
 case "$(uname -s)" in
-   Darwin)
-     ~/.scripts/install_docker_for_mac.sh
-     unlink "$HOME/Library/Application Support/Code/User/settings.json"
-     ln -s "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-     sh ~/.scripts/resume.sh
-     ;;
+  Darwin)
+    unlink "$HOME/Library/Application Support/Code/User/settings.json"
+    ln -s "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+   ;;
 esac
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!! https://github.com/sdkman/sdkman-cli/issues/613

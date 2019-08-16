@@ -59,7 +59,6 @@ case "$(uname -s)" in
      ln -snf ~/.config/Code/User/settings.json "~/Library/Application Support/Code/User/settings.json"
      ln -snf "~/Library/Mobile Documents/com~apple~CloudDocs/Mackup/Library/Application Support/Code/User/snippets" "~/Library/Application Support/Code/User/snippets"
      ln -snf "~/Library/Mobile Documents/com~apple~CloudDocs/Mackup/.mackup.cfg" ~/.mackup.cfg
-     echo 'Install Docker Desktop for Mac OS X'
      ~/.scripts/install_docker_for_mac.sh
      ;;
 esac

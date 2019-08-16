@@ -110,3 +110,10 @@ function biggerthan() {
 function cd() {
      builtin cd "$@" && ls -latr
 }
+function mouse() {
+   case "$(uname -s)" in
+     Darwin)
+	 sh ~/.scripts/mouse_bluetooth.sh
+         ;;
+     esac
+}
