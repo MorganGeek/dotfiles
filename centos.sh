@@ -193,3 +193,5 @@ yum -y install dictd
 
 # Add prettyping
 yum -y install prettyping
+# Glances + nmon for monitoring
+yum -y install nmon glances

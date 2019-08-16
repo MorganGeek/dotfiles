@@ -74,6 +74,8 @@ brew "surfraw"
 brew "dict"
 # Add prettyping
 brew "prettyping"
+# Install glances for monitoring
+brew "glances"
 
 mas 'Keynote', id: 409183694
 mas 'iMovie', id: 408981434
