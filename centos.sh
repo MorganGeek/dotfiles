@@ -205,3 +205,6 @@ curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party
 
 # Install nice disk usage
 yum -y install ncdu
+
+# Install tldr alternative to help
+curl https://raw.githubusercontent.com/raylee/tldr/master/tldr > /usr/local/bin/tldr && chmod +x /usr/local/bin/tldr

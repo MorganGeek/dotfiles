@@ -90,3 +90,5 @@ brew "fzf"
 brew "diff-so-fancy"
 # add nice disk usage
 brew "ncdu"
+# add tldr alternative to help
+brew "tldr"

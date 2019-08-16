@@ -94,6 +94,7 @@ alias biggerthan10='biggerthan 10M'
 alias latency='curl cheat.sh/latency'
 alias moon='curl wttr.in/Moon'
 alias lune='moon'
+alias help='tldr'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
