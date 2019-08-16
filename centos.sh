@@ -195,3 +195,7 @@ yum -y install dictd
 yum -y install prettyping
 # Glances + nmon for monitoring
 yum -y install nmon glances
+# Install Fuzzy finder
+git clone --depth 1 https://github.com/junegunn/fzf.git && cd fzf
+yes | ./install
+exec $SHELL

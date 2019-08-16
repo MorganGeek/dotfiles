@@ -20,6 +20,14 @@ cask "firefox"
 # Fonts
 cask "font-meslo-for-powerline"
 
+# Mac app store
+mas 'Keynote', id: 409183694
+mas 'iMovie', id: 408981434
+mas 'Microsoft Remote Desktop', id: 1295203466
+mas 'Pages', id: 409201541
+mas 'GarageBand', id: 682658836
+mas 'Numbers', id: 409203825
+
 brew "zsh"
 brew "git-ftp"
 brew "gnu-sed"
@@ -76,10 +84,5 @@ brew "dict"
 brew "prettyping"
 # Install glances for monitoring
 brew "glances"
-
-mas 'Keynote', id: 409183694
-mas 'iMovie', id: 408981434
-mas 'Microsoft Remote Desktop', id: 1295203466
-mas 'Pages', id: 409201541
-mas 'GarageBand', id: 682658836
-mas 'Numbers', id: 409203825
+# Fuzzy Finder
+brew "fzf"
