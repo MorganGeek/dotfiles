@@ -49,6 +49,9 @@ alias mails="gmail && gmail2"
 alias mailperso="gmail2"
 alias mailpro="gmail"
 
+# Viewing files
+alias cat='bat'
+
 # To do / Done
 #alias done='task_done'
 
