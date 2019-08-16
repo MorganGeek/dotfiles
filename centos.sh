@@ -199,3 +199,6 @@ yum -y install nmon glances
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 yes | ~/.fzf/install
 exec $SHELL
+
+# Install diff-so-fancy
+curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy > /usr/local/bin/diff-so-fancy && chmod +x /usr/local/bin/diff-so-fancy

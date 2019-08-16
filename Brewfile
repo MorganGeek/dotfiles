@@ -86,3 +86,5 @@ brew "prettyping"
 brew "glances"
 # Fuzzy Finder
 brew "fzf"
+# Diff-so-fancy
+brew "diff-so-fancy"
