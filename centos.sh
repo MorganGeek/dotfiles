@@ -190,3 +190,6 @@ git clone --depth 1 https://gitlab.com/surfraw/Surfraw.git \
 
 # Dictionary
 yum -y install dictd
+
+# Add prettyping
+yum -y install prettyping

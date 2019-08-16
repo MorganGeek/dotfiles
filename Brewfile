@@ -72,6 +72,8 @@ brew "fselect"
 brew "surfraw"
 # Add dict
 brew "dict"
+# Add prettyping
+brew "prettyping"
 
 mas 'Keynote', id: 409183694
 mas 'iMovie', id: 408981434
