@@ -88,3 +88,5 @@ brew "glances"
 brew "fzf"
 # Diff-so-fancy
 brew "diff-so-fancy"
+# add nice disk usage
+brew "ncdu"
