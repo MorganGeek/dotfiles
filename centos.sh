@@ -187,3 +187,6 @@ git clone --depth 1 https://gitlab.com/surfraw/Surfraw.git \
     && make && make install
     && cd .. \
     && rm -rf Surfraw
+
+# Dictionary
+yum -y install dictd

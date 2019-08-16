@@ -70,6 +70,8 @@ brew "bat"
 brew "fselect"
 # Add surfraw https://github.com/kisom/surfraw
 brew "surfraw"
+# Add dict
+brew "dict"
 
 mas 'Keynote', id: 409183694
 mas 'iMovie', id: 408981434
