@@ -29,7 +29,7 @@ run `zsh .scripts/upgrade.sh`
 * Install AWS-CLI
 
 ### If Yubico is installed, run this :
-`sudo ansible-playbook ~/Code/dotfiles/macsecure_playbook.yaml`
+`sudo ansible-playbook ~/.scripts/ansible/macsecure_playbook.yaml`
 
 #### In cases of `\n` errors with zsh
 https://github.com/robbyrussell/oh-my-zsh/issues/6764#issuecomment-384045008
