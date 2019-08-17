@@ -67,6 +67,7 @@ alias ip='echo $(curl ident.me 2>/dev/null)'
 alias ipinfo='curl "ipinfo.io/"$(ip)'
 
 # Misc
+
 alias h='cd $HOME'
 alias diff='colordiff'
 alias cp='cp -i' # confirmation before overwrite #
@@ -74,6 +75,7 @@ alias mv='mv -i' # confirmation before overwrite
 alias df='df -H'
 alias du='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 #alias du='du -ch'
+alias weather='weather "?lang=fr&"'
 alias headers='curl -I --compress'  # Find out if remote server supports gzip / mod_deflate or not #
 alias hist='history'
 alias path='echo -e ${PATH//:/\\n}' # Explode and display current PATH
@@ -88,7 +90,6 @@ alias pip='pip3'
 alias c='cat'
 alias x='extract'
 alias current_year='`echo date +"%Y"`'
-#alias meteo='weather'
 alias learnmore="apropos . | sort --random-sort | awk 'NR == 1 {print$1}' | cut -d'(' -f 1 | xargs man"
 alias biggerthan10='biggerthan 10M'
 alias latency='curl cheat.sh/latency'
