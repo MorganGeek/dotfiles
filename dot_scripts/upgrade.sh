@@ -11,6 +11,8 @@ bundle update --all
 #gem update asciidoctor-pdf t
 zsh ~/.oh-my-zsh/tools/upgrade.sh
 npm update -g jira-node-cli --save
-sudo pip install --upgrade pip
-sudo pip3 install --upgrade pip
-
+sudo pip install --upgrade pip 2>/dev/null
+sudo pip3 install --upgrade pip 2>/dev/null
+pip freeze > ~/requirements.txt
+# Update VIM plugins installed via Vundle https://github.com/VundleVim/Vundle.vim
+vim +PluginUpdate +qall

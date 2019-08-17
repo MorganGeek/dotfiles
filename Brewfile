@@ -94,3 +94,5 @@ brew "ncdu"
 brew "tldr"
 # add pandoc
 brew "pandoc"
+# add ShellCheck
+brew "shellcheck"

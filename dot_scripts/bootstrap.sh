@@ -104,6 +104,11 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 ln -snf ~/Code/dotfiles/dot_zshrc ~/.zshrc
 ln -snf ~/Code/dotfiles/dot_zshrc.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
 
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+git clone https://github.com/dbeniamine/cheat.sh-vim.git ~/.vim/cheat.sh-vim
+
+
 # Install no-more-secrets
 git clone https://github.com/bartobri/no-more-secrets.git ~/Code/no-more-secrets
 cd ~/Code/no-more-secrets

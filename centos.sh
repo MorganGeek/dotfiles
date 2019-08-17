@@ -181,10 +181,10 @@ cargo install fselect
 
 # surfraw
 git clone --depth 1 https://gitlab.com/surfraw/Surfraw.git \
-    && cd Surfraw
-    && ./prebuild
-    && ./configure
-    && make && make install
+    && cd Surfraw \
+    && ./prebuild \
+    && ./configure \
+    && make && make install \
     && cd .. \
     && rm -rf Surfraw
 
@@ -211,3 +211,6 @@ curl https://raw.githubusercontent.com/raylee/tldr/master/tldr > /usr/local/bin/
 
 # Add pandoc
 yum -y install pandoc
+
+# Add shellcheck
+yum -y install ShellCheck

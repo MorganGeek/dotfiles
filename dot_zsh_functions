@@ -16,8 +16,8 @@ function gmail() {
 function gmail2() {
     open -na "Google Chrome" --args "https://mail.google.com/mail/u/1"
 }
-function tooling() {
-    open -na "Google Chrome" --args "https://issues.collibra.com/secure/RapidBoard.jspa?rapidView=449&projectKey=TOOL&view=planning.nodetail"
+function cicd() {
+    open -na "Google Chrome" --args "https://issues.collibra.com/secure/RapidBoard.jspa?rapidView=457&view=planning.nodetail"
 }
 function issues() {
     jira jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
@@ -122,5 +122,9 @@ function meteo() {
 }
 function how_in() {
   where="$1"; shift
-  IFS=+ curl "https://cht.sh/$where/$*"
+  IFS=+ curl "cht.sh/${where}/$*"
 }
+function rate() {
+    curl "http://rate.sx/$*"
+}
+
