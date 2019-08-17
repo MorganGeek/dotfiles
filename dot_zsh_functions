@@ -120,3 +120,7 @@ function mouse() {
 function meteo() {
     curl "fr.wttr.in/$*"
 }
+function how_in() {
+  where="$1"; shift
+  IFS=+ curl "https://cht.sh/$where/$*"
+}
