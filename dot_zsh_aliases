@@ -52,6 +52,8 @@ alias mailpro="gmail"
 # Viewing files
 alias cat='bat --style=plain --color "always"'
 alias preview="fzf --preview 'bat --color \"always\" --style=plain {}'"
+alias markdown='pandoc README.md | lynx -stdin -dump'
+
 # To do / Done
 #alias done='task_done'
 

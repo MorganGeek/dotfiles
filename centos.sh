@@ -208,3 +208,6 @@ yum -y install ncdu
 
 # Install tldr alternative to help
 curl https://raw.githubusercontent.com/raylee/tldr/master/tldr > /usr/local/bin/tldr && chmod +x /usr/local/bin/tldr
+
+# Add pandoc
+yum -y install pandoc

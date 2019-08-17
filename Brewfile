@@ -92,3 +92,5 @@ brew "diff-so-fancy"
 brew "ncdu"
 # add tldr alternative to help
 brew "tldr"
+# add pandoc
+brew "pandoc"
