@@ -88,7 +88,7 @@ alias pip='pip3'
 alias c='cat'
 alias x='extract'
 alias current_year='`echo date +"%Y"`'
-alias meteo='weather'
+#alias meteo='weather'
 alias learnmore="apropos . | sort --random-sort | awk 'NR == 1 {print$1}' | cut -d'(' -f 1 | xargs man"
 alias biggerthan10='biggerthan 10M'
 alias latency='curl cheat.sh/latency'

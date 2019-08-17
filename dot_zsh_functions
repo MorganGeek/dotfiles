@@ -117,3 +117,6 @@ function mouse() {
          ;;
      esac
 }
+function meteo() {
+    curl "fr.wttr.in/$*"
+}
