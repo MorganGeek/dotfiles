@@ -214,3 +214,6 @@ yum -y install pandoc
 
 # Add shellcheck
 yum -y install ShellCheck
+
+# Add spell checker + english dictionary
+yum -y install aspell aspell-en

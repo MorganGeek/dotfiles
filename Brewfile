@@ -96,3 +96,5 @@ brew "tldr"
 brew "pandoc"
 # add ShellCheck
 brew "shellcheck"
+# add spell check
+brew "aspell"

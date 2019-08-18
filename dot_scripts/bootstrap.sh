@@ -137,7 +137,7 @@ sudo python3 get-pip.py
 case "$(uname -s)" in
    Darwin)
      ln -snf /usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
-     export PATH=$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/
+     export PATH="$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/:/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/bin"
      ;;
 esac
 sudo pip install --upgrade pip
