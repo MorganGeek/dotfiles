@@ -217,3 +217,8 @@ yum -y install ShellCheck
 
 # Add spell checker + english dictionary
 yum -y install aspell aspell-en
+
+# Add neofetch repository
+curl -o /etc/yum.repos.d/konimex-neofetch-epel-7.repo https://copr.fedorainfracloud.org/coprs/konimex/neofetch/repo/epel-7/konimex-neofetch-epel-7.repo
+# Install neofetch to display system info nicely
+yum -y install neofetch
