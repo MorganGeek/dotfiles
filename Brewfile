@@ -98,3 +98,5 @@ brew "pandoc"
 brew "shellcheck"
 # add spell check
 brew "aspell"
+# add neofetch to nicely display system info
+brew "neofetch"

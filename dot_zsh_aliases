@@ -98,6 +98,8 @@ alias latency='curl cheat.sh/latency'
 alias moon='curl "wttr.in/Moon?lang=fr"'
 alias lune='moon'
 alias help='tldr'
+alias systeminfo='neofetch'
+alias monitoring='glances'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
