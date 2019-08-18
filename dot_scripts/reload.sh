@@ -11,3 +11,5 @@ case "$(uname -s)" in
      sudo sh .macos
      ;;
 esac
+pip freeze > /Users/morganwattiez/Code/dotfiles/requirements.txt
+bundle check

@@ -3,5 +3,6 @@ source 'https://rubygems.org'
 gem 'twitter', '~> 6.1.0'
 gem 't'
 gem 'asciidoctor-pdf'
+gem 'terjira'
 #Previously installed using
 #sudo gem install -n /usr/local/bin asciidoctor-pdf --pre
