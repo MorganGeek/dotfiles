@@ -1,0 +1,127 @@
+function google() {
+    open -na "Google Chrome" --args "https://www.google.com/search?q=$*"
+}
+function stackoverflow() {
+    open -na "Google Chrome" --args "https://www.google.com/search?q=site:stackoverflow.com $*"
+}
+function github() {
+    open -na "Google Chrome" --args "https://github.com/search?q=$*"
+}
+function hacker() {
+    open -na "Google Chrome" --args "https://hn.algolia.com/?sort=byDate&query=$*"
+}
+function gmail() {
+    open -na "Google Chrome" --args "https://mail.google.com/mail/u/0"
+}
+function gmail2() {
+    open -na "Google Chrome" --args "https://mail.google.com/mail/u/1"
+}
+function issues() {
+    jira jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
+}
+function calendar() {
+    open -na "Google Chrome" --args "https://calendar.google.com/calendar/r?tab=mc"
+}
+function asana() {
+    open -na "Google Chrome" --args "https://app.asana.com"
+}
+function bookmarks() {
+    open -na "Google Chrome" --args "https://github.com/MorganGeek/bookmarks/blob/master/README.md"
+}
+function spotify() {
+    open -na "Google Chrome" --args "https://open.spotify.com/search/results/$*"
+}
+function lob() {
+    open -na "Google Chrome" --args "https://lobste.rs"
+}
+function logtalk() {
+    path_swilgt=$(find /usr/local/Cellar/logtalk -name "*swilgt.sh" 2>/dev/null)
+    sh "$path_swilgt"
+}
+function archive() {
+    open -na "Google Chrome" --args "https://web.archive.org/web/*/$*"
+}
+function git_listobjectsbysize() {
+    tempFile=$(mktemp)
+    IFS=$'\n'
+    for commitSHA1 in $(git rev-list --all); do
+	git ls-tree -r --long "$commitSHA1" >>"$tempFile"
+    done
+
+    # sort files by SHA1, de-dupe list and finally re-sort by filesize
+    sort --key 3 "$tempFile" | \
+         uniq | \
+         sort --key 4 --numeric-sort --reverse
+    # remove temp file
+    rm -f "$tempFile"
+}
+function top_commands() {
+    history | cat | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a; }' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n50
+}
+function top_commands_full() {
+    history | cat | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | sort -nr | nl | head -n50
+}
+function istherenewissues() {
+    LASTISSUE=$(newissues | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' | head -n1 | awk '{print $2}')
+    if [[ -f ".newjiraissue" ]]
+    then
+      previous_jira_issue=$(cat ".newjiraissue")
+      if [ "$LASTISSUE" != "$previous_jira_issue" ]; then
+        newissues
+      else
+        echo "no new issue"
+      fi
+    fi
+    echo "$LASTISSUE" > .newjiraissue
+}
+function greppagedate() {
+    year=$(echo "$*" | egrep -Eo '\b[[:digit:]]{4}\b')
+    if [ -z "$year" ]
+    then
+      year=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "date|datetime" -A 1 | \grep -Eo '\b[[:digit:]]{4}\b' | head -n1)
+    fi
+    yearint=$(($year + 0))
+    currentyear=$(echo `date +"%Y"`)
+    if [[ $yearint -ge 1970 && $yearint -le $currentyear ]]
+    then
+      echo "$yearint"
+    fi
+}
+# Extract a column from a tabular output
+# via https://blog.developer.atlassian.com/ten-tips-for-wonderful-bash-productivity/
+function col() {
+    awk -v col=$1 '{print $col}'
+}
+# Skip first x words in line
+# via https://blog.developer.atlassian.com/ten-tips-for-wonderful-bash-productivity/
+function skip {
+    n=$(($1 + 1))
+    cut -d' ' -f$n-
+}
+
+# Find files bigger than X size and sort them by size
+function biggerthan() {
+    find . -size "+$*" -type f -print0 | xargs -0 ls -Ssh | sort -z
+}
+# To automatically ls when changing directory
+function cd() {
+     builtin cd "$@" && ls -latr
+}
+function mouse() {
+   case "$(uname -s)" in
+     Darwin)
+	 sh ~/.scripts/mouse_bluetooth.sh
+         ;;
+     esac
+}
+function meteo() {
+    curl "fr.wttr.in/$*"
+}
+function how_in() {
+  where="$1"; shift
+  IFS=+ curl "cht.sh/${where}/$*"
+}
+function rate() {
+    curl "http://rate.sx/$*"
+}
+
