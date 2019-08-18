@@ -20,7 +20,7 @@ function cicd() {
     open -na "Google Chrome" --args "https://issues.collibra.com/secure/RapidBoard.jspa?rapidView=457&view=planning.nodetail"
 }
 function issues() {
-    jira jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
+    jira issue jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
 }
 function calendar() {
     open -na "Google Chrome" --args "https://calendar.google.com/calendar/r?tab=mc"
