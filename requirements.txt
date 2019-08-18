@@ -13,6 +13,7 @@ chardet==3.0.4
 click==6.7
 colorama==0.3.9
 colorzero==1.1
+configobj==5.0.6
 cycler==0.10.0
 ddgr==1.6
 decorator==4.4.0
@@ -73,6 +74,7 @@ requests-toolbelt==0.9.1
 rsa==3.4.2
 rtv==1.27.0
 s3transfer==0.2.0
+saws==0.4.3
 semver==2.8.1
 six==1.12.0
 slacker==0.11.0
