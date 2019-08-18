@@ -10,7 +10,6 @@ bundle update --all
 #gem update --system
 #gem update asciidoctor-pdf t
 zsh ~/.oh-my-zsh/tools/upgrade.sh
-npm update -g jira-node-cli --save
 sudo pip install --upgrade pip 2>/dev/null
 sudo pip3 install --upgrade pip 2>/dev/null
 pip freeze > ~/requirements.txt
