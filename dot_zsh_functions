@@ -17,7 +17,7 @@ function gmail2() {
     open -na "Google Chrome" --args "https://mail.google.com/mail/u/1"
 }
 function issues() {
-    jira jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
+    jira issue jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
 }
 function calendar() {
     open -na "Google Chrome" --args "https://calendar.google.com/calendar/r?tab=mc"

@@ -126,9 +126,6 @@ esac
 # Customize /etc/hosts
 curl https://someonewhocares.org/hosts/hosts -o /etc/hosts
 
-# Install NPM dependencies
-npm install -g jira-node-cli --save
-
 # Install pip and pipenv
 sudo easy_install pip
 sudo pip install --upgrade pip

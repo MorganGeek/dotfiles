@@ -21,11 +21,11 @@ alias n='newissues'
 alias backlog=cicdlist
 alias bakclog='backlog'
 alias b='backlog'
-alias mybacklog="jira my-issues && asana"
+alias mybacklog="jira issue ls && asana"
 alias mb='mybacklog'
 alias myissues='mb'
 alias me='mb'
-alias j='jira open'
+alias j='jira issue open'
 
 # News
 alias hack='hacker'
