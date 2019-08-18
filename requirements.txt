@@ -30,6 +30,7 @@ jedi==0.14.0
 jmespath==0.9.4
 jupyter-client==5.2.4
 jupyter-core==4.5.0
+kitchen==1.2.6
 kiwisolver==1.1.0
 lazy-object-proxy==1.4.1
 matplotlib==2.2.2
@@ -70,6 +71,7 @@ rebound-cli==2.0.0
 requests==2.21.0
 requests-toolbelt==0.9.1
 rsa==3.4.2
+rtv==1.27.0
 s3transfer==0.2.0
 semver==2.8.1
 six==1.12.0
