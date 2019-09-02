@@ -16,6 +16,8 @@ cask "xmind"
 cask "vlc"
 cask "spectacle"
 cask "firefox"
+# quik for GoPro
+cask "quik"
 
 # Fonts
 cask "font-meslo-for-powerline"
