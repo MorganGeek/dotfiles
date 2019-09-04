@@ -102,3 +102,5 @@ brew "shellcheck"
 brew "aspell"
 # add neofetch to nicely display system info
 brew "neofetch"
+# add nushell https://github.com/nushell/nushell
+brew "nushell"
