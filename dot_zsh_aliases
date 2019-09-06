@@ -14,6 +14,7 @@ alias jirasearch='issues'
 alias cicdlist="jira issue jql \"project = 'CICD'\""
 alias backlogs="jira issue jql \"status = New AND project IN (CICD) AND Created > -2w ORDER BY Priority DESC\""
 alias bakclogs='backlogs'
+alias support="jira issue jql \"project in (CICD) AND Created > -2w AND resolution = Unresolved AND (type = 'Engineering Incident' AND status not in ('In Progress') OR type = 'Engineering Request' AND status = New) ORDER BY key DESC\""
 alias lastissues='jira issue jql "project IN (CICD) AND Created > -2w ORDER BY Created DESC, Priority DESC"'
 alias workingon="jira issue jql \"assignee = currentUser() AND resolution = Unresolved AND status not in ('In Review', 'Done', 'In Testing', 'Waiting For Build') OR QA = currentUser() AND status = 'In Testing' ORDER BY updated DESC\""
 alias newissues="jira issue jql \"project IN (CICD) AND Created > -2w AND resolution = Unresolved AND status not in ('In Progress') ORDER BY Created DESC, Priority DESC\""
@@ -58,6 +59,9 @@ alias markdown='pandoc README.md | lynx -stdin -dump'
 #alias done='task_done'
 
 # Management / Security / SSH / SSL
+alias mgmt='ssh $(whoami)@management.collibra.com -i ~/.ssh/id_ed25519'
+alias m='mgmt'
+alias tunnel='sshuttle --dns -r "$(whoami)@management.collibra.com" 0/0'
 alias sshpub='cat ~/.ssh/id_ed25519.pub'
 alias ssla="openssl x509 -alias -noout -in"  # Usage : ssla <cert>
 
