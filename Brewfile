@@ -18,7 +18,8 @@ cask "spectacle"
 cask "firefox"
 # quik for GoPro
 cask "quik"
-
+# Skitch for taking notes
+cask "skitch"
 # Fonts
 cask "font-meslo-for-powerline"
 
