@@ -105,3 +105,6 @@ brew "aspell"
 brew "neofetch"
 # add nushell https://github.com/nushell/nushell
 brew "nushell"
+# tools for K8S
+brew "kubectl"
+brew "kubectx"
