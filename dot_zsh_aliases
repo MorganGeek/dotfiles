@@ -11,7 +11,7 @@ alias npmlist='npm list -g --depth 0'
 
 # Jira
 alias jirasearch='issues'
-alias cicdlist="jira issue jql \"project = 'CICD'\""
+alias cicdlist="jira issue jql \"project = 'CICD' AND resolution = Unresolved\""
 alias backlogs="jira issue jql \"status = New AND project IN (CICD) AND Created > -2w ORDER BY Priority DESC\""
 alias bakclogs='backlogs'
 alias support="jira issue jql \"project in (CICD) AND Created > -2w AND resolution = Unresolved AND (type = 'Engineering Incident' AND status not in ('In Progress') OR type = 'Engineering Request' AND status in ('New', 'To be picked next')) ORDER BY key DESC\""
