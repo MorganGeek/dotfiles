@@ -70,7 +70,6 @@ alias ip='echo $(curl ident.me 2>/dev/null)'
 alias ipinfo='curl "ipinfo.io/"$(ip)'
 
 # Misc
-
 alias h='cd $HOME'
 alias diff='colordiff'
 alias cp='cp -i' # confirmation before overwrite #
@@ -101,6 +100,7 @@ alias lune='moon'
 alias help='tldr'
 alias systeminfo='neofetch'
 alias monitoring='glances'
+alias ':q'='exit'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
