@@ -24,6 +24,8 @@ cask "skitch"
 cask "font-meslo-for-powerline"
 # IntelliJ IDEA Ultimate
 cask "intellij-idea"
+# IntelliJ Goland Toolbox
+cask "goland"
 
 # Mac app store
 mas 'Keynote', id: 409183694
