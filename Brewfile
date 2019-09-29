@@ -26,6 +26,8 @@ cask "font-meslo-for-powerline"
 cask "intellij-idea"
 # IntelliJ Goland Toolbox
 cask "goland"
+# Godot : Free 2D/3D Game Engine
+cask "godot"
 
 # Mac app store
 mas 'Keynote', id: 409183694
