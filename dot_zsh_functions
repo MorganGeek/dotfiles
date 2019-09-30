@@ -185,3 +185,8 @@ transfer() {
     # cleanup
     rm -f $tmpfile
 }
+# Where is a function defined?
+function whichfunc() {
+        whence -v $1
+        type -a $1
+}
