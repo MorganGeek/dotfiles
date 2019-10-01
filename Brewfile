@@ -114,3 +114,5 @@ brew "nushell"
 # tools for K8S
 brew "kubectl"
 brew "kubectx"
+# Calibre for converting ebooks (epub to pdf)
+brew "calibre"
