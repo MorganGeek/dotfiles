@@ -28,6 +28,8 @@ cask "intellij-idea"
 cask "goland"
 # Godot : Free 2D/3D Game Engine
 cask "godot"
+# Calibre for converting ebooks (epub to pdf)
+cask "calibre"
 
 # Mac app store
 mas 'Keynote', id: 409183694
@@ -114,5 +116,4 @@ brew "nushell"
 # tools for K8S
 brew "kubectl"
 brew "kubectx"
-# Calibre for converting ebooks (epub to pdf)
-brew "calibre"
+
