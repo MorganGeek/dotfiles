@@ -83,7 +83,7 @@ function aboutpage() {
     then
       year=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "date|datetime" -A 1 | \grep -Eo '\b[[:digit:]]{4}\b' | head -n1)
     fi
-    author=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "author" | \grep -Eo '([A-Z][A-Za-z]+\s[A-Za-z]+)' | head -n1)
+    author=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "author" -A 1 | \grep -Eo '([A-Z][A-Za-z]+\s([A-Za-z ]+)*)' | head -n1)
     yearint=$(($year + 0))
     currentyear=$(echo `date +"%Y"`)
     if [ ! -z "$author" ]
