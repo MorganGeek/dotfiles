@@ -77,19 +77,25 @@ function istherenewissues() {
     fi
     echo "$LASTISSUE" > .newjiraissue
 }
-function greppagedate() {
-    year=$(echo "$*" | egrep -Eo '\b[[:digit:]]{4}\b')
+function aboutpage() {
+    year=$(echo "$*" | egrep -Eo '\b[[:digit:]]{4}\b' | head -n1)
     if [ -z "$year" ]
     then
       year=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "date|datetime" -A 1 | \grep -Eo '\b[[:digit:]]{4}\b' | head -n1)
     fi
+    author=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "author" | \grep -Eo '([A-Z][A-Za-z]+\s[A-Za-z]+)' | head -n1)
     yearint=$(($year + 0))
     currentyear=$(echo `date +"%Y"`)
+    if [ ! -z "$author" ]
+    then
+      echo "by $author"
+    fi
     if [[ $yearint -ge 1970 && $yearint -le $currentyear ]]
     then
       echo "$yearint"
     fi
 }
+
 # Extract a column from a tabular output
 # via https://blog.developer.atlassian.com/ten-tips-for-wonderful-bash-productivity/
 function col() {
@@ -112,7 +118,7 @@ function uloc {
 	    -o -name '*.java' \
 	    -o -name '*.c' -o -name '*.h' \
 	    -o -name '*.js' \
-	    \)  -exec cat \{\} \; | sort -u | wc -l
+	    \)  -exec \cat \{\} \; | sed -e 's/^[ \t]*//;s/[ \t]*$//' | sort -u | wc -l
 }
 
 # Find files bigger than X size and sort them by size
