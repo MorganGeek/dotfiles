@@ -84,15 +84,23 @@ function aboutpage() {
       year=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "date|datetime" -A 1 | \grep -Eo '\b[[:digit:]]{4}\b' | head -n1)
     fi
     author=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "author" -A 1 | \grep -Eo '([A-Z][A-Za-z]+\s([A-Za-z ]+)*)' | head -n1)
+    title=$(curl -sSL "$*" | tr '<' '<\n' | \grep title -A 1 | head -n1 | sed -E 's/.*<title>(.*)<\/title>.*/\1/' | sed "s/ [^[:alnum:]]*$author//")
     yearint=$(($year + 0))
     currentyear=$(echo `date +"%Y"`)
     if [ ! -z "$author" ]
     then
       echo "by $author"
     fi
+    if [ ! -z "$title" ]
+    then
+      echo "-> $title"
+    fi
     if [[ $yearint -ge 1970 && $yearint -le $currentyear ]]
     then
       echo "$yearint"
+    fi
+    if [ ! -z "$title" ] && [ ! -z "$author" ] && [[ $yearint -ge 1970 && $yearint -le $currentyear ]]; then
+      echo "[$author]($*) - ($yearint) $title"
     fi
 }
 
