@@ -48,13 +48,13 @@ function git_listobjectsbysize() {
     tempFile=$(mktemp)
     IFS=$'\n'
     for commitSHA1 in $(git rev-list --all); do
-	git ls-tree -r --long "$commitSHA1" >>"$tempFile"
+        git ls-tree -r --long "$commitSHA1" >>"$tempFile"
     done
 
     # sort files by SHA1, de-dupe list and finally re-sort by filesize
     sort --key 3 "$tempFile" | \
-         uniq | \
-         sort --key 4 --numeric-sort --reverse
+        uniq | \
+        sort --key 4 --numeric-sort --reverse
     # remove temp file
     rm -f "$tempFile"
 }
@@ -68,12 +68,12 @@ function istherenewissues() {
     LASTISSUE=$(newissues | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' | awk 'FNR==2{print $2}')
     if [[ -f ".newjiraissue" ]]
     then
-      previous_jira_issue=$(cat ".newjiraissue" | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g') # the sed part is for removing output colors
-      if [ "$LASTISSUE" != "$previous_jira_issue" ]; then
-        newissues
-      else
-        echo "no new issue"
-      fi
+        previous_jira_issue=$(cat ".newjiraissue" | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g') # the sed part is for removing output colors
+        if [ "$LASTISSUE" != "$previous_jira_issue" ]; then
+            newissues
+        else
+            echo "no new issue"
+        fi
     fi
     echo "$LASTISSUE" > .newjiraissue
 }
@@ -81,7 +81,7 @@ function aboutpage() {
     year=$(echo "$*" | egrep -Eo '\b[[:digit:]]{4}\b' | head -n1)
     if [ -z "$year" ]
     then
-      year=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "date|datetime" -A 1 | \grep -Eo '\b[[:digit:]]{4}\b' | head -n1)
+        year=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "date|datetime" -A 1 | \grep -Eo '\b[[:digit:]]{4}\b' | head -n1)
     fi
     author=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "author" -A 1 | \grep -Eo '([A-Z][A-Za-z]+\s([A-Za-z ]+)*)' | head -n1)
     title=$(curl -sSL "$*" | tr '<' '<\n' | \grep title -A 1 | head -n1 | sed -E 's/.*<title>(.*)<\/title>.*/\1/' | sed "s/ [^[:alnum:]]*$author//")
@@ -89,18 +89,18 @@ function aboutpage() {
     currentyear=$(echo `date +"%Y"`)
     if [ ! -z "$author" ]
     then
-      echo "by $author"
+        echo "by $author"
     fi
     if [ ! -z "$title" ]
     then
-      echo "-> $title"
+        echo "-> $title"
     fi
     if [[ $yearint -ge 1970 && $yearint -le $currentyear ]]
     then
-      echo "$yearint"
+        echo "$yearint"
     fi
     if [ ! -z "$title" ] && [ ! -z "$author" ] && [[ $yearint -ge 1970 && $yearint -le $currentyear ]]; then
-      echo "[$author]($*) - ($yearint) $title"
+        echo "[$author]($*) - ($yearint) $title"
     fi
 }
 
@@ -120,13 +120,13 @@ function skip {
 # Via https://text.causal.agency/004-uloc.txt
 function uloc {
     find . -type f \( \
-	    -name '*.py' \
-	    -o -name '*.rb' \
-	    -o -name '*.go' \
-	    -o -name '*.java' \
-	    -o -name '*.c' -o -name '*.h' \
-	    -o -name '*.js' \
-	    \)  -exec \cat \{\} \; | sed -e 's/^[ \t]*//;s/[ \t]*$//' | sort -u | wc -l
+        -name '*.py' \
+        -o -name '*.rb' \
+        -o -name '*.go' \
+        -o -name '*.java' \
+        -o -name '*.c' -o -name '*.h' \
+        -o -name '*.js' \
+        \)  -exec \cat \{\} \; | sed -e 's/^[ \t]*//;s/[ \t]*$//' | sort -u | wc -l
 }
 
 # Find files bigger than X size and sort them by size
@@ -135,21 +135,21 @@ function biggerthan() {
 }
 # To automatically ls when changing directory
 function cd() {
-     builtin cd "$@" && ls -latr
+    builtin cd "$@" && ls -latr
 }
 function mouse() {
-   case "$(uname -s)" in
-     Darwin)
-	 sh ~/.scripts/mouse_bluetooth.sh
-         ;;
-     esac
+    case "$(uname -s)" in
+        Darwin)
+            sh ~/.scripts/mouse_bluetooth.sh
+            ;;
+    esac
 }
 function meteo() {
     curl "fr.wttr.in/$*"
 }
 function how_in() {
-  where="$1"; shift
-  IFS=+ curl "cht.sh/${where}/$*"
+    where="$1"; shift
+    IFS=+ curl "cht.sh/${where}/$*"
 }
 function rate() {
     curl "http://rate.sx/$*"
@@ -201,6 +201,6 @@ transfer() {
 }
 # Where is a function defined?
 function whichfunc() {
-        whence -v $1
-        type -a $1
+    whence -v $1
+    type -a $1
 }
