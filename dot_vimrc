@@ -80,7 +80,7 @@ set shortmess=atI
 set title
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
-# Enable auto indent
+" Enable auto indent
 set autoindent
 
 filetype plugin indent on
