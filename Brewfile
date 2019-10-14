@@ -116,4 +116,4 @@ brew "nushell"
 # tools for K8S
 brew "kubectl"
 brew "kubectx"
-
+brew "packer"
