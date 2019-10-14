@@ -30,6 +30,10 @@ cask "goland"
 cask "godot"
 # Calibre for converting ebooks (epub to pdf)
 cask "calibre"
+# Vagrant
+cask "vagrant"
+# VirtualBox
+cask "virtualbox"
 
 # Mac app store
 mas 'Keynote', id: 409183694
