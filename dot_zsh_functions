@@ -121,6 +121,7 @@ cmd_loc="find . -type f \( \
         -o -name '*.rb' \
         -o -name '*.go' \
         -o -name '*.java' \
+        -o -name '*.kt' \
         -o -name '*.c' -o -name '*.h' \
         -o -name '*.js' \
         -o -name '*.tsx' \
@@ -139,7 +140,7 @@ function uloc {
 
 # Top lines of code
 function toploc {
-    eval "$cmd_loc | cut -c 1-100 | LANG=C LC_CTYPE=C sort | uniq -c | sort -nr"
+    eval "$cmd_loc | LANG=C LC_CTYPE=C cut -c 1-100 | LANG=C LC_CTYPE=C sort | uniq -c | LANG=C LC_CTYPE=C sort -nr"
 }
 
 # Find files bigger than X size and sort them by size
