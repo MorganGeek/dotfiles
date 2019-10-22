@@ -14,7 +14,6 @@ cask "pgadmin4"
 cask "sloth"
 cask "xmind"
 cask "vlc"
-cask "spectacle"
 cask "firefox"
 # quik for GoPro
 cask "quik"

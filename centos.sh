@@ -29,11 +29,6 @@ yum -y install https://www.xmind.net/xmind/downloads/XMind-ZEN-for-Linux-64bit.r
 # VideoLAN
 sudo yum -y install https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
 yum -y install vlc
-# Install Spectacle
-#sudo yum -y install snapd
-#sudo systemctl enable --now snapd.socket
-#sudo ln -s /var/lib/snapd/snap /snap
-#sudo snap -y install spectacle
 
 # Browser
 yum -y install firefox
