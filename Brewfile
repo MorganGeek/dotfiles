@@ -33,6 +33,8 @@ cask "calibre"
 cask "vagrant"
 # VirtualBox
 cask "virtualbox"
+# Arduino
+cask "arduino"
 
 # Mac app store
 mas 'Keynote', id: 409183694
