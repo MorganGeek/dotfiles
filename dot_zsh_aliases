@@ -80,6 +80,7 @@ alias du='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 alias weather='weather "?lang=fr&"'
 alias headers='curl -I --compress'  # Find out if remote server supports gzip / mod_deflate or not #
 alias hist='history'
+alias music='baton'
 alias path='echo -e ${PATH//:/\\n}' # Explode and display current PATH
 alias ping='prettyping -c 5 --nolegend' # Stop after sending count ECHO_REQUEST packets
 alias p='ps -ef | grep -i '         # Show matching processes. Usage : p <process name>
