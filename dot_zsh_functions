@@ -32,7 +32,7 @@ function bookmarks() {
     open -na "Google Chrome" --args "https://github.com/MorganGeek/bookmarks/blob/master/README.md"
 }
 function spotify() {
-    open -na "Google Chrome" --args "https://open.spotify.com/search/results/$*"
+    open -na "Google Chrome" --args "https://open.spotify.com/search/$*"
 }
 function lob() {
     open -na "Google Chrome" --args "https://lobste.rs"
