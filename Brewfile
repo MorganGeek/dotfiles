@@ -124,3 +124,4 @@ brew "kubectx"
 brew "packer"
 brew "go"
 brew "weechat" # need an IRC client
+brew "tflint" # terraform linter
