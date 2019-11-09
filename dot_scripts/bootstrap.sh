@@ -75,6 +75,7 @@ curl -s "https://get.sdkman.io" | bash
 sdk install java
 sdk install gradle
 sdk install java 8.0.222-zulu
+sdk install kotlin
 sdk selfupdate
 
 # Install Docker Desktop for Mac
