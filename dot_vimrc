@@ -25,10 +25,19 @@ Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+Plugin 'ascenator/L9', {'name': 'newL9'}
+" Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
+Plugin 'dense-analysis/ale'
+" A Vim plugin for visually displaying indent levels in code
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'gmarik/vundle'
+" Syntastic is a syntax checking plugin
+Plugin 'scrooloose/syntastic'
+" A vim plugin to access cheat.sh sheets
+Plugin 'dbeniamine/cheat.sh-vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call vundle#end()
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -41,6 +50,11 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" have indent guides enabled by default by vim-indent-guides plugin
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 " Enable syntax highlighting
 syntax on
@@ -82,8 +96,6 @@ set title
 set scrolloff=3
 " Enable auto indent
 set autoindent
-
-filetype plugin indent on
 " show existing tab with 4 spaces width
 set tabstop=4
 " when indenting with '>', use 4 spaces width
@@ -98,12 +110,7 @@ hi Search ctermbg=DarkMagenta
 " test cheat.sh integration with VIM
 let mapleader=" "
 
-call vundle#begin()
-Bundle 'gmarik/vundle'
-Bundle 'scrooloose/syntastic'
-Bundle 'dbeniamine/cheat.sh-vim'
-Bundle 'tpope/vim-fugitive'
-call vundle#end()
+
 
 let g:syntastic_javascript_checkers = [ 'jshint' ]
 let g:syntastic_ocaml_checkers = ['merlin']
