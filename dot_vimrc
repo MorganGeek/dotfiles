@@ -12,10 +12,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
@@ -39,8 +35,15 @@ Plugin 'dbeniamine/cheat.sh-vim'
 Plugin 'hashivim/vim-terraform'
 " A solid language pack for Vim. support for kotlin, terraform, groovy, ...
 Plugin 'sheerun/vim-polyglot'
-
+" A code-completion engine for Vim
 Plugin 'Valloric/YouCompleteMe'
+" lean & mean status/tabline for vim that's light as air
+Plugin 'vim-airline/vim-airline'
+" fugitive.vim: A Git wrapper so awesome, it should be illegal
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'scrooloose/nerdtree'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -126,6 +129,9 @@ hi Search ctermbg=DarkMagenta
 
 " test cheat.sh integration with VIM
 let mapleader=" "
+
+" map a specific key or shortcut to open NERDTree
+map <C-n> :NERDTreeToggle<CR>
 
 
 
