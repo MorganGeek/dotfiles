@@ -123,3 +123,4 @@ brew "kubectl"
 brew "kubectx"
 brew "packer"
 brew "go"
+brew "weechat" # need an IRC client
