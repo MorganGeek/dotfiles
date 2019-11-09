@@ -101,6 +101,7 @@ alias help='tldr'
 alias systeminfo='neofetch'
 alias monitoring='glances'
 alias ':q'='exit'
+alias irc='weechat'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
