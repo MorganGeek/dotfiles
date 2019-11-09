@@ -120,4 +120,4 @@ case "$(uname -s)" in
      ;;
 esac
 export GOPATH="$HOME/go"
-export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/grep/libexec/gnubin:$GOPATH/bin:$PATH"
