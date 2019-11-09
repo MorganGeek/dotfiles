@@ -39,6 +39,9 @@ Plugin 'dbeniamine/cheat.sh-vim'
 Plugin 'hashivim/vim-terraform'
 " A solid language pack for Vim. support for kotlin, terraform, groovy, ...
 Plugin 'sheerun/vim-polyglot'
+
+Plugin 'Valloric/YouCompleteMe'
+
 " All of your Plugins must be added before the following line
 call vundle#end()
 filetype plugin indent on    " required

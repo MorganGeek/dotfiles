@@ -126,3 +126,4 @@ brew "go"
 brew "weechat" # need an IRC client
 brew "tflint" # terraform linter
 brew "ktlint" # kotlin linter
+brew "cmake" # compiler, was needed for compiling YouCompleteMe, see https://github.com/ycm-core/YouCompleteMe
