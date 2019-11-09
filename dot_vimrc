@@ -41,9 +41,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 " fugitive.vim: A Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
-
+" A tree explorer plugin for vim.
 Plugin 'scrooloose/nerdtree'
-
+" A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks and partial hunks.
+Plugin 'airblade/vim-gitgutter'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -59,6 +60,9 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" vim-gitgutter options
+set updatetime=100
 
 " have indent guides enabled by default by vim-indent-guides plugin
 let g:indent_guides_enable_on_vim_startup = 1
