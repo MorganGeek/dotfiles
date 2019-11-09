@@ -56,6 +56,14 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
+" dense-analysis/ale options
+let g:ale_history_log_output = 1
+let g:ale_use_global_executables = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['black'],
+\}
+
 " Enable syntax highlighting
 syntax on
 " Enable line numbers
