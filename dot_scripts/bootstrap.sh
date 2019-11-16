@@ -7,6 +7,7 @@ chmod +x ~/.scripts/*.sh
 case "$(uname -s)" in
    Linux)
      echo 'Linux'
+     yum install sudo -y
      sudo yum groupinstall 'Development Tools' -y
      sudo yum install git which zip unzip ruby curl file docker gcc make libxcrypt-compat vim-enhanced -y
      ;;
