@@ -7,3 +7,5 @@ gem 'terjira'
 gem 'terraforming'
 #Previously installed using
 #sudo gem install -n /usr/local/bin asciidoctor-pdf --pre
+# 3llo - CLI for Trello
+gem '3llo'

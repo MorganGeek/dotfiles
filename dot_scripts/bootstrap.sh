@@ -52,6 +52,7 @@ ln -snf ~/Code/dotfiles/dot_zshrc.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
 ln -snf ~/Code/dotfiles/private_dot_ssh/config ~/.ssh/config
 ln -snf ~/Code/dotfiles/requirements.txt ~/requirements.txt
 ln -snf ~/Code/dotfiles/dot_surfraw.conf ~/.surfraw.conf
+ln -snf ~/Code/dotfiles/private_dot_3llo/config.sh ~/.3llo_config
 
 # Other symblinks + Install Docker Desktop for Mac
 case "$(uname -s)" in

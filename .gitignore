@@ -1,3 +1,4 @@
 *.retry
 Gemfile.lock
 .newjiraissue
+private_dot_3llo/config.sh

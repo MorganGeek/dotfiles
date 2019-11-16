@@ -120,5 +120,7 @@ case "$(uname -s)" in
      export PATH="$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/:/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin"
      ;;
 esac
+
+. ~/.3llo_config
 export GOPATH="$HOME/go"
 export PATH="/usr/local/opt/grep/libexec/gnubin:$GOPATH/bin:$PATH"
