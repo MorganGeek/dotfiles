@@ -5,7 +5,7 @@
 
 ## Setup
 ```
-git clone ssh://git@bitbucket.collibra.com/~morgan.wattiez/dotfiles.git ~/Code/dotfiles
+git clone git@github.com:MorganGeek/dotfiles.git ~/Code/dotfiles
 ~/Code/dotfiles/dot_scripts/bootstrap.sh
 ```
 
