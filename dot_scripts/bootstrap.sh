@@ -167,6 +167,9 @@ case "$(uname -s)" in
      ;;
 esac
 
+# Use rustup to install the Rust compiler (rustc) and the Rust package manager (cargo).
+rustup-init -y
+
 # Upgrade
 ~/.scripts/upgrade.sh
 

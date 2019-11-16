@@ -128,3 +128,4 @@ brew "tflint" # terraform linter
 brew "ktlint" # kotlin linter
 brew "cmake" # compiler, was needed for compiling YouCompleteMe, see https://github.com/ycm-core/YouCompleteMe
 brew "zola" # a simple and fast static site generator
+brew "rustup" # Install Rust

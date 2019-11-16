@@ -116,11 +116,13 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 case "$(uname -s)" in
    Darwin)
-    ln -snf /usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
+    ln -snf /usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin/pip /usr/local/bin/pip3
      export PATH="$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/:/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin"
      ;;
 esac
 
 . ~/.3llo_config
 export GOPATH="$HOME/go"
-export PATH="/usr/local/opt/grep/libexec/gnubin:$GOPATH/bin:$PATH"
+export RUSTPATH="$HOME/.cargo/bin"
+export PATH="/usr/local/opt/grep/libexec/gnubin:$GOPATH/bin:$RUSTPATH:$PATH"
+
