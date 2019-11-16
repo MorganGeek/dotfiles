@@ -5,7 +5,7 @@
 
 ## Setup
 ```
-git clone git@github.com:MorganGeek/dotfiles.git ~/Code/dotfiles
+git clone https://github.com/MorganGeek/dotfiles.git ~/Code/dotfiles
 ~/Code/dotfiles/dot_scripts/bootstrap.sh
 ```
 
