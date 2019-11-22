@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Make sure Code directory exists
 mkdir -p ~/Code
 ln -snf ~/Code/dotfiles/dot_scripts ~/.scripts
