@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 cask "java"
 cask "iterm2"
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
@@ -51,17 +52,17 @@ chmod 755 /bin/git-ftp
 
 # Install Golang
 yum install golang golang-godoc golang-vet golang-src golang-pkg-linux-amd64 -y
-echo 'export GOPATH="$HOME/go"' >> ~/.zshrc
-echo 'export PATH="$GOPATH/bin:$PATH"' >> ~/.zshrc
+echo "export GOPATH=\"$HOME/go\"" >> ~/.zshrc
+echo "export PATH=\"$GOPATH/bin:$PATH\"" >> ~/.zshrc
 . ~/.zshrc
 
 # Install Hugo
-mkdir $HOME/src
-cd $HOME/src
+mkdir "$HOME/src"
+cd "$HOME/src"
 git clone https://github.com/gohugoio/hugo.git
 cd hugo
 go install --tags extended
-cd $HOME
+cd "$HOME"
 
 # Inet utils
 yum -y install telnet ftp rsh traceroute
@@ -80,8 +81,8 @@ curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o 
 
 # Using pyenv to be able to install specific python versions https://stackoverflow.com/questions/49794432/how-to-setup-a-pipenv-python-3-6-project-if-os-python-version-is-3-5
 curl https://pyenv.run | bash
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo "export PYENV_ROOT=\"$HOME/.pyenv\"" >> ~/.zshrc
+echo "export PATH=\"$PYENV_ROOT/bin:$PATH\"" >> ~/.zshrc
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
 source ~/.zshrc
 yum -y install git gcc zlib-devel bzip2-devel readline-devel sqlite-devel openssl-devel
@@ -160,7 +161,7 @@ cd Bash-Snippets
 git checkout v1.22.1
 ./install.sh all
 rm -rf Bash-Snippets
-cd $HOME
+cd "$HOME"
 
 # Install googler https://github.com/jarun/googler#installation
 sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v3.9/googler && sudo chmod +x /usr/local/bin/googler
@@ -193,7 +194,7 @@ yum -y install nmon glances
 # Install Fuzzy finder
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 yes | ~/.fzf/install
-exec $SHELL
+exec "$SHELL"
 
 # Install diff-so-fancy
 curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy > /usr/local/bin/diff-so-fancy && chmod +x /usr/local/bin/diff-so-fancy

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 docker_app=$(find /Applications/ \
                   -name "Docker.app" -maxdepth 1 -mindepth 1 -type d)
 if [ -z "$docker_app" ]; then
