@@ -3,7 +3,7 @@
 
 echo "Hello $(whoami)! Let's get you set up."
 
-echo "mkdir -p $(HOME)/Code"
+echo "mkdir -p $HOME/Code"
 mkdir -p ~/Code
 ln -snf ~/Code/dotfiles/dot_scripts ~/.scripts
 chmod +x ~/.scripts/*.sh
@@ -23,28 +23,15 @@ case "$(uname -s)" in
    Darwin)
     echo "(Mac OS X) installing homebrew"
      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-     ;;
-
-   Linux)
-    echo "(Linux) installing homebrew"
-     git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
-     mkdir -p ~/.linuxbrew/bin
-     ln -snf ../Homebrew/bin/brew ~/.linuxbrew/bin
-     eval "$(~/.linuxbrew/bin/brew shellenv)"
-     ;;
-   *)
-     echo 'Homebrew installation aborted : Non supported OS'
-     exit
+    # Prevent `Error: Your Homebrew is outdated. Please run `brew update`.`
+    echo "Updating Homebrew"
+    brew update
      ;;
 esac
-# Prevent `Error: Your Homebrew is outdated. Please run `brew update`.`
-echo "Updating Homebrew"
-brew update
 
 # Create symbolic links
 echo "Creating symbolic links"
 ln -snf ~/.local/share/chezmoi/ ~/dotfiles
-ln -snf ~/Code/dotfiles/Brewfile ~/Brewfile
 ln -snf ~/Code/dotfiles/Gemfile ~/Gemfile
 ln -snf ~/Code/dotfiles/README.md ~/README.md
 ln -snf ~/Code/dotfiles/dot_bash_profile ~/.bash_profile
@@ -75,8 +62,21 @@ case "$(uname -s)" in
 esac
 
 # Install dependencies (apps, fonts, ...) with Brew
-echo "Brew installing stuff (apps, fonts, ...)"
-brew bundle
+case "$(uname -s)" in
+   Darwin)
+    echo "(Mac OS X) Brew installing stuff (apps, fonts, ...)"
+    ln -snf ~/Code/dotfiles/Brewfile ~/Brewfile
+    brew bundle
+     ;;
+esac
+
+# Install dependencies (apps, fonts, ...) for CentOS
+case "$(uname -s)" in
+   Linux)
+    echo "(CentOS) Installing stuff (apps, ...)"
+    ~/Code/dotfiles/centos.sh
+     ;;
+esac
 
 # Switch to ZSH
 echo "switching to ZSH"
@@ -125,7 +125,7 @@ ln -snf ~/Code/dotfiles/dot_zshrc.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
 
 echo "Installing Vundle + VIM Plugins"
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
+vim +PluginInstall +qall > /dev/null
 #https://github.com/ycm-core/YouCompleteMe/blob/master/README.md#installation
 cd "$HOME/.vim/bundle/YouCompleteMe" || exit
 ./install.py --all

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-cask "java"
-cask "iterm2"
+#cask "iterm2"
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 yum -y install https://zoom.us/client/latest/zoom_x86_64.rpm
 
@@ -38,10 +37,10 @@ yum -y install firefox
 # clone
 git clone https://github.com/powerline/fonts.git --depth=1
 # install
-cd fonts
+cd fonts || exit
 ./install.sh
 # clean-up a bit
-cd ..
+cd .. || exit
 rm -rf fonts
 
 # Install ZSH
@@ -58,11 +57,11 @@ echo "export PATH=\"$GOPATH/bin:$PATH\"" >> ~/.zshrc
 
 # Install Hugo
 mkdir "$HOME/src"
-cd "$HOME/src"
+cd "$HOME/src" || exit
 git clone https://github.com/gohugoio/hugo.git
-cd hugo
+cd hugo || exit
 go install --tags extended
-cd "$HOME"
+cd "$HOME" || exit
 
 # Inet utils
 yum -y install telnet ftp rsh traceroute
@@ -194,7 +193,7 @@ yum -y install nmon glances
 # Install Fuzzy finder
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 yes | ~/.fzf/install
-exec "$SHELL"
+#exec "$SHELL"
 
 # Install diff-so-fancy
 curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy > /usr/local/bin/diff-so-fancy && chmod +x /usr/local/bin/diff-so-fancy
@@ -218,3 +217,50 @@ yum -y install aspell aspell-en
 curl -o /etc/yum.repos.d/konimex-neofetch-epel-7.repo https://copr.fedorainfracloud.org/coprs/konimex/neofetch/repo/epel-7/konimex-neofetch-epel-7.repo
 # Install neofetch to display system info nicely
 yum -y install neofetch
+
+cargo install nu
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg     https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
+yum install -y kubectl
+
+
+# Install the harbottle-main repo
+sudo yum -y install https://harbottle.gitlab.io/harbottle-main/7/x86_64/harbottle-main-release.rpm
+yum -y install kubectx
+
+# Install packer
+packer_version=1.4.5
+curl -L -o /tmp/packer.zip https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
+cd /usr/local/bin && unzip -o /tmp/packer.zip && rm -f /tmp/packer.zip
+
+yum -y install weechat tflint
+
+curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.35.0/ktlint && chmod a+x ktlint
+# you can also download ktlint manually from https://github.com/pinterest/ktlint/releases
+# another option is "brew install ktlint"
+
+# verify PGP signature (optional but recommended)
+curl -sS https://keybase.io/pinterestandroid/pgp_keys.asc | gpg --import
+curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.35.0/ktlint.asc
+gpg --verify ktlint.asc
+
+git clone https://github.com/getzola/zola.git
+cd zola
+cargo build --Release
+
+yum install -y https://github.com/vmware/octant/releases/download/v0.9.1/octant_0.9.1_Linux-64bit.rpm && yum clean all
+
+yum -y install bc
+git clone https://github.com/fcambus/ansiweather.git
+
+git clone https://github.com/datawire/telepresence.git && cd telepresence
+env PREFIX=/usr/local ./install.sh

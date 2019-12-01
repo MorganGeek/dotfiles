@@ -2,9 +2,16 @@
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 sdk selfupdate
-brew update
-#brew upgrade
-brew outdated | xargs brew upgrade
+
+# Upgrading HomeBrew stuff
+case "$(uname -s)" in
+   Darwin)
+    echo "(Mac OS X) Homebrew upgrading stuff"
+    brew update
+    #brew upgrade
+    brew outdated | xargs brew upgrade
+     ;;
+esac
 
 bundle update --all
 #gem update --system
@@ -15,5 +22,5 @@ sudo pip3 install --upgrade pip 2>/dev/null
 pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
 pip freeze > ~/requirements.txt
 # Update VIM plugins installed via Vundle https://github.com/VundleVim/Vundle.vim
-vim +PluginUpdate +qall
+vim +PluginUpdate +qall > /dev/null
 rustup-update

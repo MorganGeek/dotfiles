@@ -4,7 +4,15 @@ export SDKMAN_DIR="$HOME/.sdkman"
 chmod +x ~/.scripts/*.sh
 source ~/.zshrc
 sdk use java 8.0.222-zulu
-brew bundle
+
+# Homebrew reloading stuff
+case "$(uname -s)" in
+   Darwin)
+    echo "(Mac OS X) Homebrew reloading stuff"
+    brew bundle
+     ;;
+esac
+
 # OSX Defaults
 case "$(uname -s)" in
    Darwin)
