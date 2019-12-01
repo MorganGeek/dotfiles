@@ -74,6 +74,7 @@ esac
 case "$(uname -s)" in
    Linux)
     echo "(CentOS) Installing stuff (apps, ...)"
+    chmod +x ~/Code/dotfiles/centos.sh
     ~/Code/dotfiles/centos.sh
      ;;
 esac
