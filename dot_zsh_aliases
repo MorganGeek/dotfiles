@@ -108,6 +108,7 @@ alias mytracks='music me saved tracks'
 alias unix='curl -L http://git.io/unix'
 alias coffee="curl -L http://git.io/coffee"
 alias hotcoffee="curl -sL git.io/hotcoffee | sh"
+alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"

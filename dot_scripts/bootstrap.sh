@@ -200,6 +200,10 @@ rustup component add rustfmt
 echo "Installing pa11y tool for local webpage accessibility analysis"
 npm install -g pa11y
 
+git clone https://github.com/sherlock-project/sherlock.git ~/Code/sherlock
+cd sherlock || exit
+python3 -m pip install -r requirements.txt
+
 # Upgrade
 echo "Upgrading apps"
 ~/.scripts/upgrade.sh
