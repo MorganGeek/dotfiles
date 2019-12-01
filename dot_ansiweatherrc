@@ -1,0 +1,10 @@
+location:Gembloux,BE
+units:metric
+wind_text:Vent
+sunrise_text:Lever du soleil
+sunset_text:Coucher de soleil
+greeting_text:Météo de
+humidity_text:Humidité
+pressure_text:Pression
+forecast_text:Prévisions
+background:\033[35m

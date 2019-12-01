@@ -218,3 +218,9 @@ function whichfunc() {
     whence -v $1
     type -a $1
 }
+
+# git shortcuts
+function gcrb {
+   branch=$1
+   git checkout -b $branch origin/$branch
+}

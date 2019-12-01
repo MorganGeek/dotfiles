@@ -1,4 +1,8 @@
 # Make sure Code directory exists
+
+echo "Hello $(whoami)! Let's get you set up."
+
+echo "mkdir -p $(HOME)/Code"
 mkdir -p ~/Code
 ln -snf ~/Code/dotfiles/dot_scripts ~/.scripts
 chmod +x ~/.scripts/*.sh
@@ -6,7 +10,7 @@ chmod +x ~/.scripts/*.sh
 # Install missing package (Linux)
 case "$(uname -s)" in
    Linux)
-     echo 'Linux'
+     echo "(Linux) Installing Development Tools"
      yum install sudo -y
      sudo yum groupinstall 'Development Tools' -y
      sudo yum install git which zip unzip ruby curl file docker gcc make libxcrypt-compat vim-enhanced -y
@@ -15,28 +19,29 @@ esac
 
 # Install HomeBrew
 case "$(uname -s)" in
-
    Darwin)
-     echo 'Mac OS X'
+    echo "(Mac OS X) installing homebrew"
      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
      ;;
 
    Linux)
-     echo 'Linux'
+    echo "(Linux) installing homebrew"
      git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
      mkdir -p ~/.linuxbrew/bin
      ln -snf ../Homebrew/bin/brew ~/.linuxbrew/bin
-     eval $(~/.linuxbrew/bin/brew shellenv)
+     eval "$(~/.linuxbrew/bin/brew shellenv)"
      ;;
    *)
-     echo 'Non supported OS'
+     echo 'Homebrew installation aborted : Non supported OS'
      exit
      ;;
 esac
 # Prevent `Error: Your Homebrew is outdated. Please run `brew update`.`
+echo "Updating Homebrew"
 brew update
 
 # Create symbolic links
+echo "Creating symbolic links"
 ln -snf ~/.local/share/chezmoi/ ~/dotfiles
 ln -snf ~/Code/dotfiles/Brewfile ~/Brewfile
 ln -snf ~/Code/dotfiles/Gemfile ~/Gemfile
@@ -54,36 +59,44 @@ ln -snf ~/Code/dotfiles/private_dot_ssh/config ~/.ssh/config
 ln -snf ~/Code/dotfiles/requirements.txt ~/requirements.txt
 ln -snf ~/Code/dotfiles/dot_surfraw.conf ~/.surfraw.conf
 ln -snf ~/Code/dotfiles/private_dot_3llo/config.sh ~/.3llo_config
+ln -snf ~/Code/dotfiles/dot_ansiweatherrc ~/.ansiweatherrc
 
 # Other symblinks + Install Docker Desktop for Mac
 case "$(uname -s)" in
    Darwin)
-     ln -snf ~/.config/Code/User/settings.json "~/Library/Application Support/Code/User/settings.json"
-     ln -snf "~/Library/Mobile Documents/com~apple~CloudDocs/Mackup/Library/Application Support/Code/User/snippets" "~/Library/Application Support/Code/User/snippets"
-     ln -snf "~/Library/Mobile Documents/com~apple~CloudDocs/Mackup/.mackup.cfg" ~/.mackup.cfg
+    echo "(Mac OS X) Adding symbolic links"
+     ln -snf "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+     ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/Library/Application Support/Code/User/snippets" "$HOME/Library/Application Support/Code/User/snippets"
+     ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/.mackup.cfg" "$HOME/.mackup.cfg"
+    echo "(Mac OS X) Installing Docker"
      ~/.scripts/install_docker_for_mac.sh
      ;;
 esac
 
 # Install dependencies (apps, fonts, ...) with Brew
+echo "Brew installing stuff (apps, fonts, ...)"
 brew bundle
 
 # Switch to ZSH
-echo "$(which zsh)" >> /etc/shells
-chsh -s "$(which zsh)"
+echo "switching to ZSH"
+command -v zsh >> /etc/shells
+chsh -s "$(command -v zsh)"
 
 # Use SDKMan to install development tools
+echo "Installing SDKMan as development tools manager"
 curl -s "https://get.sdkman.io" | bash
+
+echo "SDKMan installing development tools"
 sdk install java
 sdk install gradle
 sdk install java 8.0.222-zulu
 sdk install kotlin
+echo "SDKMan updating"
 sdk selfupdate
 
-# Install Docker Desktop for Mac
 case "$(uname -s)" in
    Linux)
-     echo 'Install ruby on Linux'
+     echo '(Linux) Installing ruby'
      curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
      curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
      curl -L get.rvm.io | bash -s stable
@@ -95,10 +108,12 @@ case "$(uname -s)" in
 esac
 
 # Install bundler for managing ruby dependencies and Gemfile
+echo "Installing bundler for managing ruby dependencies and Gemfile"
 sudo gem install bundler
 bundle install
 
 # Install Oh My Zsh and some cool dependencies
+echo "Installing Oh My Zsh + customizing themes and plugins"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 git clone https://github.com/AlexisBRENON/oh-my-zsh-reminder ~/.oh-my-zsh/custom/plugins/reminder
@@ -107,43 +122,51 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 ln -snf ~/Code/dotfiles/dot_zshrc ~/.zshrc
 ln -snf ~/Code/dotfiles/dot_zshrc.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
 
+echo "Installing Vundle + VIM Plugins"
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
-cd ~/.vim/bundle/YouCompleteMe
-./install.py --clang-completer
-cd ~/
-
+#https://github.com/ycm-core/YouCompleteMe/blob/master/README.md#installation
+cd "$HOME/.vim/bundle/YouCompleteMe" || exit
+./install.py --all
+cd "$HOME" || exit
 git clone https://github.com/dbeniamine/cheat.sh-vim.git ~/.vim/cheat.sh-vim
 
 # Install no-more-secrets
+echo "Installing no-more-secrets (for fun)"
 git clone https://github.com/bartobri/no-more-secrets.git ~/Code/no-more-secrets
-cd ~/Code/no-more-secrets
+cd "$HOME/Code/no-more-secrets" || exit
 make nms sneakers
 sudo make install
-cd ~/
+cd "$HOME" || exit
 
 # OSX Defaults
 case "$(uname -s)" in
    Darwin)
+     echo "(Mac OS X) Loading preferences"
      sudo sh .macos
      ;;
 esac
 
 # Customize /etc/hosts
+echo "Overriding /etc/hosts"
 curl https://someonewhocares.org/hosts/hosts -o /etc/hosts
 
 # Install pip and pipenv
+echo "Installing pip and pipenv"
 sudo easy_install pip
 sudo pip install --upgrade pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
 case "$(uname -s)" in
    Darwin)
+     echo "(Mac OS X) Updating PATH for loading pip user installed packages"
      ln -snf /usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
      export PATH="$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/:/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin"
      ;;
 esac
+echo "Upgrading pip"
 sudo pip install --upgrade pip
+echo "Pip installing stuff"
 pip install -r requirements.txt
 
 # was used for some slack cli in python... https://pypi.org/project/slack-cli/
@@ -153,25 +176,32 @@ pip install -r requirements.txt
 # Install baton (CLI to manage Spotify playback) https://github.com/joshuathompson/baton
 case "$(uname -s)" in
    Darwin)
-     echo 'Mac OS X'
+     echo '(Mac OS X) Installing baton (spotify CLI)'
      curl -sSL https://github.com/joshuathompson/baton/releases/download/0.1.7/baton-0.1.7-darwin-amd64 -o /usr/local/bin/baton && chmod +x /usr/local/bin/baton
      ;;
 
    Linux)
-     echo 'Linux'
+       echo '(Linux) Installing baton (spotify CLI)'
     curl -sSL https://github.com/joshuathompson/baton/releases/download/0.1.7/baton-0.1.7-linux-amd64 -o /usr/local/bin/baton && chmod +x /usr/local/bin/baton
      ;;
    *)
-     echo 'Non supported OS'
+     echo 'Non supported OS : Installation aborted for baton (spotify CLI)'
      exit
      ;;
 esac
 
 # Use rustup to install the Rust compiler (rustc) and the Rust package manager (cargo).
+echo "Installing Rust compiler and package manager"
 rustup-init -y
+rustup component add rustfmt
+# Install pa11y tool for local webpage accessibility analysis
+echo "Installing pa11y tool for local webpage accessibility analysis"
+npm install -g pa11y
 
 # Upgrade
+echo "Upgrading apps"
 ~/.scripts/upgrade.sh
 
 # Reload
+echo "Reloading config"
 ~/.scripts/reload.sh

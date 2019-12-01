@@ -35,6 +35,8 @@ cask "vagrant"
 cask "virtualbox"
 # Arduino
 cask "arduino"
+cask "koa11y" # desktop app for asserting websites accessibility
+cask "osxfuse" # telepresence https://www.telepresence.io/reference/install
 
 # Mac app store
 mas 'Keynote', id: 409183694
@@ -129,3 +131,7 @@ brew "ktlint" # kotlin linter
 brew "cmake" # compiler, was needed for compiling YouCompleteMe, see https://github.com/ycm-core/YouCompleteMe
 brew "zola" # a simple and fast static site generator
 brew "rustup" # Install Rust
+brew "jq" # add jq utility for parsing json
+brew "octant" # k8s cluster viewer
+brew "datawire/blackbird/telepresence" # telepresence https://www.telepresence.io/reference/install
+brew "ansiweather" # https://github.com/fcambus/ansiweather
