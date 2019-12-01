@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Make sure Code directory exists
 
 echo "Hello $(whoami)! Let's get you set up."
