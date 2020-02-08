@@ -48,6 +48,7 @@ ln -snf ~/Code/dotfiles/requirements.txt ~/requirements.txt
 ln -snf ~/Code/dotfiles/dot_surfraw.conf ~/.surfraw.conf
 ln -snf ~/Code/dotfiles/private_dot_3llo/config.sh ~/.3llo_config
 ln -snf ~/Code/dotfiles/dot_ansiweatherrc ~/.ansiweatherrc
+ln -snf ~/Code/dotfiles/dot_p10k_dot_zsh ~/.p10k.zsh
 
 # Other symblinks + Install Docker Desktop for Mac
 case "$(uname -s)" in
@@ -117,10 +118,10 @@ bundle install
 # Install Oh My Zsh and some cool dependencies
 echo "Installing Oh My Zsh + customizing themes and plugins"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-git clone https://github.com/AlexisBRENON/oh-my-zsh-reminder ~/.oh-my-zsh/custom/plugins/reminder
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
+git clone https://github.com/AlexisBRENON/oh-my-zsh-reminder "$ZSH_CUSTOM/plugins/reminder"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 ln -snf ~/Code/dotfiles/dot_zshrc ~/.zshrc
 ln -snf ~/Code/dotfiles/dot_zshrc.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
 

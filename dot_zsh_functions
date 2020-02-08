@@ -224,3 +224,5 @@ function gcrb {
    branch=$1
    git checkout -b $branch origin/$branch
 }
+function terraform-compliance { docker run --rm -v "$(pwd):/target" -i -t eerkunt/terraform-compliance "$@"; }
+function checkov { docker run -i --rm -v "$(pwd):/tf" bridgecrew/checkov -d /tf "$@" ; }

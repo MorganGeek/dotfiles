@@ -5,6 +5,10 @@ tap "homebrew/core"
 tap "twpayne/taps"
 # Tap for real path
 tap "iveney/mocha"
+tap "atlassian/tap"
+tap "datawire/blackbird" # telepresence https://www.telepresence.io/reference/install
+tap "liamg/tfsec"
+tap "derailed/k9s"
 
 cask "java"
 cask "iterm2"
@@ -13,7 +17,6 @@ cask "visual-studio-code"
 cask "pgadmin4"
 cask "sloth"
 cask "xmind"
-cask "vlc"
 cask "firefox"
 # quik for GoPro
 cask "quik"
@@ -37,6 +40,8 @@ cask "virtualbox"
 cask "arduino"
 cask "koa11y" # desktop app for asserting websites accessibility
 cask "osxfuse" # telepresence https://www.telepresence.io/reference/install
+cask "qbittorrent"
+cask "vlc"
 
 # Mac app store
 mas 'Keynote', id: 409183694
@@ -133,5 +138,17 @@ brew "zola" # a simple and fast static site generator
 brew "rustup" # Install Rust
 brew "jq" # add jq utility for parsing json
 brew "octant" # k8s cluster viewer
-brew "datawire/blackbird/telepresence" # telepresence https://www.telepresence.io/reference/install
+brew "telepresence" # telepresence https://www.telepresence.io/reference/install
 brew "ansiweather" # https://github.com/fcambus/ansiweather
+brew "bats" # test for bash scripts
+brew "atlassian-plugin-sdk" # atlassian sdk https://developer.atlassian.com/server/framework/atlassian-sdk/install-the-atlassian-sdk-on-a-linux-or-mac-system/#step-2-download-and-install-the-sdk
+
+brew "terragrunt"
+brew "helm"
+brew "aws-iam-authenticator"
+brew "tfsec"
+brew "k9s"
+brew "stern"
+
+brew "tac" # Needed for some terraform modules at work
+brew "coreutils"
