@@ -89,6 +89,7 @@ alias s=ls
 alias sl=ll
 alias v=vi
 alias ls='lsd'
+alias tree='ls --almost-all --tree'
 alias pip='pip3'
 alias c='cat'
 alias x='extract'
