@@ -9,6 +9,7 @@ tap "atlassian/tap"
 tap "datawire/blackbird" # telepresence https://www.telepresence.io/reference/install
 tap "liamg/tfsec"
 tap "derailed/k9s"
+tap "github/gh"
 
 cask "java"
 cask "iterm2"
@@ -152,3 +153,4 @@ brew "stern"
 
 brew "tac" # Needed for some terraform modules at work
 brew "coreutils"
+brew "gh" # GitHub CLI
