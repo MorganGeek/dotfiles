@@ -154,3 +154,4 @@ brew "stern"
 brew "tac" # Needed for some terraform modules at work
 brew "coreutils"
 brew "gh" # GitHub CLI
+brew "bash" # time to upgrade bash
