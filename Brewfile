@@ -10,6 +10,8 @@ tap "datawire/blackbird" # telepresence https://www.telepresence.io/reference/in
 tap "liamg/tfsec"
 tap "derailed/k9s"
 tap "github/gh"
+tap "derailed/popeye" # provides popeye, k8s sanity analysis
+
 
 cask "java"
 cask "iterm2"
@@ -155,3 +157,4 @@ brew "tac" # Needed for some terraform modules at work
 brew "coreutils"
 brew "gh" # GitHub CLI
 brew "bash" # time to upgrade bash
+brew "popeye" # Kubernetes resources sanity analysis
