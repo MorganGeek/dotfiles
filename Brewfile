@@ -158,3 +158,6 @@ brew "coreutils"
 brew "gh" # GitHub CLI
 brew "bash" # time to upgrade bash
 brew "popeye" # Kubernetes resources sanity analysis
+brew "pre-commit" # https://pre-commit.com/#install
+brew "terraform-docs" # https://github.com/segmentio/terraform-docs
+brew "shfmt" # format shell

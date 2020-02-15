@@ -10,27 +10,28 @@ chmod +x ~/.scripts/*.sh
 
 # Install missing package (Linux)
 case "$(uname -s)" in
-   Linux)
-     echo "(Linux) Installing Development Tools"
-     yum install sudo -y
-     sudo yum groupinstall 'Development Tools' -y
-     sudo yum install git which zip unzip ruby curl file docker gcc make libxcrypt-compat vim-enhanced -y
-     ;;
+Linux)
+	echo "(Linux) Installing Development Tools"
+	yum install sudo -y
+	sudo yum groupinstall 'Development Tools' -y
+	sudo yum install git which zip unzip ruby curl file docker gcc make libxcrypt-compat vim-enhanced -y
+	;;
 esac
 
 # Install HomeBrew
 case "$(uname -s)" in
-   Darwin)
-    echo "(Mac OS X) installing homebrew"
-     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    # Prevent `Error: Your Homebrew is outdated. Please run `brew update`.`
-    echo "Updating Homebrew"
-    brew update
-     ;;
+Darwin)
+	echo "(Mac OS X) installing homebrew"
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	# Prevent `Error: Your Homebrew is outdated. Please run `brew update`.`
+	echo "Updating Homebrew"
+	brew update
+	;;
 esac
 
 # Create symbolic links
 echo "Creating symbolic links"
+ln -snf ~/Code/dotfiles/dot_profile ~/.profile
 ln -snf ~/.local/share/chezmoi/ ~/dotfiles
 ln -snf ~/Code/dotfiles/Gemfile ~/Gemfile
 ln -snf ~/Code/dotfiles/README.md ~/README.md
@@ -49,40 +50,41 @@ ln -snf ~/Code/dotfiles/dot_surfraw.conf ~/.surfraw.conf
 ln -snf ~/Code/dotfiles/private_dot_3llo/config.sh ~/.3llo_config
 ln -snf ~/Code/dotfiles/dot_ansiweatherrc ~/.ansiweatherrc
 ln -snf ~/Code/dotfiles/dot_p10k_dot_zsh ~/.p10k.zsh
+ln -snf ~/Code/dotfiles/dot_git-template ~/.git-template
 
 # Other symblinks + Install Docker Desktop for Mac
 case "$(uname -s)" in
-   Darwin)
-    echo "(Mac OS X) Adding symbolic links"
-     ln -snf "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-     ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/Library/Application Support/Code/User/snippets" "$HOME/Library/Application Support/Code/User/snippets"
-     ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/.mackup.cfg" "$HOME/.mackup.cfg"
-    echo "(Mac OS X) Installing Docker"
-     ~/.scripts/install_docker_for_mac.sh
-     ;;
+Darwin)
+	echo "(Mac OS X) Adding symbolic links"
+	ln -snf "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+	ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/Library/Application Support/Code/User/snippets" "$HOME/Library/Application Support/Code/User/snippets"
+	ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/.mackup.cfg" "$HOME/.mackup.cfg"
+	echo "(Mac OS X) Installing Docker"
+	~/.scripts/install_docker_for_mac.sh
+	;;
 esac
 
 # Install dependencies (apps, fonts, ...) with Brew
 case "$(uname -s)" in
-   Darwin)
-    echo "(Mac OS X) Brew installing stuff (apps, fonts, ...)"
-    ln -snf ~/Code/dotfiles/Brewfile ~/Brewfile
-    brew bundle
-     ;;
+Darwin)
+	echo "(Mac OS X) Brew installing stuff (apps, fonts, ...)"
+	ln -snf ~/Code/dotfiles/Brewfile ~/Brewfile
+	brew bundle
+	;;
 esac
 
 # Install dependencies (apps, fonts, ...) for CentOS
 case "$(uname -s)" in
-   Linux)
-    echo "(CentOS) Installing stuff (apps, ...)"
-    chmod +x ~/Code/dotfiles/centos.sh
-    ~/Code/dotfiles/centos.sh
-     ;;
+Linux)
+	echo "(CentOS) Installing stuff (apps, ...)"
+	chmod +x ~/Code/dotfiles/centos.sh
+	~/Code/dotfiles/centos.sh
+	;;
 esac
 
 # Switch to ZSH
 echo "switching to ZSH"
-command -v zsh >> /etc/shells
+command -v zsh >>/etc/shells
 chsh -s "$(command -v zsh)"
 
 # Use SDKMan to install development tools
@@ -98,16 +100,16 @@ echo "SDKMan updating"
 sdk selfupdate
 
 case "$(uname -s)" in
-   Linux)
-     echo '(Linux) Installing ruby'
-     curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
-     curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
-     curl -L get.rvm.io | bash -s stable
-     source /etc/profile.d/rvm.sh
-     rvm reload
-     rvm requirements run
-     rvm install 2.3.7
-     ;;
+Linux)
+	echo '(Linux) Installing ruby'
+	curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+	curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
+	curl -L get.rvm.io | bash -s stable
+	source /etc/profile.d/rvm.sh
+	rvm reload
+	rvm requirements run
+	rvm install 2.3.7
+	;;
 esac
 
 # Install bundler for managing ruby dependencies and Gemfile
@@ -127,7 +129,7 @@ ln -snf ~/Code/dotfiles/dot_zshrc.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
 
 echo "Installing Vundle + VIM Plugins"
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall > /dev/null
+vim +PluginInstall +qall >/dev/null
 #https://github.com/ycm-core/YouCompleteMe/blob/master/README.md#installation
 cd "$HOME/.vim/bundle/YouCompleteMe" || exit
 ./install.py --all
@@ -144,10 +146,10 @@ cd "$HOME" || exit
 
 # OSX Defaults
 case "$(uname -s)" in
-   Darwin)
-     echo "(Mac OS X) Loading preferences"
-     sudo sh .macos
-     ;;
+Darwin)
+	echo "(Mac OS X) Loading preferences"
+	sudo sh .macos
+	;;
 esac
 
 # Customize /etc/hosts
@@ -161,11 +163,11 @@ sudo pip install --upgrade pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
 case "$(uname -s)" in
-   Darwin)
-     echo "(Mac OS X) Updating PATH for loading pip user installed packages"
-     ln -snf /usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
-     export PATH="$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/:/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin"
-     ;;
+Darwin)
+	echo "(Mac OS X) Updating PATH for loading pip user installed packages"
+	ln -snf /usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
+	export PATH="$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/:/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin"
+	;;
 esac
 echo "Upgrading pip"
 sudo pip install --upgrade pip
@@ -178,19 +180,19 @@ pip install -r requirements.txt
 
 # Install baton (CLI to manage Spotify playback) https://github.com/joshuathompson/baton
 case "$(uname -s)" in
-   Darwin)
-     echo '(Mac OS X) Installing baton (spotify CLI)'
-     curl -sSL https://github.com/joshuathompson/baton/releases/download/0.1.7/baton-0.1.7-darwin-amd64 -o /usr/local/bin/baton && chmod +x /usr/local/bin/baton
-     ;;
+Darwin)
+	echo '(Mac OS X) Installing baton (spotify CLI)'
+	curl -sSL https://github.com/joshuathompson/baton/releases/download/0.1.7/baton-0.1.7-darwin-amd64 -o /usr/local/bin/baton && chmod +x /usr/local/bin/baton
+	;;
 
-   Linux)
-       echo '(Linux) Installing baton (spotify CLI)'
-    curl -sSL https://github.com/joshuathompson/baton/releases/download/0.1.7/baton-0.1.7-linux-amd64 -o /usr/local/bin/baton && chmod +x /usr/local/bin/baton
-     ;;
-   *)
-     echo 'Non supported OS : Installation aborted for baton (spotify CLI)'
-     exit
-     ;;
+Linux)
+	echo '(Linux) Installing baton (spotify CLI)'
+	curl -sSL https://github.com/joshuathompson/baton/releases/download/0.1.7/baton-0.1.7-linux-amd64 -o /usr/local/bin/baton && chmod +x /usr/local/bin/baton
+	;;
+*)
+	echo 'Non supported OS : Installation aborted for baton (spotify CLI)'
+	exit
+	;;
 esac
 
 # Use rustup to install the Rust compiler (rustc) and the Rust package manager (cargo).
@@ -204,6 +206,12 @@ npm install -g pa11y
 git clone https://github.com/sherlock-project/sherlock.git ~/Code/sherlock
 cd sherlock || exit
 python3 -m pip install -r requirements.txt
+
+git config --global init.templateDir ~/.git-template
+pre-commit init-templatedir ~/.git-template
+
+terraform-docs completion zsh >/usr/local/share/zsh/site-functions/_terraform-docs
+autoload -U compinit && compinit
 
 # Upgrade
 echo "Upgrading apps"

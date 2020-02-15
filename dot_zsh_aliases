@@ -71,6 +71,7 @@ alias ipinfo='curl "ipinfo.io/"$(ip)'
 
 # Misc
 alias h='cd $HOME'
+alias bash="/usr/local/bin/bash"
 alias diff='colordiff'
 alias cp='cp -i' # confirmation before overwrite #
 alias mv='mv -i' # confirmation before overwrite

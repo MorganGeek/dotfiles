@@ -1,4 +1,4 @@
-# Needed for https://stackoverflow.com/questions/27566999/git-with-intellij-idea-could-not-read-from-remote-repository 
+# Needed for https://stackoverflow.com/questions/27566999/git-with-intellij-idea-could-not-read-from-remote-repository
 Host *
  AddKeysToAgent yes
  UseKeychain yes

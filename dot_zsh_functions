@@ -226,3 +226,8 @@ function gcrb {
 }
 function terraform-compliance { docker run --rm -v "$(pwd):/target" -i -t eerkunt/terraform-compliance "$@"; }
 function checkov { docker run -i --rm -v "$(pwd):/tf" bridgecrew/checkov -d /tf "$@" ; }
+function copyhooks {
+   cp -f ~/.git-template/.pre-commit-config.yaml ./
+   pre-commit install --install-hooks --overwrite
+   pre-commit run -a
+}

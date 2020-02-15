@@ -31,3 +31,6 @@ aws-iam-authenticator version
 stern --version
 helm version
 terragrunt --version
+pre-commit --version
+terraform-docs --version
+tflint --version

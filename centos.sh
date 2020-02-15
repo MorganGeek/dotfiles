@@ -45,14 +45,14 @@ rm -rf fonts
 
 # Install ZSH
 sudo yum -y install zsh
-curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp > /bin/git-ftp
+curl https://raw.githubusercontent.com/git-ftp/git-ftp/master/git-ftp >/bin/git-ftp
 # Install git-ftp
 chmod 755 /bin/git-ftp
 
 # Install Golang
 yum install golang golang-godoc golang-vet golang-src golang-pkg-linux-amd64 -y
-echo "export GOPATH=\"$HOME/go\"" >> ~/.zshrc
-echo "export PATH=\"$GOPATH/bin:$PATH\"" >> ~/.zshrc
+echo "export GOPATH=\"$HOME/go\"" >>~/.zshrc
+echo "export PATH=\"$GOPATH/bin:$PATH\"" >>~/.zshrc
 . ~/.zshrc
 
 # Install Hugo
@@ -74,21 +74,21 @@ source "/root/.sdkman/bin/sdkman-init.sh"
 
 # Install Plantuml
 sdk install java
-curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o /usr/local/bin/plantuml.jar && \
-    echo 'java -jar /usr/local/bin/plantuml.jar $@' > /usr/local/bin/plantuml && \
-    chmod +x /usr/local/bin/plantuml
+curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o /usr/local/bin/plantuml.jar &&
+	echo 'java -jar /usr/local/bin/plantuml.jar $@' >/usr/local/bin/plantuml &&
+	chmod +x /usr/local/bin/plantuml
 
 # Using pyenv to be able to install specific python versions https://stackoverflow.com/questions/49794432/how-to-setup-a-pipenv-python-3-6-project-if-os-python-version-is-3-5
 curl https://pyenv.run | bash
-echo "export PYENV_ROOT=\"$HOME/.pyenv\"" >> ~/.zshrc
-echo "export PATH=\"$PYENV_ROOT/bin:$PATH\"" >> ~/.zshrc
-echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+echo "export PYENV_ROOT=\"$HOME/.pyenv\"" >>~/.zshrc
+echo "export PATH=\"$PYENV_ROOT/bin:$PATH\"" >>~/.zshrc
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >>~/.zshrc
 source ~/.zshrc
 yum -y install git gcc zlib-devel bzip2-devel readline-devel sqlite-devel openssl-devel
 # Install Python 3
 pyenv install 3.7.3
 pyenv global 3.7.3
-ln -snf /root/.pyenv/versions/3.7.3/bin/python  /usr/bin/python3.7
+ln -snf /root/.pyenv/versions/3.7.3/bin/python /usr/bin/python3.7
 
 # ripgrep
 sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
@@ -122,13 +122,13 @@ yum -y install ansible
 yum -y install cargo
 # Next gen ls command https://github.com/Peltoche/lsd
 cargo install lsd
-echo 'export PATH="/root/.cargo/bin:$PATH"' >> ~/.zshrc
+echo 'export PATH="/root/.cargo/bin:$PATH"' >>~/.zshrc
 source ~/.zshrc
 
 # Prepare swipl install
 yum -y install epel-release
 yum groupinstall -y "Development Tools"
-yum -y install ninja-build   libunwind   freetype-devel   gmp-devel   java-1.8.0-openjdk-devel   jpackage-utils   libICE-devel   libjpeg-turbo-devel   libSM-devel   libX11-devel   libXaw-devel   libXext-devel   libXft-devel   libXinerama-devel   libXmu-devel   libXpm-devel   libXrender-devel   libXt-devel   ncurses-devel   openssl-devel   pkgconfig   readline-devel   libedit-devel   unixODBC-devel   zlib-devel   uuid-devel   libarchive-devel   libyaml-devel
+yum -y install ninja-build libunwind freetype-devel gmp-devel java-1.8.0-openjdk-devel jpackage-utils libICE-devel libjpeg-turbo-devel libSM-devel libX11-devel libXaw-devel libXext-devel libXft-devel libXinerama-devel libXmu-devel libXpm-devel libXrender-devel libXt-devel ncurses-devel openssl-devel pkgconfig readline-devel libedit-devel unixODBC-devel zlib-devel uuid-devel libarchive-devel libyaml-devel
 
 ## Prepare cmake3 install
 #pyenv install 3.6.0
@@ -166,22 +166,22 @@ cd "$HOME"
 sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/googler/v3.9/googler && sudo chmod +x /usr/local/bin/googler
 
 # Install BAT (cat with more power)
-wget https://github.com/sharkdp/bat/releases/download/v0.11.0/bat-v0.11.0-x86_64-unknown-linux-musl.tar.gz \
-     && tar -xzvf bat-v0.11.0-x86_64-unknown-linux-musl.tar.gz \
-     && mv bat-v0.11.0-x86_64-unknown-linux-musl/bat /usr/local/bin/ \
-     && rm -rf bat-v0.11.0-x86_64-unknown-linux-musl*
+wget https://github.com/sharkdp/bat/releases/download/v0.11.0/bat-v0.11.0-x86_64-unknown-linux-musl.tar.gz &&
+	tar -xzvf bat-v0.11.0-x86_64-unknown-linux-musl.tar.gz &&
+	mv bat-v0.11.0-x86_64-unknown-linux-musl/bat /usr/local/bin/ &&
+	rm -rf bat-v0.11.0-x86_64-unknown-linux-musl*
 
 # Install fselect
 cargo install fselect
 
 # surfraw
-git clone --depth 1 https://gitlab.com/surfraw/Surfraw.git \
-    && cd Surfraw \
-    && ./prebuild \
-    && ./configure \
-    && make && make install \
-    && cd .. \
-    && rm -rf Surfraw
+git clone --depth 1 https://gitlab.com/surfraw/Surfraw.git &&
+	cd Surfraw &&
+	./prebuild &&
+	./configure &&
+	make && make install &&
+	cd .. &&
+	rm -rf Surfraw
 
 # Dictionary
 yum -y install dictd
@@ -196,13 +196,13 @@ yes | ~/.fzf/install
 #exec "$SHELL"
 
 # Install diff-so-fancy
-curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy > /usr/local/bin/diff-so-fancy && chmod +x /usr/local/bin/diff-so-fancy
+curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy >/usr/local/bin/diff-so-fancy && chmod +x /usr/local/bin/diff-so-fancy
 
 # Install nice disk usage
 yum -y install ncdu
 
 # Install tldr alternative to help
-curl https://raw.githubusercontent.com/raylee/tldr/master/tldr > /usr/local/bin/tldr && chmod +x /usr/local/bin/tldr
+curl https://raw.githubusercontent.com/raylee/tldr/master/tldr >/usr/local/bin/tldr && chmod +x /usr/local/bin/tldr
 
 # Add pandoc
 yum -y install pandoc
@@ -220,7 +220,7 @@ yum -y install neofetch
 
 cargo install nu
 
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+cat <<EOF >/etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
@@ -231,7 +231,6 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg     https://package
 EOF
 
 yum install -y kubectl
-
 
 # Install the harbottle-main repo
 sudo yum -y install https://harbottle.gitlab.io/harbottle-main/7/x86_64/harbottle-main-release.rpm

@@ -31,4 +31,4 @@
 [diff]
 	noprefix = true
 [init]
-	templatedir = ~/.git-templates
+	templateDir = /Users/morganwattiez/.git-template
