@@ -34,3 +34,4 @@ terragrunt --version
 pre-commit --version
 terraform-docs --version
 tflint --version
+eksctl version

@@ -226,8 +226,39 @@ function gcrb {
 }
 function terraform-compliance { docker run --rm -v "$(pwd):/target" -i -t eerkunt/terraform-compliance "$@"; }
 function checkov { docker run -i --rm -v "$(pwd):/tf" bridgecrew/checkov -d /tf "$@" ; }
+function vimat {
+    vim +/$1 $2
+}
 function copyhooks {
    cp -f ~/.git-template/.pre-commit-config.yaml ./
    pre-commit install --install-hooks --overwrite
    pre-commit run -a
+}
+function httperr {
+   curl -s "https://http.cat/$1" | imgcat
+}
+function terragrunt_color {
+    BOLD=$(tput bold)
+    BLACK=$(tput setaf 0)
+    RED=$(tput setaf 1)
+    GREEN=$(tput setaf 2)
+    YELLOW=$(tput setaf 3)
+    BLUE=$(tput setaf 4)
+    CYAN=$(tput setaf 6)
+    RESET=$(tput sgr0)
+    REDBOLD=${RED}${BOLD}
+    REDRESET=${RESET}${RED}
+    BLUEBOLD=${BLUE}${BOLD}
+    BLUERESET=${RESET}${BLUE}
+
+    terragrunt ${*} 2>&1 | sed \
+        -e "s/\(\\[terragrunt\\] \\[.*\\]\)\( [0-9\\/]* [0-9:]*\) /${BLUEBOLD}\1${BLUERESET}\2${RESET} /" \
+        -e "s/\(\\[terragrunt\\]\)\( [0-9\\/]* [0-9:]*\) /${BLUEBOLD}\1${BLUERESET}\2${RESET} /" \
+        -e "s/\(Error: \)\(.*\)/${REDBOLD}\1${REDRESET}\2${RESET}/" \
+        -e "s/\(Hit multiple errors:\)/${REDBOLD}\1${RESET}/" \
+        -e "s/\(exit status 1\)/${RED}\1${RESET}/" \
+        -e "s/\( WARNING: \)\(.*\)/${YELLOW}${BOLD}\1${RESET}${YELLOW}\2${RESET}/" \
+        -e "s/\( Running command: \)\(.*\)/\1${CYAN}\2${RESET}/" \
+        -e "s/\(  *.*:  *\)\(\".*\"\)\( => \)\(\".*\"\)/${YELLOW}\1${RED}\2${BLACK}\3${GREEN}\4${RESET}/" \
+        -e "s/\(  *.*:  *\".*\"\)/${GREEN}\1${RESET}/"
 }

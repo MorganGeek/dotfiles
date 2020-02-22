@@ -11,8 +11,10 @@ tap "liamg/tfsec"
 tap "derailed/k9s"
 tap "github/gh"
 tap "derailed/popeye" # provides popeye, k8s sanity analysis
-
-
+tap "instrumenta/instrumenta" # provides kubeval
+tap "weaveworks/tap" # provides eksctl
+tap "b4b4r07/tap" # provides gomi a replacement for rm command
+tap "eddieantonio/eddieantonio" # provides imgcat, cat but for images
 cask "java"
 cask "iterm2"
 cask "zoomus"
@@ -161,3 +163,9 @@ brew "popeye" # Kubernetes resources sanity analysis
 brew "pre-commit" # https://pre-commit.com/#install
 brew "terraform-docs" # https://github.com/segmentio/terraform-docs
 brew "shfmt" # format shell
+brew "dive" # a tool to explore docker layers
+brew "terraform_landscape" # pretty print of terraform plan output
+brew "kubeval" # linter for kubernetes config files
+brew "eksctl"
+brew "gomi" # replacement for rm command
+brew "imgcat" # cat for images

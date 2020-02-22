@@ -14,9 +14,10 @@ alias jirasearch='issues'
 alias cicdlist="jira issue jql \"project = 'CICD' AND resolution = Unresolved\""
 alias backlogs="jira issue jql \"status = New AND project IN (CICD) AND Created > -2w ORDER BY Priority DESC\""
 alias bakclogs='backlogs'
-alias support="jira issue jql \"project in (CICD) AND Created > -2w AND resolution = Unresolved AND (type = 'Engineering Incident' AND status not in ('In Progress') OR type IN ('Engineering Request', 'Task', 'User Story') AND status in ('New', 'To be picked next')) ORDER BY key DESC\""
+alias support="jira issue jql \"project in (CICD) AND (Created > -2w AND resolution = Unresolved AND (type = 'Engineering Incident' AND status not in ('Waiting for external information') OR type IN ('Engineering Request', 'Task', 'User Story') AND status in ('New', 'To be picked next')) OR resolution != Unresolved AND status = 'In Progress') ORDER BY key DESC\""
+alias guardian="support"
 alias lastissues='jira issue jql "project IN (CICD) AND Created > -2w ORDER BY Created DESC, Priority DESC"'
-alias workingon="jira issue jql \"assignee = currentUser() AND resolution = Unresolved AND status not in ('In Review', 'Done', 'In Testing', 'Waiting For Build') OR QA = currentUser() AND status = 'In Testing' ORDER BY updated DESC\""
+alias workingon="jira issue jql \"assignee = currentUser() AND resolution = Unresolved AND status not in ('In Review', 'Done', 'In Testing', 'Waiting For Build') OR QA = currentUser() AND status = 'In Testing' ORDER BY updated DESC, priority DESC\""
 alias newissues="jira issue jql \"project IN (CICD) AND Created > -2w AND resolution = Unresolved AND status not in ('In Progress') ORDER BY Created DESC, Priority DESC\""
 alias n='newissues'
 alias backlog=cicdlist
@@ -35,6 +36,7 @@ alias crypto='curl rate.sx'
 # Twitter
 alias twitter='\t'
 alias tsearch='twitter search all'
+alias tweets='tsearch'
 alias tsearchfav='twitter search favorites'
 alias tsearchtimeline='twitter search timeline'
 
@@ -53,7 +55,8 @@ alias mailpro="gmail"
 # Viewing files
 alias cat='bat --style=plain --color "always"'
 alias preview="fzf --preview 'bat --color \"always\" --style=plain {}' --cycle "
-alias markdown='pandoc README.md | lynx -stdin -dump'
+alias markdown2='pandoc README.md | lynx -stdin -dump'
+alias markdown='glow'
 
 # To do / Done
 #alias done='task_done'
@@ -72,9 +75,10 @@ alias ipinfo='curl "ipinfo.io/"$(ip)'
 # Misc
 alias h='cd $HOME'
 alias bash="/usr/local/bin/bash"
-alias diff='colordiff'
+alias diff='colordiff --side-by-side --ignore-space-change --width=200 --suppress-common-lines  --recursive'
 alias cp='cp -i' # confirmation before overwrite #
 alias mv='mv -i' # confirmation before overwrite
+alias rm='gomi'
 alias df='df -H'
 alias du='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 #alias du='du -ch'
@@ -114,6 +118,7 @@ alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
 alias checken="aspell check -d en"
 alias checkfr="aspell check -d fr"
 alias gw='./gradlew'
+alias terraform_landscape='landscape'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"

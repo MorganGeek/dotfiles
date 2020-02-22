@@ -213,6 +213,14 @@ pre-commit init-templatedir ~/.git-template
 terraform-docs completion zsh >/usr/local/share/zsh/site-functions/_terraform-docs
 autoload -U compinit && compinit
 
+go get -u -v  github.com/jessfraz/dockfmt
+go get -u -v github.com/dmlittle/scenery
+go get -u -v github.com/camptocamp/terraboard
+
+sudo curl -L git.io/scope -o /usr/local/bin/scope
+sudo chmod a+x /usr/local/bin/scope
+#scope launch
+
 # Upgrade
 echo "Upgrading apps"
 ~/.scripts/upgrade.sh

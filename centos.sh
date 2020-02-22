@@ -104,7 +104,10 @@ yum -y install nodejs
 sudo yum -y install fasd
 
 # Simplistic interactive filtering tool https://github.com/peco/peco
-go get github.com/peco/peco/cmd/peco
+go get -u -v github.com/peco/peco/cmd/peco
+go get -u -v github.com/jessfraz/dockfmt
+go get -u -v github.com/dmlittle/scenery
+go get -u -v github.com/camptocamp/terraboard
 
 # Tig is an ncurses-based text-mode interface for git.
 yum -y install tig
@@ -263,3 +266,7 @@ git clone https://github.com/fcambus/ansiweather.git
 
 git clone https://github.com/datawire/telepresence.git && cd telepresence
 env PREFIX=/usr/local ./install.sh
+
+wget https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
+tar xf kubeval-linux-amd64.tar.gz
+sudo cp kubeval /usr/local/bin
