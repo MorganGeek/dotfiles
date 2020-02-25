@@ -119,6 +119,7 @@ alias checken="aspell check -d en"
 alias checkfr="aspell check -d fr"
 alias gw='./gradlew'
 alias terraform_landscape='landscape'
+alias tf='terraform'
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
