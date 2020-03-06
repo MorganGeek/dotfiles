@@ -66,16 +66,16 @@ function top_commands_full() {
 }
 function istherenewissues() {
     LASTISSUE=$(newissues | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' | awk 'FNR==2{print $2}')
-    if [[ -f ".newjiraissue" ]]
+    if [[ -f "$HOME/.newjiraissue" ]]
     then
-        previous_jira_issue=$(cat ".newjiraissue" | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g') # the sed part is for removing output colors
+        previous_jira_issue=$(cat "$HOME/.newjiraissue" | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g') # the sed part is for removing output colors
         if [ "$LASTISSUE" != "$previous_jira_issue" ]; then
             newissues
         else
             echo "no new issue"
         fi
     fi
-    echo "$LASTISSUE" > .newjiraissue
+    echo "$LASTISSUE" > "$HOME/.newjiraissue"
 }
 function aboutpage() {
     year=$(echo "$*" | egrep -Eo '\b[[:digit:]]{4}\b' | head -n1)
@@ -261,4 +261,14 @@ function terragrunt_color {
         -e "s/\( Running command: \)\(.*\)/\1${CYAN}\2${RESET}/" \
         -e "s/\(  *.*:  *\)\(\".*\"\)\( => \)\(\".*\"\)/${YELLOW}\1${RED}\2${BLACK}\3${GREEN}\4${RESET}/" \
         -e "s/\(  *.*:  *\".*\"\)/${GREEN}\1${RESET}/"
+}
+function git-project {
+    if [ -d "$REPO_PATH" ]; then
+        REPO_PATH="$(pwd)"
+    fi
+    local preview='lsd --color always --icon always --group-dirs first {}'
+    local dir=$(find $REPO_PATH -maxdepth 3 -type d -name ".git" | sed 's#.git$##' | fzf --select-1 --query="$*" --preview "$preview")
+    if [[ -n "$dir" ]]; then
+        cd "$dir"
+    fi
 }

@@ -8,6 +8,8 @@ alias gcls='git clone --depth 1 --recurse-submodules'
 alias cm='chezmoi'
 alias grep='rg'
 alias npmlist='npm list -g --depth 0'
+alias lg='lazygit'
+alias lzd='lazydocker'
 
 # Jira
 alias jirasearch='issues'
@@ -88,6 +90,7 @@ alias hist='history'
 alias music='baton'
 alias path='echo -e ${PATH//:/\\n}' # Explode and display current PATH
 alias ping='prettyping -c 5 --nolegend' # Stop after sending count ECHO_REQUEST packets
+alias https='http --default-scheme=https' # useful alias stealed from a colleague. http is provided by httpie
 alias p='ps -ef | grep -i '         # Show matching processes. Usage : p <process name>
 alias root='sudo -i'
 alias s=ls
