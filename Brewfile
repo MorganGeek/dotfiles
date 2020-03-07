@@ -177,3 +177,4 @@ brew "lazygit" # simple terminal UI for git commands
 brew "lazydocker" # simple terminal UI for managing docker
 brew "docui" # simple terminal UI for creating/configuring docker services
 brew "httpie" # provides http - a command line HTTP client that will make you smile.
+brew "hyperfine" # CLI benchmark tool
