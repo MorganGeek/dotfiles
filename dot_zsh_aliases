@@ -38,7 +38,7 @@ alias crypto='curl rate.sx'
 # Twitter
 alias twitter='\t'
 alias tsearch='twitter search all'
-alias tweets='tsearch'
+alias tweets='tsearch --long -a -d'
 alias tsearchfav='twitter search favorites'
 alias tsearchtimeline='twitter search timeline'
 

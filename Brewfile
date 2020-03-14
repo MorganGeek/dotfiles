@@ -18,6 +18,7 @@ tap "eddieantonio/eddieantonio" # provides imgcat, cat but for images
 tap "jesseduffield/lazygit" # provides lazygit, simple terminal UI for git commands
 tap "jesseduffield/lazydocker" # provides lazydocker, simple terminal UI for managnig docker
 tap "skanehira/docui" # provides docui, simple terminal UI for creating/configuring docker services
+tap "romkatv/powerlevel10k" # provides powerlevel10k
 
 cask "java"
 cask "iterm2"
@@ -178,3 +179,4 @@ brew "lazydocker" # simple terminal UI for managing docker
 brew "docui" # simple terminal UI for creating/configuring docker services
 brew "httpie" # provides http - a command line HTTP client that will make you smile.
 brew "hyperfine" # CLI benchmark tool
+brew "powerlevel10k"
