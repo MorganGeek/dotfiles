@@ -20,6 +20,7 @@ tap "jesseduffield/lazydocker" # provides lazydocker, simple terminal UI for man
 tap "skanehira/docui" # provides docui, simple terminal UI for creating/configuring docker services
 tap "romkatv/powerlevel10k" # provides powerlevel10k
 
+
 cask "java"
 cask "iterm2"
 cask "zoomus"
