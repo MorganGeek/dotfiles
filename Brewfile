@@ -73,6 +73,7 @@ brew "ripgrep"
 brew "twpayne/taps/chezmoi"
 brew "tmux"
 brew "node"
+
 # Fasd (pronounced similar to "fast") is a command-line productivity booster. https://github.com/clvv/fasd
 brew "fasd"
 # Simplistic interactive filtering tool https://github.com/peco/peco
