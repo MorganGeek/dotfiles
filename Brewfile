@@ -135,9 +135,11 @@ brew "aspell"
 brew "neofetch"
 # add nushell https://github.com/nushell/nushell
 brew "nushell"
+
 # tools for K8S
 brew "kubectl"
 brew "kubectx"
+
 brew "packer"
 brew "go"
 brew "weechat" # need an IRC client
