@@ -152,7 +152,6 @@ brew "telepresence" # telepresence https://www.telepresence.io/reference/install
 brew "ansiweather" # https://github.com/fcambus/ansiweather
 brew "bats" # test for bash scripts
 brew "atlassian-plugin-sdk" # atlassian sdk https://developer.atlassian.com/server/framework/atlassian-sdk/install-the-atlassian-sdk-on-a-linux-or-mac-system/#step-2-download-and-install-the-sdk
-
 brew "terragrunt"
 brew "helm"
 brew "aws-iam-authenticator"
