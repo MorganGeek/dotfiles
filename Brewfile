@@ -19,6 +19,7 @@ tap "jesseduffield/lazygit" # provides lazygit, simple terminal UI for git comma
 tap "jesseduffield/lazydocker" # provides lazydocker, simple terminal UI for managnig docker
 tap "skanehira/docui" # provides docui, simple terminal UI for creating/configuring docker services
 tap "romkatv/powerlevel10k" # provides powerlevel10k
+tap "shopify/shopify" # provides toxiproxy
 
 
 cask "java"
@@ -47,12 +48,14 @@ cask "calibre"
 cask "vagrant"
 # VirtualBox
 cask "virtualbox"
-# Arduino
-cask "arduino"
 cask "koa11y" # desktop app for asserting websites accessibility
 cask "osxfuse" # telepresence https://www.telepresence.io/reference/install
 cask "qbittorrent"
 cask "vlc"
+cask "brave-browser"
+cask "dropbox"
+cask "rescuetime"
+cask "wireshark"
 
 # Mac app store
 mas 'Keynote', id: 409183694
@@ -182,4 +185,5 @@ brew "docui" # simple terminal UI for creating/configuring docker services
 brew "httpie" # provides http - a command line HTTP client that will make you smile.
 brew "hyperfine" # CLI benchmark tool
 brew "powerlevel10k"
-
+brew "translate-shell" # provides the trans command, more doc via https://www.ostechnix.com/use-google-translate-commandline-linux/
+brew "toxiproxy"

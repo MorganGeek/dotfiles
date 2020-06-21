@@ -272,3 +272,15 @@ function git-project {
         cd "$dir"
     fi
 }
+function jenkins-cli {
+    local script_location=$(find $HOME/code/jenkins-cloudbees-core -name "jenkins-cli.sh")
+    eval "$script_location $*"
+}
+function colorpic {
+    local picture_url="$1"
+    echo "Colorizing $picture_url"
+    local result_url=$(\curl -F "image=@$picture_url" -H "api-key:a91c8220-53b0-4afd-b97d-96825700cd3d" https://api.deepai.org/api/colorizer -s | jq '.output_url' | strings)
+    echo "Generated $result_url"
+    echo "Display in progress..."
+    eval "\curl -s $result_url | imgcat"
+}

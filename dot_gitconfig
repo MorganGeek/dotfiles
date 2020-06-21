@@ -26,9 +26,9 @@
                  | awk '{n=$1+0;if(H[n]++>max)max=H[n]}END{for(i=0;i<24;i++){printf\"%02d -%5d \",i,H[i];for(n=0;n<H[i]/max*50;n++){printf \"*\"}print\"\"}}'"
 [help]
 	autocorrect = -1 # not more git psuh
+[init]
+	templateDir = /Users/morganwattiez/.git-template
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [diff]
 	noprefix = true
-[init]
-	templateDir = /Users/morganwattiez/.git-template
