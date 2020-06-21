@@ -89,7 +89,8 @@ alias du='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 alias weather='weather "?lang=fr&"'
 alias headers='curl -I --compress'  # Find out if remote server supports gzip / mod_deflate or not #
 alias hist='history'
-alias music='baton'
+
+
 alias path='echo -e ${PATH//:/\\n}' # Explode and display current PATH
 alias ping='prettyping -c 5 --nolegend' # Stop after sending count ECHO_REQUEST packets
 alias https='http --default-scheme=https' # useful alias stealed from a colleague. http is provided by httpie
@@ -115,7 +116,6 @@ alias monitoring='glances'
 alias ':q'='exit'
 alias irc='weechat'
 alias trello='3llo'
-alias mytracks='music me saved tracks'
 alias unix='curl -L http://git.io/unix'
 alias coffee="curl -L http://git.io/coffee"
 alias hotcoffee="curl -sL git.io/hotcoffee | sh"
@@ -125,6 +125,16 @@ alias checkfr="aspell check -d fr"
 alias gw='./gradlew'
 alias terraform_landscape='landscape'
 alias tf='terraform'
+
+# Music
+alias music='baton'
+alias mytracks='music me saved tracks'
+alias saved='mytracks'
+alias next='music next'
+alias prev='music prev'
+alias previous='prev'
+alias like='music save'
+alias curr='music status'
 
 # K8S
 alias k9s='COLORTERM=256bit k9s --all-namespaces'
