@@ -283,7 +283,20 @@ function passwords {
     bw list items --search "$1" | jq -c '.[] | .name + " " + .login.username + ":" + .login.password + " " +  .login.uris[0].uri'
 }
 function password {
-   bw get password "$1"
+    bw get password "$1"
+}
+function vaultgetsecret {
+    local secret=$(grep -A 500 "ANSIBLE_VAULT" "$1" | awk '{$1=$1;print}' | \grep -Eo "^[0-9a-z^ ]+$")
+    local secret_string=$(echo "\$ANSIBLE_VAULT;1.1;AES256\n$secret")
+    echo "$secret_string" | awk '{$1=$1;print}' | ansible-vault decrypt --vault-password-file=$VAULT_PASSWORD_FILE
+}
+function gitpushallremote {
+    grv
+    grv | grep push | awk '{print $1}' | while read -r remote
+    do
+        echo "$remote"
+        git push --all "$remote"
+    done
 }
 function colorpic {
     local picture_url="$1"

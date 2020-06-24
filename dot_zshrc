@@ -130,6 +130,7 @@ export JENKINS_SECRET=""
 export JIRA_URL=""
 export PROXY_HOST=""
 export COLORPIC_APIKEY=""
+export VAULT_PASSWORD_FILE=""
 
 if test -f "$HOME/.secrets"; then
     chmod +x "$HOME/.secrets"
