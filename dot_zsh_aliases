@@ -73,9 +73,9 @@ alias m='mgmt'
 alias tunnel='ssh -D 8000 -N $(whoami)@$PROXY_HOST -i ~/.ssh/id_ed25519'
 alias sshpub='cat ~/.ssh/id_ed25519.pub'
 alias ssla="openssl x509 -alias -noout -in"  # Usage : ssla <cert>
-
 alias encrypt='ansible-vault encrypt **/vault.yml --vault-password-file=~/.vaultpass'
 alias decrypt='ansible-vault decrypt **/vault.yml --vault-password-file=~/.vaultpass'
+alias newpass='bw generate --special --uppercase --lowercase --number --length 30'
 
 # Network
 alias ip='echo $(curl ident.me -4 2>/dev/null)'

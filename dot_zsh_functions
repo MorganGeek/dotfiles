@@ -279,6 +279,12 @@ function jenkins-cli {
     local script_location=$(find $HOME/code/jenkins-cloudbees-core -name "jenkins-cli.sh")
     eval "$script_location $*"
 }
+function passwords {
+    bw list items --search "$1" | jq -c '.[] | .name + " " + .login.username + ":" + .login.password + " " +  .login.uris[0].uri'
+}
+function password {
+   bw get password "$1"
+}
 function colorpic {
     local picture_url="$1"
     echo "Colorizing $picture_url"
