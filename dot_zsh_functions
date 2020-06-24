@@ -16,8 +16,11 @@ function gmail() {
 function gmail2() {
     open -na "Google Chrome" --args "https://mail.google.com/mail/u/1"
 }
-function cicd() {
-    open -na "Google Chrome" --args "https://issues.collibra.com/secure/RapidBoard.jspa?rapidView=457&view=planning.nodetail"
+function cicdboard() {
+    open -na "Google Chrome" --args "$JIRA_URL/secure/RapidBoard.jspa?rapidView=457&view=planning.nodetail"
+}
+function cicddashboard() {
+    open -na "Google Chrome" --args "$JIRA_URL/secure/Dashboard.jspa?selectPageId=13131"
 }
 function issues() {
     jira issue jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
@@ -279,7 +282,7 @@ function jenkins-cli {
 function colorpic {
     local picture_url="$1"
     echo "Colorizing $picture_url"
-    local result_url=$(\curl -F "image=@$picture_url" -H "api-key:a91c8220-53b0-4afd-b97d-96825700cd3d" https://api.deepai.org/api/colorizer -s | jq '.output_url' | strings)
+    local result_url=$(\curl -F "image=@$picture_url" -H "api-key:$COLORPIC_APIKEY" https://api.deepai.org/api/colorizer -s | jq '.output_url' | strings)
     echo "Generated $result_url"
     echo "Display in progress..."
     eval "\curl -s $result_url | imgcat"

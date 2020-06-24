@@ -43,10 +43,20 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-fugitive'
 " A tree explorer plugin for vim.
 Plugin 'scrooloose/nerdtree'
-" A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks and partial hunks.
-Plugin 'airblade/vim-gitgutter'
 " A plugin of NERDTree showing git status
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+" A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks and partial hunks.
+Plugin 'airblade/vim-gitgutter'
+" Jenkinsfile DSL Vim Syntax
+Plugin 'martinda/jenkinsfile-vim-syntax'
+" integrate Grep search tools with Vim
+Plugin 'yegappan/grep'
+" The plug-in visualizes undo history and makes it easier to browse and switch between different undo
+Plugin 'mbbill/undotree'
+" Intelligently reopen files at your last edit position
+Plugin 'farmergreg/vim-lastplace'
+" Add icons to your plugins
+Plugin 'ryanoasis/vim-devicons'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -86,10 +96,12 @@ let g:ale_history_log_output = 1
 let g:ale_use_global_executables = 1
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
+let g:ale_open_list = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'python': ['black'],
 \   'rust': ['rustfmt'],
+\   'Jenkinsfile': ['checkci'],
 \}
 
 " Enable syntax highlighting
@@ -149,7 +161,13 @@ let mapleader=" "
 " map a specific key or shortcut to open NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
-
+let g:netrw_liststyle = 3
+" remove the default banner
+let g:netrw_banner = 0
+" set the width of directory explorer
+let g:netrw_winsize = 25
+" open files in a new tab
+let g:netrw_browse_split = 4
 
 let g:syntastic_javascript_checkers = [ 'jshint' ]
 let g:syntastic_ocaml_checkers = ['merlin']

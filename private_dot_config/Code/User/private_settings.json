@@ -5,7 +5,7 @@
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
     "jenkins.pipeline.linter.connector.user": "morgan.wattiez",
-    "jenkins.pipeline.linter.connector.url": "https://jenkins.collibra.com/pipeline-model-converter/validate",
+    "jenkins.pipeline.linter.connector.url": "$JENKINS_URL/pipeline-model-converter/validate",
     "terminal.integrated.fontSize": 14,
     "editor.autoClosingBrackets": "always"
 }

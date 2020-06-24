@@ -29,6 +29,9 @@ Darwin)
 	;;
 esac
 
+# Path to ruby
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
 # Create symbolic links
 echo "Creating symbolic links"
 ln -snf ~/Code/dotfiles/dot_profile ~/.profile
@@ -39,7 +42,11 @@ ln -snf ~/Code/dotfiles/dot_bash_profile ~/.bash_profile
 ln -snf ~/Code/dotfiles/dot_gitconfig ~/.gitconfig
 ln -snf ~/Code/dotfiles/dot_macos ~/.macos
 ln -snf ~/Code/dotfiles/dot_scripts ~/.scripts
+ln -snf ~/Code/dotfiles/dot_scripts/checkci.sh /usr/local/bin/checkci
 ln -snf ~/Code/dotfiles/dot_vimrc ~/.vimrc
+# custom linters
+ln -snf ~/Code/dotfiles/dot_vim/ale_linters ~/.vim/ale_linters
+
 ln -snf ~/Code/dotfiles/dot_zsh_aliases ~/.zsh_aliases
 ln -snf ~/Code/dotfiles/dot_zsh_functions ~/.zsh_functions
 ln -snf ~/Code/dotfiles/dot_zshrc ~/.zshrc
@@ -49,7 +56,7 @@ ln -snf ~/Code/dotfiles/requirements.txt ~/requirements.txt
 ln -snf ~/Code/dotfiles/dot_surfraw.conf ~/.surfraw.conf
 ln -snf ~/Code/dotfiles/private_dot_3llo/config.sh ~/.3llo_config
 ln -snf ~/Code/dotfiles/dot_ansiweatherrc ~/.ansiweatherrc
-ln -snf ~/Code/dotfiles/dot_p10k_dot_zsh ~/.p10k.zsh
+ln -snf ~/Code/dotfiles/dot_p10k.zsh ~/.p10k.zsh
 ln -snf ~/Code/dotfiles/dot_git-template ~/.git-template
 
 # Other symblinks + Install Docker Desktop for Mac
@@ -119,7 +126,7 @@ bundle install
 
 # Install Oh My Zsh and some cool dependencies
 echo "Installing Oh My Zsh + customizing themes and plugins"
-echo 'source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme' >>! ~/.zshrc
+echo 'source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme' ~/.zshrc >>!
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/AlexisBRENON/oh-my-zsh-reminder "$ZSH_CUSTOM/plugins/reminder"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
@@ -213,7 +220,7 @@ pre-commit init-templatedir ~/.git-template
 terraform-docs completion zsh >/usr/local/share/zsh/site-functions/_terraform-docs
 autoload -U compinit && compinit
 
-go get -u -v  github.com/jessfraz/dockfmt
+go get -u -v github.com/jessfraz/dockfmt
 go get -u -v github.com/dmlittle/scenery
 go get -u -v github.com/camptocamp/terraboard
 

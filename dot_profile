@@ -4,7 +4,13 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-alias proxy='ssh -D 8000 -N $(whoami)@management.collibra.com -i ~/.ssh/id_ed25519'
-export JETBRAINS_LICENSE_SERVER=https://licenseserver.collibra.com
+export PROXY_HOST=""
+export JETBRAINS_LICENSE_SERVER=""
+
+if test -f "$HOME/.secrets"; then
+    chmod +x "$HOME/.secrets"
+    source "$HOME/.secrets"
+    alias proxy='ssh -D 8000 -N $(whoami)@$PROXY_HOST -i ~/.ssh/id_ed25519'
+fi
 
 export PATH="$HOME/.cargo/bin:$PATH"

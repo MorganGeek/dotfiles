@@ -20,7 +20,7 @@ tap "jesseduffield/lazydocker" # provides lazydocker, simple terminal UI for man
 tap "skanehira/docui" # provides docui, simple terminal UI for creating/configuring docker services
 tap "romkatv/powerlevel10k" # provides powerlevel10k
 tap "shopify/shopify" # provides toxiproxy
-
+tap "homebrew/cask-fonts" # provides fonts used by vim-devicons https://vimawesome.com/plugin/vim-devicons https://github.com/ryanoasis/nerd-fonts#font-installation
 
 cask "java"
 cask "iterm2"
@@ -56,6 +56,7 @@ cask "brave-browser"
 cask "dropbox"
 cask "rescuetime"
 cask "wireshark"
+cask "font-hack-nerd-font" # provides fonts used by vim-devicons https://vimawesome.com/plugin/vim-devicons https://github.com/ryanoasis/nerd-fonts#font-installation
 
 # Mac app store
 mas 'Keynote', id: 409183694
@@ -187,3 +188,4 @@ brew "hyperfine" # CLI benchmark tool
 brew "powerlevel10k"
 brew "translate-shell" # provides the trans command, more doc via https://www.ostechnix.com/use-google-translate-commandline-linux/
 brew "toxiproxy"
+brew "bitwarden-cli"
