@@ -1,0 +1,18 @@
+on: [push]
+
+name: CI
+
+jobs:
+  build_and_test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+        path: ~/Code/dotfiles
+      - name: Run bootstrap
+        shell: bash
+        run: |
+          ~/Code/dotfiles/dot_scripts/bootstrap.sh
+        env:
+          REPO: ${{github.workspace}}
+          DOTFILES_REF: ${{github.sha}}
+          HOMEBREW_BUNDLE_BREW_SKIP: "node"
