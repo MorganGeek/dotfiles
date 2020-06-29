@@ -7,13 +7,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@master
-        with:
-          path: Code
       - name: Mimic
         shell: bash
         run: |
-          ln -snf Code ~/Code
-          mv dotfiles ~/Code/
+          ln -snf /Users/runner/work/dotfiles ~/Code
       - name: Run bootstrap
         shell: bash
         run: |
