@@ -8,11 +8,15 @@ jobs:
     steps:
       - uses: actions/checkout@master
         with:
-          path: $HOME/Code/dotfiles
+          path: Code
+      - name: Mimic
+        shell: bash
+        run: |
+          ln -snf Code ~/Code
       - name: Run bootstrap
         shell: bash
         run: |
-          $HOME/Code/dotfiles/dot_scripts/bootstrap.sh
+          dot_scripts/bootstrap.sh
         env:
           REPO: ${{github.workspace}}
           DOTFILES_REF: ${{github.sha}}
