@@ -7,9 +7,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export PROXY_HOST=""
 export JETBRAINS_LICENSE_SERVER=""
 
-if test -f "$HOME/.secrets"; then
-    chmod +x "$HOME/.secrets"
-    source "$HOME/.secrets"
+if test -f "$HOME/.scripts/secrets.sh"; then
+    chmod +x "$HOME/.scripts/secrets.sh"
+    source "$HOME/.scripts/secrets.sh"
     alias proxy='ssh -D 8000 -N $(whoami)@$PROXY_HOST -i ~/.ssh/id_ed25519'
 fi
 

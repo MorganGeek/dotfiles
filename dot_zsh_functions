@@ -290,6 +290,11 @@ function vaultgetsecret {
     local secret_string=$(echo "\$ANSIBLE_VAULT;1.1;AES256\n$secret")
     echo "$secret_string" | awk '{$1=$1;print}' | ansible-vault decrypt --vault-password-file=$VAULT_PASSWORD_FILE
 }
+function setorigin {
+    gra origin "$1" 2>/dev/null
+    grset origin "$1"
+    copyhooks
+}
 function gitpushallremote {
     grv
     grv | grep push | awk '{print $1}' | while read -r remote
@@ -298,6 +303,12 @@ function gitpushallremote {
         git push --all "$remote"
     done
 }
+function clone {
+    local folder=$(echo $1 | cut -d'/' -f2 | cut -d'.' -f1)
+    gcls "$1"
+    cd "$folder"
+    copyhooks
+}
 function colorpic {
     local picture_url="$1"
     echo "Colorizing $picture_url"
@@ -305,4 +316,8 @@ function colorpic {
     echo "Generated $result_url"
     echo "Display in progress..."
     eval "\curl -s $result_url | imgcat"
+}
+function brewadd {
+    brew install "$1"
+    ansible 127.0.0.1 -m lineinfile -a "path=~/Brewfile line='brew \"$1\"'"
 }

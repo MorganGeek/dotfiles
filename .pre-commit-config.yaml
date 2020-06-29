@@ -42,6 +42,14 @@ repos:
         pass_filenames: false
         args: [-l=infra] #NOTE: that this is the directory you created earlier to host your terraform
         verbose: true
+-   repo: https://github.com/askulkarni2/pre-commit-docker-jenkinslint
+    rev: master
+    hooks:
+    -   id: docker-jenkinslint
+        language: docker_image
+        entry: --entrypoint /usr/local/bin/run-jflint.sh askulkarni2/jenkinslint
+        files: Jenkinsfile
+
 #- repo: https://github.com/ansible/ansible-lint.git
 #  rev: v4.1.0
 #  hooks:
