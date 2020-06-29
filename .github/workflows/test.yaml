@@ -8,11 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@master
         with:
-          path: ~/Code/dotfiles
+          path: ./Code/dotfiles
       - name: Run bootstrap
         shell: bash
         run: |
-          ~/Code/dotfiles/dot_scripts/bootstrap.sh
+          ./Code/dotfiles/dot_scripts/bootstrap.sh
         env:
           REPO: ${{github.workspace}}
           DOTFILES_REF: ${{github.sha}}
