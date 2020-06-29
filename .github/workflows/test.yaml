@@ -13,10 +13,11 @@ jobs:
         shell: bash
         run: |
           ln -snf Code ~/Code
+          echo ~/Code
       - name: Run bootstrap
         shell: bash
         run: |
-          dot_scripts/bootstrap.sh
+          ~/Code/dotfiles/dot_scripts/bootstrap.sh
         env:
           REPO: ${{github.workspace}}
           DOTFILES_REF: ${{github.sha}}
