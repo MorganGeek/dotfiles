@@ -133,6 +133,7 @@ alias p='ps -ef | grep -i '         # Show matching processes. Usage : p <proces
 alias root='sudo -i'
 alias current_year='`echo date +"%Y"`'
 alias ':q'='exit'
+alias sc="source $HOME/.zshrc"
 
 # Linters
 alias checken="aspell check -d en"
