@@ -4,17 +4,17 @@
 #
 
 # Git, dotfiles, ripgrep, Node.JS
-alias gcls='git clone --depth 1 --recurse-submodules'
 alias cm='chezmoi'
-alias grep='rg'
-alias npmlist='npm list -g --depth 0'
+alias gcls='git clone --depth 1 --recurse-submodules'
+alias gpar='gitpushallremote'
 alias lg='lazygit'
-alias lzd='lazydocker'
 alias neworigin='setorigin'
 alias origin='setorigin'
-alias gpar='gitpushallremote'
 
-# Jira
+# Docker
+alias lzd='lazydocker'
+
+# PM : Jira & trello & asana
 alias jirasearch='issues'
 alias cicdlist="jira issue jql \"project = 'CICD' AND resolution = Unresolved\""
 alias backlogs="jira issue jql \"status = New AND project IN (CICD) AND Created > -2w ORDER BY Priority DESC\""
@@ -34,10 +34,12 @@ alias mb='mybacklog'
 alias myissues='mb'
 alias me='mb'
 alias j='jira issue open'
+alias trello='3llo'
 
 # News
 alias hack='hacker'
 alias crypto='curl rate.sx'
+alias weather='weather "?lang=fr&"'
 
 # Twitter
 alias twitter='\t'
@@ -57,6 +59,8 @@ alias ddg='ddgr'
 alias goo='googler'
 alias se='sr -elvi'
 alias engines='sr -elvi'
+alias grep='rg'
+alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
 
 # Events
 alias agenda='calendar'
@@ -88,17 +92,38 @@ alias ip='echo $(curl ident.me -4 2>/dev/null)'
 alias ipinfo='curl "ipinfo.io/"$(ip)'
 alias getips='\egrep "\b(([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(1[0-9][0-9]|2[0-4][0-9]|25[0-5]|[0-9]{1,2})\b"'
 
-# Misc
+# Files & folder tricks
+alias biggerthan10='biggerthan 10M'
+alias c='cat'
 alias h='cd $HOME'
-alias bash="/usr/local/bin/bash"
-alias diff='colordiff --side-by-side --ignore-space-change --width=200 --suppress-common-lines  --recursive'
 alias cp='cp -i' # confirmation before overwrite #
 alias mv='mv -i' # confirmation before overwrite
 alias rm='gomi'
 alias df='df -H'
+alias diff='colordiff --side-by-side --ignore-space-change --width=200 --suppress-common-lines  --recursive'
 alias du='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
-#alias du='du -ch'
-alias weather='weather "?lang=fr&"'
+alias s=ls
+alias sl=ll
+alias ls='lsd'
+alias tree='ls --almost-all --tree'
+alias v=vi
+alias x='extract'
+
+# System info
+alias systeminfo='neofetch'
+alias monitoring='glances'
+
+# Package management tricks
+alias npmlist='npm list -g --depth 0'
+alias pip='pip3'
+
+# RTFM
+alias learnmore="apropos . | sort --random-sort | awk 'NR == 1 {print$1}' | cut -d'(' -f 1 | xargs man"
+alias help='tldr'
+alias latency='curl cheat.sh/latency'
+
+# Misc
+alias bash="/usr/local/bin/bash"
 alias headers='curl -I --compress'  # Find out if remote server supports gzip / mod_deflate or not #
 alias hist='history'
 alias path='echo -e ${PATH//:/\\n}' # Explode and display current PATH
@@ -106,35 +131,29 @@ alias ping='prettyping -c 5 --nolegend' # Stop after sending count ECHO_REQUEST 
 alias https='http --default-scheme=https' # useful alias stealed from a colleague. http is provided by httpie
 alias p='ps -ef | grep -i '         # Show matching processes. Usage : p <process name>
 alias root='sudo -i'
-alias s=ls
-alias sl=ll
-alias v=vi
-alias ls='lsd'
-alias tree='ls --almost-all --tree'
-alias pip='pip3'
-alias c='cat'
-alias x='extract'
 alias current_year='`echo date +"%Y"`'
-alias learnmore="apropos . | sort --random-sort | awk 'NR == 1 {print$1}' | cut -d'(' -f 1 | xargs man"
-alias biggerthan10='biggerthan 10M'
-alias latency='curl cheat.sh/latency'
+alias ':q'='exit'
+
+# Linters
+alias checken="aspell check -d en"
+alias checkfr="aspell check -d fr"
+
+# Development
+alias gw='./gradlew'
+
+# NSFW
+alias irc='weechat'
+
+# Terraform
+alias terraform_landscape='landscape'
+alias tf='terraform'
+
+# Fun
 alias moon='curl "wttr.in/Moon?lang=fr"'
 alias lune='moon'
-alias help='tldr'
-alias systeminfo='neofetch'
-alias monitoring='glances'
-alias ':q'='exit'
-alias irc='weechat'
-alias trello='3llo'
 alias unix='curl -L http://git.io/unix'
 alias coffee="curl -L http://git.io/coffee"
 alias hotcoffee="curl -sL git.io/hotcoffee | sh"
-alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
-alias checken="aspell check -d en"
-alias checkfr="aspell check -d fr"
-alias gw='./gradlew'
-alias terraform_landscape='landscape'
-alias tf='terraform'
 
 # Music
 alias music='baton'
