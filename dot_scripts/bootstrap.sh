@@ -229,6 +229,11 @@ sudo curl -L git.io/scope -o /usr/local/bin/scope
 sudo chmod a+x /usr/local/bin/scope
 #scope launch
 
+# Install bashtop (until brew manages it)
+git clone https://github.com/aristocratos/bashtop.git ~/Code/bashtop
+cd ~/Code/bashtop || exit
+sudo make install
+
 # Upgrade
 echo "Upgrading apps"
 ~/.scripts/upgrade.sh
