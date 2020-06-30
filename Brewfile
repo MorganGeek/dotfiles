@@ -21,6 +21,7 @@ tap "skanehira/docui" # provides docui, simple terminal UI for creating/configur
 tap "romkatv/powerlevel10k" # provides powerlevel10k
 tap "shopify/shopify" # provides toxiproxy
 tap "homebrew/cask-fonts" # provides fonts used by vim-devicons https://vimawesome.com/plugin/vim-devicons https://github.com/ryanoasis/nerd-fonts#font-installation
+tap "wtfutil/wtfutil" # https://wtfutil.com/getting_started/installation/
 
 cask "java"
 cask "iterm2"
@@ -191,3 +192,4 @@ brew "toxiproxy"
 brew "bitwarden-cli"
 brew "awscli@2"
 brew "newsboat"
+brew "wtfutil"

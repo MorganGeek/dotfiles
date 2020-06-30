@@ -64,6 +64,7 @@ ln -snf ~/Code/dotfiles/private_dot_config/neofetch ~/.config/neofetch
 ln -snf ~/Code/dotfiles/private_dot_config/gh ~/.config/gh
 ln -snf ~/Code/dotfiles/private_dot_config/htop ~/.config/htop
 ln -snf ~/Code/dotfiles/private_dot_config/bashtop ~/.config/bashtop
+ln -snf ~/Code/dotfiles/private_dot_config/wtf ~/.config/wtf
 
 # Other symblinks + Install Docker Desktop for Mac
 case "$(uname -s)" in
