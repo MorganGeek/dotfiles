@@ -58,6 +58,7 @@ ln -snf ~/Code/dotfiles/private_dot_3llo/config.sh ~/.3llo_config
 ln -snf ~/Code/dotfiles/dot_ansiweatherrc ~/.ansiweatherrc
 ln -snf ~/Code/dotfiles/dot_p10k.zsh ~/.p10k.zsh
 ln -snf ~/Code/dotfiles/dot_git-template ~/.git-template
+ln -snf ~/Code/dotfiles/private_dot_newsboat ~/.newsboat
 
 # Other symblinks + Install Docker Desktop for Mac
 case "$(uname -s)" in

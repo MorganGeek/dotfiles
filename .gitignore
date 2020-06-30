@@ -3,3 +3,9 @@ Gemfile.lock
 .newjiraissue
 private_dot_3llo/config.sh
 *secret*
+# rainbowstream (twitter client)
+completer.hist
+
+# newsboat (rss reader)
+*newsboat/cache.db
+*newsboat/history.cmdline
