@@ -6,6 +6,15 @@ private_dot_3llo/config.sh
 # rainbowstream (twitter client)
 completer.hist
 
+# no logs
+*.log
+
+# no backups
+*.bak
+
+# no secrets
+private_dot_config/gh/hosts.yml
+
 # newsboat (rss reader)
 *newsboat/cache.db
 *newsboat/history.cmdline

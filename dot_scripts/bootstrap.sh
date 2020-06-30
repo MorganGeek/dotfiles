@@ -59,6 +59,11 @@ ln -snf ~/Code/dotfiles/dot_ansiweatherrc ~/.ansiweatherrc
 ln -snf ~/Code/dotfiles/dot_p10k.zsh ~/.p10k.zsh
 ln -snf ~/Code/dotfiles/dot_git-template ~/.git-template
 ln -snf ~/Code/dotfiles/private_dot_newsboat ~/.newsboat
+ln -snf ~/Code/dotfiles/private_dot_config/Code ~/.config/Code
+ln -snf ~/Code/dotfiles/private_dot_config/neofetch ~/.config/neofetch
+ln -snf ~/Code/dotfiles/private_dot_config/gh ~/.config/gh
+ln -snf ~/Code/dotfiles/private_dot_config/htop ~/.config/htop
+ln -snf ~/Code/dotfiles/private_dot_config/bashtop ~/.config/bashtop
 
 # Other symblinks + Install Docker Desktop for Mac
 case "$(uname -s)" in
