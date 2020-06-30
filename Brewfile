@@ -190,3 +190,4 @@ brew "translate-shell" # provides the trans command, more doc via https://www.os
 brew "toxiproxy"
 brew "bitwarden-cli"
 brew "awscli@2"
+brew "newsboat"
