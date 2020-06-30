@@ -189,3 +189,4 @@ brew "powerlevel10k"
 brew "translate-shell" # provides the trans command, more doc via https://www.ostechnix.com/use-google-translate-commandline-linux/
 brew "toxiproxy"
 brew "bitwarden-cli"
+brew "awscli@2"
