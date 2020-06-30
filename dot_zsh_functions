@@ -304,7 +304,8 @@ function gitpushallremote {
     done
 }
 function clone {
-    local folder=$(echo $1 | cut -d'/' -f2 | cut -d'.' -f1)
+    local folder=$(echo $1 | \grep -Eo '[a-zA-Z_-]+.git$' | cut -d'.' -f1)
+    echo "$folder"
     gcls "$1"
     cd "$folder"
     copyhooks
