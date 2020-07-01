@@ -53,6 +53,9 @@ alias mystream='tstream'
 # RSS
 alias addfeed='rssadd'
 alias addrss='rssadd'
+alias rss='newsboat'
+alias feed='rss'
+alias feeds='rss'
 
 # Search
 alias ddg='ddgr'
