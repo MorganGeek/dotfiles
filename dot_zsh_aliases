@@ -61,6 +61,7 @@ alias se='sr -elvi'
 alias engines='sr -elvi'
 alias grep='rg'
 alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
+alias ygg="torrengo -s ygg"
 
 # Events
 alias agenda='calendar'
