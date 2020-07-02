@@ -5,9 +5,35 @@
 [alias]
 	tags = log --no-walk --tags --pretty=\"%h %d %s\" --decorate=full
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	st = status
-	contrib = ! git log --pretty=format:'%aN' | sort | uniq -c | sort -nr
-	whois = ! sh -c 'git log -i --pretty=\"format:%an <%ae>\" --author=\"\" | sort -u' -
+    st = status
+
+	# View abbreviated SHA, description, and history graph of the latest 20 commits.
+    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+	# View the current working tree status using the short format.
+    s = status -s
+
+	# Show the diff between the latest commit and the current state.
+    d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+	# `git di $number` shows the diff between the state `$number` revisions ago and the current state.
+    di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+	# Switch to a branch, creating it if necessary.
+    go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+	# Show verbose output about tags, branches or remotes
+    tags = tag -l
+    branches = branch --all
+    remotes = remote --verbose
+
+    # List contributors with number of commits.
+    contributors = shortlog --summary --numbered
+    contrib = ! git log --pretty=format:'%aN' | sort | uniq -c | sort -nr
+    whois = ! sh -c 'git log -i --pretty=\"format:%an <%ae>\" --author=\"\" | sort -u' -
+
+    # Show the user email for the current repository.
+    whoami = config user.email
 	di = diff -w --color-words=.
 	ac = ! git add . && git commit -v
 	unstage = reset HEAD
@@ -19,16 +45,48 @@
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\"  --graph --date=short
 	type = cat-file -t
 	dump = cat-file -p
-        times = "!git log --author=\"$(git config user.name)\" \
+    times = "!git log --author=\"$(git config user.name)\" \
                  --date=iso \
                  --format=\"%ad\" \
                  --date=\"format:%H\" \
-                 | awk '{n=$1+0;if(H[n]++>max)max=H[n]}END{for(i=0;i<24;i++){printf\"%02d -%5d \",i,H[i];for(n=0;n<H[i]/max*50;n++){printf \"*\"}print\"\"}}'"
+        | awk '{n=$1+0;if(H[n]++>max)max=H[n]}END{for(i=0;i<24;i++){printf\"%02d -%5d \",i,H[i];for(n=0;n<H[i]/max*50;n++){printf \"*\"}print\"\"}}'"
+
+    # Find commits by source code
+    fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+	# Find commits by commit message
+    fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+    # Credit an author on the latest commit.
+    credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+
+    # List aliases.
+    aliases = config --get-regexp alias
+
+    # Amend the currently staged files to the latest commit.
+    amend = commit --amend --reuse-message=HEAD
+
 [help]
 	autocorrect = -1 # not more git psuh
+
 [init]
 	templateDir = /Users/morganwattiez/.git-template
+
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = diff-so-fancy | less --tabs=4 -RFX
+
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
 [diff]
-	noprefix = true
+    noprefix = true
+
+[apply]
+	# Detect whitespace errors when applying a patch.
+    whitespace = fix
+
+[branch]
+	# Show most recently changed branches first.
+	sort = -committerdate
