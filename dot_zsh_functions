@@ -265,6 +265,41 @@ function terragrunt_color {
         -e "s/\(  *.*:  *\)\(\".*\"\)\( => \)\(\".*\"\)/${YELLOW}\1${RED}\2${BLACK}\3${GREEN}\4${RESET}/" \
         -e "s/\(  *.*:  *\".*\"\)/${GREEN}\1${RESET}/"
 }
+
+bold=$(tput bold)
+underline=$(tput sgr 0 1)
+reset=$(tput sgr0)
+purple=$(tput setaf 171)
+red=$(tput setaf 1)
+green=$(tput setaf 76)
+tan=$(tput setaf 3)
+blue=$(tput setaf 38)
+
+header() {
+  printf "\n${bold}${purple}==========  %s  ==========${reset}\n" "$@"
+}
+arrow() {
+  printf " ➜ $@\n"
+}
+success() {
+  printf "${green} ✔ %s${reset}\n" "$@"
+}
+error() {
+  printf "${red} ✖ %s${reset}\n" "$@"
+}
+warning() {
+  printf "${tan} ➜ %s${reset}\n" "$@"
+}
+underline() {
+  printf "${underline}${bold}%s${reset}\n" "$@"
+}
+bold() {
+  printf "${bold}%s${reset}\n" "$@"
+}
+note() {
+  printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n" "$@"
+}
+
 function git-project {
     if [ -d "$REPO_PATH" ]; then
         REPO_PATH="$(pwd)"
