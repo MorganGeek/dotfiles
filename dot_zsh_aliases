@@ -113,10 +113,21 @@ alias ls='lsd'
 alias tree='ls --almost-all --tree'
 alias v=vi
 alias x='extract'
+# Empty the Trash on all mounted volumes and the main HDD.
+# Also, clear Apple’s System Logs to improve shell startup speed.
+# Finally, clear download history from quarantine. https://mths.be/bum
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 # System info
 alias systeminfo='neofetch'
 alias monitoring='glances'
+
+# System Utils
+# Lock the screen (when going AFK)
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec ${SHELL} -l"
 
 # Infrastructure
 alias awsls='awsls -profile default -region eu-west-1 --attributes tags aws_instance'
