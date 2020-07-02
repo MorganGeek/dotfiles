@@ -78,9 +78,6 @@ alias preview="fzf --preview 'bat --color \"always\" --style=plain {}' --cycle "
 alias markdown2='pandoc README.md | lynx -stdin -dump'
 alias markdown='glow'
 
-# To do / Done
-#alias done='task_done'
-
 # Management / Security / SSH / SSL
 alias mgmt='ssh $(whoami)@$PROXY_HOST -i ~/.ssh/id_ed25519'
 alias m='mgmt'
@@ -110,6 +107,8 @@ alias du='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 alias s=ls
 alias sl=ll
 alias ls='lsd'
+alias lsg='ll | grep'  # show me files matching "ls grep"
+alias lh='ls -alt | head' # see the last modified files
 alias tree='ls --almost-all --tree'
 alias v=vi
 alias x='extract'
@@ -117,17 +116,16 @@ alias x='extract'
 # Also, clear Apple’s System Logs to improve shell startup speed.
 # Finally, clear download history from quarantine. https://mths.be/bum
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+alias ve='vim ~/.vimrc' # vimrc editing
+alias ze='vim ~/.zshrc' # zsh profile editing
 
 # System info
 alias systeminfo='neofetch'
 alias monitoring='glances'
 
 # System Utils
-# Lock the screen (when going AFK)
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
-
-# Reload the shell (i.e. invoke as a login shell)
-alias reload="exec ${SHELL} -l"
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend" # Lock the screen (when going AFK)
+alias reload="exec ${SHELL} -l" # Reload the shell (i.e. invoke as a login shell)
 
 # Infrastructure
 alias awsls='awsls -profile default -region eu-west-1 --attributes tags aws_instance'
