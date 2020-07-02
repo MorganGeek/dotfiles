@@ -1,3 +1,37 @@
+# Text formatting utilities
+bold=$(tput bold)
+underline=$(tput sgr 0 1)
+reset=$(tput sgr0)
+purple=$(tput setaf 171)
+red=$(tput setaf 1)
+green=$(tput setaf 76)
+tan=$(tput setaf 3)
+blue=$(tput setaf 38)
+header() {
+  printf "\n${bold}${purple}==========  %s  ==========${reset}\n" "$@"
+}
+arrow() {
+  printf " ➜ $@\n"
+}
+success() {
+  printf "${green} ✔ %s${reset}\n" "$@"
+}
+error() {
+  printf "${red} ✖ %s${reset}\n" "$@"
+}
+warning() {
+  printf "${tan} ➜ %s${reset}\n" "$@"
+}
+underline() {
+  printf "${underline}${bold}%s${reset}\n" "$@"
+}
+bold() {
+  printf "${bold}%s${reset}\n" "$@"
+}
+note() {
+  printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n" "$@"
+}
+# Browser interaction utilities
 function google() {
     open -na "Google Chrome" --args "https://www.google.com/search?q=$*"
 }
@@ -171,7 +205,7 @@ function how_in() {
 function rate() {
     curl "http://rate.sx/$*"
 }
-transfer() {
+function transfer() {
     # check arguments
     if [ $# -eq 0 ];
     then
@@ -266,39 +300,7 @@ function terragrunt_color {
         -e "s/\(  *.*:  *\".*\"\)/${GREEN}\1${RESET}/"
 }
 
-bold=$(tput bold)
-underline=$(tput sgr 0 1)
-reset=$(tput sgr0)
-purple=$(tput setaf 171)
-red=$(tput setaf 1)
-green=$(tput setaf 76)
-tan=$(tput setaf 3)
-blue=$(tput setaf 38)
 
-header() {
-  printf "\n${bold}${purple}==========  %s  ==========${reset}\n" "$@"
-}
-arrow() {
-  printf " ➜ $@\n"
-}
-success() {
-  printf "${green} ✔ %s${reset}\n" "$@"
-}
-error() {
-  printf "${red} ✖ %s${reset}\n" "$@"
-}
-warning() {
-  printf "${tan} ➜ %s${reset}\n" "$@"
-}
-underline() {
-  printf "${underline}${bold}%s${reset}\n" "$@"
-}
-bold() {
-  printf "${bold}%s${reset}\n" "$@"
-}
-note() {
-  printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n" "$@"
-}
 
 function git-project {
     if [ -d "$REPO_PATH" ]; then
