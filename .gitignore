@@ -9,6 +9,9 @@ completer.hist
 # no logs
 *.log
 
+# gh / github
+private_dot_config/gh/state.yml
+
 # no backups
 *.bak
 
