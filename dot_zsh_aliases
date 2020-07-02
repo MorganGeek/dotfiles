@@ -117,6 +117,9 @@ alias x='extract'
 alias systeminfo='neofetch'
 alias monitoring='glances'
 
+# Infrastructure
+alias awsls='awsls -profile default -region eu-west-1 --attributes tags aws_instance'
+
 # Package management tricks
 alias npmlist='npm list -g --depth 0'
 alias pip='pip3'

@@ -241,6 +241,9 @@ git clone https://github.com/aristocratos/bashtop.git ~/Code/bashtop
 cd ~/Code/bashtop || exit
 sudo make install
 
+# Install awsls
+BINDIR="/usr/local/bin" curl -sSfL https://raw.githubusercontent.com/jckuester/awsls/master/install.sh | sh -s v0.1.2
+
 # Upgrade
 echo "Upgrading apps"
 ~/.scripts/upgrade.sh
