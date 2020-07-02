@@ -101,6 +101,7 @@ alias biggerthan10='biggerthan 10M'
 alias c='cat'
 alias h='cd $HOME'
 alias cp='cp -i' # confirmation before overwrite #
+alias del='rm -rf'
 alias mv='mv -i' # confirmation before overwrite
 alias rm='gomi'
 alias df='df -H'
