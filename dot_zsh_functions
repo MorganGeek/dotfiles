@@ -272,7 +272,7 @@ function git-project {
     local preview='lsd --color always --icon always --group-dirs first {}'
     local dir=$(find $REPO_PATH -maxdepth 3 -type d -name ".git" | sed 's#.git$##' | fzf --select-1 --query="$*" --preview "$preview")
     if [[ -n "$dir" ]]; then
-        cd "$dir"
+        cd "$dir" || exit
     fi
 }
 function jenkins-cli {
@@ -304,10 +304,10 @@ function gitpushallremote {
     done
 }
 function clone {
-    local folder=$(echo $1 | \grep -Eo '[a-zA-Z_-]+.git$' | cut -d'.' -f1)
+    local folder=$(basename $1 | sed 's/\.git.*//g')
     echo "$folder"
     gcls "$1"
-    cd "$folder"
+    cd "$folder" || exit
     copyhooks
 }
 function colorpic {
@@ -325,4 +325,7 @@ function brewadd {
 function rssadd {
     ansible 127.0.0.1 -m lineinfile -a "path=~/.newsboat/urls line='"$1"'"
     newsboat
+}
+function backupgithub {
+    curl -sL "https://api.github.com/users/$1/repos" | jq -r '.[] | .ssh_url' | xargs -n1 git clone --mirror --no-hardlinks
 }
