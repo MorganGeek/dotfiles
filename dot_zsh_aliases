@@ -65,7 +65,7 @@ alias engines='sr -elvi'
 alias grep='rg'
 alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
 alias ygg="torrengo -s ygg"
-
+alias ag='alias | grep' # search for patten among aliases
 # Events
 alias agenda='calendar'
 alias mails="gmail && gmail2"
