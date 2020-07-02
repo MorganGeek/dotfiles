@@ -109,7 +109,7 @@ function istherenewissues() {
         if [ "$LASTISSUE" != "$previous_jira_issue" ]; then
             newissues
         else
-            echo "no new issue"
+            success "no new issue"
         fi
     fi
     echo "$LASTISSUE" > "$HOME/.newjiraissue"
@@ -209,7 +209,7 @@ function transfer() {
     # check arguments
     if [ $# -eq 0 ];
     then
-        echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"
+        warning "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"
         return 1
     fi
 
@@ -225,7 +225,7 @@ function transfer() {
 
         if [ ! -e $file ];
         then
-            echo "File $file doesn't exists."
+            error "File $file doesn't exists."
             return 1
         fi
 
@@ -336,23 +336,30 @@ function gitpushallremote {
     grv
     grv | grep push | awk '{print $1}' | while read -r remote
     do
-        echo "$remote"
+        arrow "$remote"
         git push --all "$remote"
     done
 }
 function clone {
     local folder=$(basename $1 | sed 's/\.git.*//g')
-    echo "$folder"
-    gcls "$1"
-    cd "$folder" || exit
-    copyhooks
+    arrow "git project identified as $folder"
+    if gcls "$1"; then
+        if [[ -n "$folder" ]]; then
+            cd "$folder" || exit
+            copyhooks
+        else
+            error "unable to change current directory to : $folder"
+        fi
+    else
+        error "unable to clone repository url : $1"
+    fi
 }
 function colorpic {
     local picture_url="$1"
-    echo "Colorizing $picture_url"
+    arrow "Colorizing $picture_url"
     local result_url=$(\curl -F "image=@$picture_url" -H "api-key:$COLORPIC_APIKEY" https://api.deepai.org/api/colorizer -s | jq '.output_url' | strings)
-    echo "Generated $result_url"
-    echo "Display in progress..."
+    success "Generated $result_url"
+    arrow "Display in progress..."
     eval "\curl -s $result_url | imgcat"
 }
 function brewadd {
