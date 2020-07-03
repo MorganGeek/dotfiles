@@ -65,7 +65,10 @@ alias engines='sr -elvi'
 alias grep='rg'
 alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
 alias ygg="torrengo -s ygg"
-alias ag='alias | grep' # search for patten among aliases
+alias ag='alias | grep -i' # search for patten among aliases
+alias hg='history | grep -i' # search for pattern among history
+alias hist='history'
+
 # Events
 alias agenda='calendar'
 alias mails="gmail && gmail2"
@@ -92,6 +95,10 @@ alias newpass='bw generate --special --uppercase --lowercase --number --length 3
 alias ip='echo $(curl ident.me -4 2>/dev/null)'
 alias ipinfo='curl "ipinfo.io/"$(ip)'
 alias getips='\egrep "\b(([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(1[0-9][0-9]|2[0-4][0-9]|25[0-5]|[0-9]{1,2})\b"'
+alias ping='prettyping -c 5 --nolegend' # Stop after sending count ECHO_REQUEST packets
+
+# Downloads
+alias get="curl -O -L" # Download file and save it with filename of remote file
 
 # Files & folder tricks
 alias biggerthan10='biggerthan 10M'
@@ -107,8 +114,9 @@ alias du='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 alias s=ls
 alias sl=ll
 alias ls='lsd'
-alias lsg='ll | grep'  # show me files matching "ls grep"
+alias lsg='ll | grep -i'  # show me files matching "ls grep"
 alias lh='ls -alt | head' # see the last modified files
+
 alias tree='ls --almost-all --tree'
 alias v=vi
 alias x='extract'
@@ -118,6 +126,8 @@ alias x='extract'
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 alias ve='vim ~/.vimrc' # vimrc editing
 alias ze='vim ~/.zshrc' # zsh profile editing
+alias zf='vim ~/.zsh_functions' # edit zsh_functions
+alias za='vim ~/.zsh_aliases' # edit zsh_aliases
 
 # System info
 alias systeminfo='neofetch'
@@ -126,6 +136,7 @@ alias monitoring='glances'
 # System Utils
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend" # Lock the screen (when going AFK)
 alias reload="exec ${SHELL} -l" # Reload the shell (i.e. invoke as a login shell)
+alias sc="source $HOME/.zshrc"
 
 # Infrastructure
 alias awsls='awsls -profile default -region eu-west-1 --attributes tags aws_instance'
@@ -141,16 +152,13 @@ alias latency='curl cheat.sh/latency'
 
 # Misc
 alias bash="/usr/local/bin/bash"
+alias current_year='`echo date +"%Y"`'
 alias headers='curl -I --compress'  # Find out if remote server supports gzip / mod_deflate or not #
-alias hist='history'
-alias path='echo -e ${PATH//:/\\n}' # Explode and display current PATH
-alias ping='prettyping -c 5 --nolegend' # Stop after sending count ECHO_REQUEST packets
 alias https='http --default-scheme=https' # useful alias stealed from a colleague. http is provided by httpie
+alias path='echo -e ${PATH//:/\\n}' # Explode and display current PATH
 alias p='ps -ef | grep -i '         # Show matching processes. Usage : p <process name>
 alias root='sudo -i'
-alias current_year='`echo date +"%Y"`'
 alias ':q'='exit'
-alias sc="source $HOME/.zshrc"
 
 # Linters
 alias checken="aspell check -d en"

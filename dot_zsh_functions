@@ -96,16 +96,16 @@ function git_listobjectsbysize() {
     rm -f "$tempFile"
 }
 function top_commands() {
-    history | cat | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a; }' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n50
+    history | \cat | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a; }' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n50
 }
 function top_commands_full() {
-    history | cat | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | sort -nr | nl | head -n50
+    history | \cat | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | sort -nr | nl | head -n50
 }
 function istherenewissues() {
     LASTISSUE=$(newissues | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' | awk 'FNR==2{print $2}')
     if [[ -f "$HOME/.newjiraissue" ]]
     then
-        previous_jira_issue=$(cat "$HOME/.newjiraissue" | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g') # the sed part is for removing output colors
+        previous_jira_issue=$(\cat "$HOME/.newjiraissue" | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g') # the sed part is for removing output colors
         if [ "$LASTISSUE" != "$previous_jira_issue" ]; then
             newissues
         else
@@ -372,4 +372,8 @@ function rssadd {
 }
 function backupgithub {
     curl -sL "https://api.github.com/users/$1/repos" | jq -r '.[] | .ssh_url' | xargs -n1 git clone --mirror --no-hardlinks
+}
+# Make a directory and cd to it
+function take {
+  mkdir -p $@ && cd ${@:$#}
 }
