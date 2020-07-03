@@ -21,16 +21,21 @@ Linux)
 	;;
 esac
 
+if [[ $(uname) == "Darwin" ]]; then
+    IS_MAC=true
+else
+    IS_MAC=false
+fi
+
+
 # Install HomeBrew
-case "$(uname -s)" in
-Darwin)
+if [ "$IS_MAC" = true ]; then
 	echo "(Mac OS X) installing homebrew"
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	# Prevent `Error: Your Homebrew is outdated. Please run `brew update`.`
 	echo "Updating Homebrew"
 	brew update
-	;;
-esac
+fi
 
 # Path to ruby
 export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -63,21 +68,17 @@ ln -snf ~/Code/dotfiles/dot_p10k.zsh ~/.p10k.zsh
 ln -snf ~/Code/dotfiles/dot_git-template ~/.git-template
 
 # Install Docker Desktop for Mac
-case "$(uname -s)" in
-Darwin)
+if [ "$IS_MAC" = true ]; then
 	echo "(Mac OS X) Installing Docker"
 	~/.scripts/install_docker_for_mac.sh
-	;;
-esac
+fi
 
 # Install dependencies (apps, fonts, ...) with Brew
-case "$(uname -s)" in
-Darwin)
+if [ "$IS_MAC" = true ]; then
 	echo "(Mac OS X) Brew installing stuff (apps, fonts, ...)"
 	ln -snf ~/Code/dotfiles/Brewfile ~/Brewfile
 	brew bundle
-	;;
-esac
+fi
 
 # Install dependencies (apps, fonts, ...) for CentOS
 case "$(uname -s)" in
@@ -89,15 +90,13 @@ Linux)
 esac
 
 # Configure Mac specific symbolic links
-case "$(uname -s)" in
-Darwin)
+if [ "$IS_MAC" = true ]; then
 	echo "(Mac OS X) Adding symbolic links"
     mkdir -pv "$HOME/Library/Application Support/Code/User/snippets"
 	ln -snf "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 	ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/Library/Application Support/Code/User/snippets" "$HOME/Library/Application Support/Code/User/snippets"
 	ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/.mackup.cfg" "$HOME/.mackup.cfg"
-	;;
-esac
+fi
 
 # Switch to ZSH
 sudo -v
@@ -163,12 +162,10 @@ sudo make install
 cd "$HOME" || exit
 
 # OSX Defaults
-case "$(uname -s)" in
-Darwin)
+if [ "$IS_MAC" = true ]; then
 	echo "(Mac OS X) Loading preferences"
 	sudo sh .macos
-	;;
-esac
+fi
 
 # Customize /etc/hosts
 echo "Overriding /etc/hosts"
@@ -180,13 +177,12 @@ sudo easy_install pip
 sudo pip install --upgrade pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
-case "$(uname -s)" in
-Darwin)
+if [ "$IS_MAC" = true ]; then
 	echo "(Mac OS X) Updating PATH for loading pip user installed packages"
 	ln -snf /usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
 	export PATH="$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/:/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin"
-	;;
-esac
+fi
+
 echo "Upgrading pip"
 sudo pip install --upgrade pip
 echo "Pip installing stuff"
