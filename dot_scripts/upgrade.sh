@@ -5,12 +5,12 @@ sdk selfupdate
 
 # Upgrading HomeBrew stuff
 case "$(uname -s)" in
-Darwin)
-	echo "(Mac OS X) Homebrew upgrading stuff"
-	brew update
-	#brew upgrade
-	brew outdated | xargs brew upgrade
-	;;
+  Darwin)
+    echo "(Mac OS X) Homebrew upgrading stuff"
+    brew update
+    #brew upgrade
+    brew outdated | xargs brew upgrade
+    ;;
 esac
 
 bundle update --all
@@ -24,3 +24,4 @@ pip freeze >~/requirements.txt
 # Update VIM plugins installed via Vundle https://github.com/VundleVim/Vundle.vim
 vim +PluginUpdate +qall >/dev/null
 rustup-update
+npm update -g moro

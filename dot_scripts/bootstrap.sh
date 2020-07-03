@@ -10,23 +10,23 @@ chmod +x ~/.scripts/*.sh
 
 # Install missing package (Linux)
 case "$(uname -s)" in
-Linux)
-	echo "(Linux) Installing Development Tools"
-	yum install sudo -y
-	sudo yum groupinstall 'Development Tools' -y
-	sudo yum install git which zip unzip ruby curl file docker gcc make libxcrypt-compat vim-enhanced -y
-	;;
+  Linux)
+    echo "(Linux) Installing Development Tools"
+    yum install sudo -y
+    sudo yum groupinstall 'Development Tools' -y
+    sudo yum install git which zip unzip ruby curl file docker gcc make libxcrypt-compat vim-enhanced -y
+    ;;
 esac
 
 # Install HomeBrew
 case "$(uname -s)" in
-Darwin)
-	echo "(Mac OS X) installing homebrew"
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	# Prevent `Error: Your Homebrew is outdated. Please run `brew update`.`
-	echo "Updating Homebrew"
-	brew update
-	;;
+  Darwin)
+    echo "(Mac OS X) installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    # Prevent `Error: Your Homebrew is outdated. Please run `brew update`.`
+    echo "Updating Homebrew"
+    brew update
+    ;;
 esac
 
 # Path to ruby
@@ -68,32 +68,32 @@ ln -snf ~/Code/dotfiles/private_dot_config/wtf ~/.config/wtf
 
 # Other symblinks + Install Docker Desktop for Mac
 case "$(uname -s)" in
-Darwin)
-	echo "(Mac OS X) Adding symbolic links"
-	ln -snf "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-	ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/Library/Application Support/Code/User/snippets" "$HOME/Library/Application Support/Code/User/snippets"
-	ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/.mackup.cfg" "$HOME/.mackup.cfg"
-	echo "(Mac OS X) Installing Docker"
-	~/.scripts/install_docker_for_mac.sh
-	;;
+  Darwin)
+    echo "(Mac OS X) Adding symbolic links"
+    ln -snf "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+    ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/Library/Application Support/Code/User/snippets" "$HOME/Library/Application Support/Code/User/snippets"
+    ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/.mackup.cfg" "$HOME/.mackup.cfg"
+    echo "(Mac OS X) Installing Docker"
+    ~/.scripts/install_docker_for_mac.sh
+    ;;
 esac
 
 # Install dependencies (apps, fonts, ...) with Brew
 case "$(uname -s)" in
-Darwin)
-	echo "(Mac OS X) Brew installing stuff (apps, fonts, ...)"
-	ln -snf ~/Code/dotfiles/Brewfile ~/Brewfile
-	brew bundle
-	;;
+  Darwin)
+    echo "(Mac OS X) Brew installing stuff (apps, fonts, ...)"
+    ln -snf ~/Code/dotfiles/Brewfile ~/Brewfile
+    brew bundle
+    ;;
 esac
 
 # Install dependencies (apps, fonts, ...) for CentOS
 case "$(uname -s)" in
-Linux)
-	echo "(CentOS) Installing stuff (apps, ...)"
-	chmod +x ~/Code/dotfiles/centos.sh
-	~/Code/dotfiles/centos.sh
-	;;
+  Linux)
+    echo "(CentOS) Installing stuff (apps, ...)"
+    chmod +x ~/Code/dotfiles/centos.sh
+    ~/Code/dotfiles/centos.sh
+    ;;
 esac
 
 # Switch to ZSH
@@ -114,16 +114,16 @@ echo "SDKMan updating"
 sdk selfupdate
 
 case "$(uname -s)" in
-Linux)
-	echo '(Linux) Installing ruby'
-	curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
-	curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
-	curl -L get.rvm.io | bash -s stable
-	source /etc/profile.d/rvm.sh
-	rvm reload
-	rvm requirements run
-	rvm install 2.3.7
-	;;
+  Linux)
+    echo '(Linux) Installing ruby'
+    curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+    curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
+    curl -L get.rvm.io | bash -s stable
+    source /etc/profile.d/rvm.sh
+    rvm reload
+    rvm requirements run
+    rvm install 2.3.7
+    ;;
 esac
 
 # Install bundler for managing ruby dependencies and Gemfile
@@ -160,10 +160,10 @@ cd "$HOME" || exit
 
 # OSX Defaults
 case "$(uname -s)" in
-Darwin)
-	echo "(Mac OS X) Loading preferences"
-	sudo sh .macos
-	;;
+  Darwin)
+    echo "(Mac OS X) Loading preferences"
+    sudo sh .macos
+    ;;
 esac
 
 # Customize /etc/hosts
@@ -177,11 +177,11 @@ sudo pip install --upgrade pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
 case "$(uname -s)" in
-Darwin)
-	echo "(Mac OS X) Updating PATH for loading pip user installed packages"
-	ln -snf /usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
-	export PATH="$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/:/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin"
-	;;
+  Darwin)
+    echo "(Mac OS X) Updating PATH for loading pip user installed packages"
+    ln -snf /usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin/pip pip3
+    export PATH="$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/:/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin"
+    ;;
 esac
 echo "Upgrading pip"
 sudo pip install --upgrade pip
@@ -194,19 +194,19 @@ pip install -r requirements.txt
 
 # Install baton (CLI to manage Spotify playback) https://github.com/joshuathompson/baton
 case "$(uname -s)" in
-Darwin)
-	echo '(Mac OS X) Installing baton (spotify CLI)'
-	curl -sSL https://github.com/joshuathompson/baton/releases/download/0.1.7/baton-0.1.7-darwin-amd64 -o /usr/local/bin/baton && chmod +x /usr/local/bin/baton
-	;;
+  Darwin)
+    echo '(Mac OS X) Installing baton (spotify CLI)'
+    curl -sSL https://github.com/joshuathompson/baton/releases/download/0.1.7/baton-0.1.7-darwin-amd64 -o /usr/local/bin/baton && chmod +x /usr/local/bin/baton
+    ;;
 
-Linux)
-	echo '(Linux) Installing baton (spotify CLI)'
-	curl -sSL https://github.com/joshuathompson/baton/releases/download/0.1.7/baton-0.1.7-linux-amd64 -o /usr/local/bin/baton && chmod +x /usr/local/bin/baton
-	;;
-*)
-	echo 'Non supported OS : Installation aborted for baton (spotify CLI)'
-	exit
-	;;
+  Linux)
+    echo '(Linux) Installing baton (spotify CLI)'
+    curl -sSL https://github.com/joshuathompson/baton/releases/download/0.1.7/baton-0.1.7-linux-amd64 -o /usr/local/bin/baton && chmod +x /usr/local/bin/baton
+    ;;
+  *)
+    echo 'Non supported OS : Installation aborted for baton (spotify CLI)'
+    exit
+    ;;
 esac
 
 # Use rustup to install the Rust compiler (rustc) and the Rust package manager (cargo).
@@ -216,6 +216,8 @@ rustup component add rustfmt
 # Install pa11y tool for local webpage accessibility analysis
 echo "Installing pa11y tool for local webpage accessibility analysis"
 npm install -g pa11y
+echo "Installing moro, a productivity CLI tool"
+npm install -g moro
 
 git clone https://github.com/sherlock-project/sherlock.git ~/Code/sherlock
 cd sherlock || exit
