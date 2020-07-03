@@ -59,12 +59,16 @@ cask "wireshark"
 cask "font-hack-nerd-font" # provides fonts used by vim-devicons https://vimawesome.com/plugin/vim-devicons https://github.com/ryanoasis/nerd-fonts#font-installation
 
 # Mac app store
-mas 'Keynote', id: 409183694
-mas 'iMovie', id: 408981434
-mas 'Microsoft Remote Desktop', id: 1295203466
-mas 'Pages', id: 409201541
-mas 'GarageBand', id: 682658836
-mas 'Numbers', id: 409203825
+# Github actions cannot install these.
+unless ENV.has_key?('CI') then
+    mas '1Password', id:1333542190
+    mas 'Keynote', id: 409183694
+    mas 'iMovie', id: 408981434
+    mas 'Microsoft Remote Desktop', id: 1295203466
+    mas 'Pages', id: 409201541
+    mas 'GarageBand', id: 682658836
+    mas 'Numbers', id: 409203825
+end
 
 brew "zsh"
 brew "git-ftp"
@@ -105,8 +109,12 @@ brew "htop"
 brew "moreutils"
 brew "asciidoc"
 brew "bash-snippets"
-# Mac App Store command line interface
-brew "mas"
+
+# Github actions cannot install these.
+unless ENV.has_key?('CI') then
+    brew "mas" # Mac App Store command line interface
+end
+
 # Using pyenv to be able to install specific python versions https://stackoverflow.com/questions/49794432/how-to-setup-a-pipenv-python-3-6-project-if-os-python-version-is-3-5
 brew "pyenv"
 # Google CLI https://github.com/jarun/googler
