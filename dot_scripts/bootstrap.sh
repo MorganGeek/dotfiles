@@ -9,6 +9,7 @@ mkdir -vp "$HOME/.vim"
 echo "mkdir -p $HOME/Code"
 mkdir -p ~/Code
 ln -snf ~/Code/dotfiles/dot_scripts ~/.scripts
+ln -snf ~/Code/dotfiles/dot_gitconfig ~/.gitconfig
 chmod +x ~/.scripts/*.sh
 
 # Install missing package (Linux)
@@ -47,14 +48,11 @@ ln -snf ~/.local/share/chezmoi/ ~/dotfiles
 ln -snf ~/Code/dotfiles/Gemfile ~/Gemfile
 ln -snf ~/Code/dotfiles/README.md ~/README.md
 ln -snf ~/Code/dotfiles/dot_bash_profile ~/.bash_profile
-ln -snf ~/Code/dotfiles/dot_gitconfig ~/.gitconfig
 ln -snf ~/Code/dotfiles/dot_macos ~/.macos
-ln -snf ~/Code/dotfiles/dot_scripts ~/.scripts
 ln -snf ~/Code/dotfiles/dot_scripts/checkci.sh /usr/local/bin/checkci
 ln -snf ~/Code/dotfiles/dot_vimrc ~/.vimrc
 # custom linters
 ln -snf ~/Code/dotfiles/dot_vim/ale_linters ~/.vim/ale_linters
-
 ln -snf ~/Code/dotfiles/dot_zsh_aliases ~/.zsh_aliases
 ln -snf ~/Code/dotfiles/dot_zsh_functions ~/.zsh_functions
 ln -snf ~/Code/dotfiles/dot_zshrc ~/.zshrc
