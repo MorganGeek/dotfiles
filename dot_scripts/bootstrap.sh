@@ -3,6 +3,9 @@
 
 echo "Hello $(whoami)! Let's get you set up."
 
+echo "create vim directory is missing"
+mkdir -vp "$HOME/.vim"
+
 echo "mkdir -p $HOME/Code"
 mkdir -p ~/Code
 ln -snf ~/Code/dotfiles/dot_scripts ~/.scripts
@@ -59,13 +62,9 @@ ln -snf ~/Code/dotfiles/dot_ansiweatherrc ~/.ansiweatherrc
 ln -snf ~/Code/dotfiles/dot_p10k.zsh ~/.p10k.zsh
 ln -snf ~/Code/dotfiles/dot_git-template ~/.git-template
 
-# Other symblinks + Install Docker Desktop for Mac
+# Install Docker Desktop for Mac
 case "$(uname -s)" in
 Darwin)
-	echo "(Mac OS X) Adding symbolic links"
-	ln -snf "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-	ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/Library/Application Support/Code/User/snippets" "$HOME/Library/Application Support/Code/User/snippets"
-	ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/.mackup.cfg" "$HOME/.mackup.cfg"
 	echo "(Mac OS X) Installing Docker"
 	~/.scripts/install_docker_for_mac.sh
 	;;
@@ -89,7 +88,19 @@ Linux)
 	;;
 esac
 
+# Configure Mac specific symbolic links
+case "$(uname -s)" in
+Darwin)
+	echo "(Mac OS X) Adding symbolic links"
+    mkdir -pv "$HOME/Library/Application Support/Code/User/snippets"
+	ln -snf "$HOME/.config/Code/User/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+	ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/Library/Application Support/Code/User/snippets" "$HOME/Library/Application Support/Code/User/snippets"
+	ln -snf "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Mackup/.mackup.cfg" "$HOME/.mackup.cfg"
+	;;
+esac
+
 # Switch to ZSH
+sudo -v
 echo "switching to ZSH"
 command -v zsh >>/etc/shells
 chsh -s "$(command -v zsh)"
