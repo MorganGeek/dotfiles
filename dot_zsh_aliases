@@ -10,6 +10,10 @@ alias gpar='gitpushallremote'
 alias lg='lazygit'
 alias neworigin='setorigin'
 alias origin='setorigin'
+alias goto='git go'
+alias master='goto master'
+alias develop='goto develop'
+alias gg='git config -l | grep -i' # search git config for ...
 
 # Docker
 alias lzd='lazydocker'
