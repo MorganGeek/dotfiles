@@ -18,7 +18,7 @@ alias gg='git config -l | grep -i' # search git config for ...
 # Docker
 alias lzd='lazydocker'
 
-# PM : Jira & trello & asana
+# PM : Jira & trello & asana & moro
 alias jirasearch='issues'
 alias cicdlist="jira issue jql \"project = 'CICD' AND resolution = Unresolved\""
 alias backlogs="jira issue jql \"status = New AND project IN (CICD) AND Created > -2w ORDER BY Priority DESC\""
@@ -39,6 +39,7 @@ alias myissues='mb'
 alias me='mb'
 alias j='jira issue open'
 alias trello='3llo'
+alias work='moro'
 
 # News
 alias hack='hacker'
