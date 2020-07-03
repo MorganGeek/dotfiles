@@ -134,14 +134,14 @@ alias ze='vim ~/.zshrc' # zsh profile editing
 alias zf='vim ~/.zsh_functions' # edit zsh_functions
 alias za='vim ~/.zsh_aliases' # edit zsh_aliases
 
-# System info
+# System Utils
 alias systeminfo='neofetch'
 alias monitoring='glances'
-
-# System Utils
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend" # Lock the screen (when going AFK)
 alias reload="exec ${SHELL} -l" # Reload the shell (i.e. invoke as a login shell)
 alias sc="source $HOME/.zshrc"
+alias lastlogin="log show --style syslog  --last 1d | awk '/Enter/ && /unlockUIBecomesActive/ {print \$1 \" \" \$2}'"
+alias loginhistory='lastlogin'
 
 # Infrastructure
 alias awsls='awsls -profile default -region eu-west-1 --attributes tags aws_instance'
