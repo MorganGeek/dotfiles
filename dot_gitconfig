@@ -27,7 +27,7 @@
 [help]
 	autocorrect = -1 # not more git psuh
 [init]
-	templateDir = /Users/morganwattiez/.git-template
+	templateDir = ~/.git-template
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [diff]
