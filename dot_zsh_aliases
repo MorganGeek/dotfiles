@@ -66,6 +66,7 @@ alias feeds='rss'
 alias ddg='ddgr'
 alias goo='googler'
 alias se='sr -elvi'
+alias eg='env | grep -i' # search env variables for pattern
 alias engines='sr -elvi'
 alias grep='rg'
 alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
