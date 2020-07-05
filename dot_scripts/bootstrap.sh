@@ -153,7 +153,7 @@ function installOhMyZsh() {
 function installVimPlugins() {
     echo "Installing Vundle + VIM Plugins"
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall >/dev/null
+    vim +'PluginInstall --sync' +qa >/dev/null
     #https://github.com/ycm-core/YouCompleteMe/blob/master/README.md#installation
     cd "$HOME/.vim/bundle/YouCompleteMe" || exit
     ./install.py --all
