@@ -40,6 +40,7 @@ alias me='mb'
 alias j='jira issue open'
 alias trello='3llo'
 alias work='moro'
+alias endofday='moro status 2>&1 | \grep -Eo "Working until ([0-9:]+) will make.*" | uniq | \grep -Eo "([0-9]+:[0-9]+)"'
 
 # News
 alias hack='hacker'
@@ -166,6 +167,7 @@ alias path='echo -e ${PATH//:/\\n}' # Explode and display current PATH
 alias p='ps -ef | grep -i '         # Show matching processes. Usage : p <process name>
 alias root='sudo -i'
 alias ':q'='exit'
+alias current_hour='date +"%H:%M"'
 
 # Linters
 alias checken="aspell check -d en"
