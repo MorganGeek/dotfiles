@@ -268,7 +268,7 @@ function vimat {
 }
 function copyhooks {
    cp -f ~/.git-template/.pre-commit-config.yaml ./
-   pre-commit install --install-hooks --overwrite
+   pre-commit install --install-hooks --overwrite --allow-missing-config
    pre-commit run -a
 }
 function httperr {
@@ -330,7 +330,9 @@ function vaultgetsecret {
 function setorigin {
     gra origin "$1" 2>/dev/null
     grset origin "$1"
-    copyhooks
+    if [[ $string =~ "collibra" ]]; then
+        copyhooks
+    fi
 }
 function gitpushallremote {
     grv
@@ -346,7 +348,9 @@ function clone {
     if gcls "$1"; then
         if [[ -n "$folder" ]]; then
             cd "$folder" || exit
-            copyhooks
+            if [[ $string =~ "collibra" ]]; then
+              copyhooks
+            fi
         else
             error "unable to change current directory to : $folder"
         fi
