@@ -379,5 +379,36 @@ function backupgithub {
 }
 # Make a directory and cd to it
 function take {
-  mkdir -p $@ && cd ${@:$#}
+    mkdir -p $@ && cd ${@:$#}
+}
+function endofday {
+    local planned_end=$(moro status 2>&1 | \grep -Eo "Working until ([0-9:]+) will make.*" | uniq | \grep -Eo "([0-9]+:[0-9]+)")
+    local max_hour="$planned_end"
+    local min_hour=`current_time`
+    if [ -z "$planned_end" ]; then
+        local clockout=$(moro report 2>&1 | \grep -Eo "Clock out.*([0-9:]+)" | \grep -Eo "([0-9]+:[0-9]+)")
+        max_hour="$clockout"
+    fi
+    if is_earlier "$min_hour" "$max_hour"; then
+        arrow "you should keep working, it's only $min_hour while you should work until $max_hour"
+        moro status
+    else
+        warning "you should stop working now because it's later than $max_hour"
+        moro report
+    fi
+}
+function convtimetodate {
+    date -j -f '%H:%M' "$1" +'%Y/%m/%d %H:%M'
+}
+function convtimetotimestamp {
+    date -j -f '%H:%M' "$1" +'%s'
+}
+function is_earlier {
+    local first=$(convtimetotimestamp "$1")
+    local second=$(convtimetotimestamp "$2")
+    if [ "$second" -gt "$first" ]; then
+        true
+    else
+        false
+    fi
 }

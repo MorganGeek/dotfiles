@@ -14,6 +14,7 @@ alias goto='git go'
 alias master='goto master'
 alias develop='goto develop'
 alias gg='git config -l | grep -i' # search git config for ...
+alias ucommit='PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit'
 
 # Docker
 alias lzd='lazydocker'
@@ -40,7 +41,6 @@ alias me='mb'
 alias j='jira issue open'
 alias trello='3llo'
 alias work='moro'
-alias endofday='moro status 2>&1 | \grep -Eo "Working until ([0-9:]+) will make.*" | uniq | \grep -Eo "([0-9]+:[0-9]+)"'
 
 # News
 alias hack='hacker'
@@ -115,6 +115,7 @@ alias h='cd $HOME'
 alias cp='cp -i' # confirmation before overwrite #
 alias del='rm -rf'
 alias mv='mv -i' # confirmation before overwrite
+alias mkcd='take'
 alias rm='gomi'
 alias df='df -H'
 alias diff='colordiff --side-by-side --ignore-space-change --width=200 --suppress-common-lines  --recursive'
@@ -168,6 +169,7 @@ alias p='ps -ef | grep -i '         # Show matching processes. Usage : p <proces
 alias root='sudo -i'
 alias ':q'='exit'
 alias current_hour='date +"%H:%M"'
+alias current_time='current_hour'
 
 # Linters
 alias checken="aspell check -d en"
