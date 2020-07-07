@@ -412,3 +412,18 @@ function is_earlier {
         false
     fi
 }
+function gitydiff {
+    local path_to_file="$1"
+    git show "HEAD:$path_to_file" | colordiff -y - "$path_to_file"
+}
+function dl_stopwords {
+    curl -Lks https://raw.githubusercontent.com/MorganGeek/bookmarks/master/stopwords.txt -o "$HOME/stopwords.txt"
+}
+function file_getwords {
+    dl_stopwords;
+    \cat "$1" | tr '[:upper:]' '[:lower:]' | \grep -o -E '\w{3,}' | \grep --invert-match --word-regexp --fixed-strings --file="$HOME/stopwords.txt" | \sed 's/s$//g' | \sed 's/ing$//g' | sort | uniq -c | sort --numeric-sort --reverse
+}
+function file_getpairs {
+    dl_stopwords;
+    \cat "$1" | tr '[:upper:]' '[:lower:]' | \grep -o -E '\w{3,} \w{3,}' | \grep --invert-match --word-regexp --fixed-strings --file="$HOME/stopwords.txt" | \sed 's/s$//g' | \sed 's/ing$//g' | sort | uniq -c | sort --numeric-sort --reverse
+}
