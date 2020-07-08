@@ -218,6 +218,8 @@ echo "Installing pa11y tool for local webpage accessibility analysis"
 npm install -g pa11y
 echo "Installing moro, a productivity CLI tool"
 npm install -g moro
+echo "Install wiki cli tool"
+npm install -g wikit
 
 git clone https://github.com/sherlock-project/sherlock.git ~/Code/sherlock
 cd sherlock || exit
