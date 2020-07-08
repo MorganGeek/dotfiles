@@ -90,3 +90,13 @@
 [branch]
 	# Show most recently changed branches first.
 	sort = -committerdate
+    tool = colordiff
+
+[difftool "colordiff"]
+    cmd = colordiff -ydw \"$LOCAL\" \"$REMOTE\"
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+[difftool]
+	prompt = false

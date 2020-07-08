@@ -427,3 +427,6 @@ function file_getpairs {
     dl_stopwords;
     \cat "$1" | tr '[:upper:]' '[:lower:]' | \grep -o -E '\w{3,} \w{3,}' | \grep --invert-match --word-regexp --fixed-strings --file="$HOME/stopwords.txt" | \sed 's/s$//g' | \sed 's/ing$//g' | sort | uniq -c | sort --numeric-sort --reverse
 }
+function file_dups {
+    \cat "$1" | sort | uniq -c | sort -nr
+}
