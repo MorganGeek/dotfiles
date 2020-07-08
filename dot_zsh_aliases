@@ -75,6 +75,7 @@ alias ygg="torrengo -s ygg"
 alias ag='alias | grep -i' # search for patten among aliases
 alias hg='history | grep -i' # search for pattern among history
 alias hist='history'
+alias codestats='tokei'
 
 # Events
 alias agenda='calendar'
