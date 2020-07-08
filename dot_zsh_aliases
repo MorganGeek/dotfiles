@@ -77,6 +77,9 @@ alias ag='alias | grep -i' # search for patten among aliases
 alias hg='history | grep -i' # search for pattern among history
 alias hist='history'
 alias codestats='tokei'
+alias dups='file_dups'
+alias pairs='file_getpairs'
+alias words='file_getwords'
 
 # Events
 alias agenda='calendar'
@@ -139,6 +142,9 @@ alias ve='vim ~/.vimrc' # vimrc editing
 alias ze='vim ~/.zshrc' # zsh profile editing
 alias zf='vim ~/.zsh_functions' # edit zsh_functions
 alias za='vim ~/.zsh_aliases' # edit zsh_aliases
+alias dots='cd $HOME/Code/dotfiles'
+alias dotfiles='dots'
+alias code='cd $HOME/Code'
 
 # System Utils
 alias systeminfo='neofetch'
