@@ -374,6 +374,9 @@ function rssadd {
     ansible 127.0.0.1 -m lineinfile -a "path=~/.newsboat/urls line='"$1"'"
     newsboat
 }
+function bookmarkadd {
+    ansible 127.0.0.1 -m lineinfile -a "path=~/Code/bookmarks/README.md insertafter='"$1"' line='* "$2"'"
+}
 function backupgithub {
     curl -sL "https://api.github.com/users/$1/repos" | jq -r '.[] | .ssh_url' | xargs -n1 git clone --mirror --no-hardlinks
 }

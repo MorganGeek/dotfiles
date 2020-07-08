@@ -70,6 +70,7 @@ alias se='sr -elvi'
 alias eg='env | grep -i' # search env variables for pattern
 alias engines='sr -elvi'
 alias grep='rg'
+alias grip='grep -i'
 alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
 alias ygg="torrengo -s ygg"
 alias ag='alias | grep -i' # search for patten among aliases
