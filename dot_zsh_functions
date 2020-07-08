@@ -96,10 +96,12 @@ function git_listobjectsbysize() {
     rm -f "$tempFile"
 }
 function top_commands() {
-    history | \cat | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a; }' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n50
+    local filter="$1"
+    history | \cat | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a; }' | grep -v "./" | column -c3 -s " " -t | grep "$filter" | sort -nr | nl | head -n50
 }
 function top_commands_full() {
-    history | \cat | awk '{$1=$1};1' | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | sort -nr | nl | head -n50
+    local filter="$1"
+    history | \cat | awk '{$1=$1};1' | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | grep "$filter" | sort -nr | nl | head -n50
 }
 function istherenewissues() {
     LASTISSUE=$(newissues | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' | awk 'FNR==2{print $2}')
