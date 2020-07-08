@@ -336,12 +336,21 @@ function setorigin {
         copyhooks
     fi
 }
+function gitpushcurrentremote {
+    gitpushallremote "$(git_current_branch)"
+}
 function gitpushallremote {
+    local param_branch="$1"
     grv
     grv | grep push | awk '{print $1}' | while read -r remote
     do
-        arrow "$remote"
-        git push --all "$remote"
+        if  [ -z "$param_branch" ]; then
+            arrow "pushing all branches to $remote"
+            git push --all "$remote"
+        else
+            arrow "pushing $param_branch to $remote"
+            git push "$remote" "$param_branch"
+        fi
     done
 }
 function clone {
