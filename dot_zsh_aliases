@@ -80,6 +80,7 @@ alias codestats='tokei'
 alias dups='file_dups'
 alias pairs='file_getpairs'
 alias words='file_getwords'
+alias fd="\fd"
 
 # Events
 alias agenda='calendar'
