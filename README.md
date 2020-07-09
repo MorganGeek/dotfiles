@@ -5,8 +5,8 @@
 
 ## Setup
 ```
-git clone https://github.com/MorganGeek/dotfiles.git ~/Code/dotfiles
-~/Code/dotfiles/dot_scripts/bootstrap.sh
+git clone https://github.com/MorganGeek/dotfiles.git $HOME/Code/dotfiles
+$HOME/Code/dotfiles/dot_scripts/bootstrap.sh
 ```
 
 ### Run
