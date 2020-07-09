@@ -32,7 +32,6 @@ repos:
     - id: shfmt
     - id: script-must-have-extension
     - id: git-check
-#   - id: git-dirty
     - id: forbid-binary
     - id: bundler-audit
 -   repo: https://github.com/cesar-rodriguez/terrascan
@@ -49,13 +48,3 @@ repos:
         language: docker_image
         entry: --entrypoint /usr/local/bin/run-jflint.sh askulkarni2/jenkinslint
         files: Jenkinsfile
-
-#- repo: https://github.com/ansible/ansible-lint.git
-#  rev: v4.1.0
-#  hooks:
-#    - id: ansible-lint
-#      files: \.(yaml|yml)$
-#- repo: https://github.com/pre-commit/mirrors-autopep8
-#  rev: 'v1.5'  # Use the sha / tag you want to point at
-#  hooks:
-#    - id: autopep8
