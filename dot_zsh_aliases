@@ -196,6 +196,7 @@ alias irc='weechat'
 
 # Terraform
 source $HOME/.aliases/terraform.sh
+source $HOME/.aliases/terragrunt.sh
 
 # Fun
 alias moon='curl "wttr.in/Moon?lang=fr"'
