@@ -47,6 +47,7 @@ ln -snf ~/Code/dotfiles/dot_vimrc ~/.vimrc
 # custom linters
 ln -snf ~/Code/dotfiles/dot_vim/ale_linters ~/.vim/ale_linters
 
+ln -snf ~/Code/dotfiles/dot_aliases ~/.aliases
 ln -snf ~/Code/dotfiles/dot_zsh_aliases ~/.zsh_aliases
 ln -snf ~/Code/dotfiles/dot_zsh_functions ~/.zsh_functions
 ln -snf ~/Code/dotfiles/dot_zshrc ~/.zshrc

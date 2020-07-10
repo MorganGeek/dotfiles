@@ -149,6 +149,7 @@ alias za='vim ~/.zsh_aliases' # edit zsh_aliases
 alias dots='cd $HOME/Code/dotfiles'
 alias dotfiles='dots'
 alias code='cd $HOME/Code'
+alias gochezmoi='cd ~/.local/share/chezmoi'
 
 # System Utils
 alias systeminfo='neofetch'
@@ -194,8 +195,7 @@ alias gw='./gradlew'
 alias irc='weechat'
 
 # Terraform
-alias terraform_landscape='landscape'
-alias tf='terraform'
+source $HOME/.aliases/terraform.sh
 
 # Fun
 alias moon='curl "wttr.in/Moon?lang=fr"'
@@ -205,15 +205,7 @@ alias coffee="curl -L http://git.io/coffee"
 alias hotcoffee="curl -sL git.io/hotcoffee | sh"
 
 # Music
-alias music='baton'
-alias mytracks='music me saved tracks'
-alias saved='mytracks'
-alias liked='saved'
-alias next='music next'
-alias prev='music prev'
-alias previous='prev'
-alias like='music save'
-alias curr='music status'
+source $HOME/.aliases/music.sh
 
 # K8S
 alias k9s='COLORTERM=256bit k9s --all-namespaces'
