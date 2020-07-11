@@ -48,12 +48,3 @@ git config core.autocrlf false
 git rm --cached -r .
 git reset --hard
 ```
-
-https://github.com/robbyrussell/oh-my-zsh/issues/6764#issuecomment-384045008
-
-```
-cd $ZSH
-git config core.autocrlf false
-git rm --cached -r .
-git reset --hard
-```
