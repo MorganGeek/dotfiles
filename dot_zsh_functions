@@ -32,54 +32,63 @@ note() {
   printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n" "$@"
 }
 # Browser interaction utilities
+function browse() {
+    open -na "$DEFAULT_BROWSER" --args "$1"
+}
 function google() {
-    open -na "Google Chrome" --args "https://www.google.com/search?q=$*"
+    browse "https://www.google.com/search?q=$*"
 }
 function stackoverflow() {
-    open -na "Google Chrome" --args "https://www.google.com/search?q=site:stackoverflow.com $*"
+    browse "https://www.google.com/search?q=site:stackoverflow.com $*"
 }
 function github() {
-    open -na "Google Chrome" --args "https://github.com/search?q=$*"
+    browse "https://github.com/search?q=$*"
 }
 function hacker() {
-    open -na "Google Chrome" --args "https://hn.algolia.com/?sort=byDate&query=$*"
+    browse "https://hn.algolia.com/?sort=byDate&query=$*"
 }
 function gmail() {
-    open -na "Google Chrome" --args "https://mail.google.com/mail/u/0"
+    browse "https://mail.google.com/mail/u/0"
 }
 function gmail2() {
-    open -na "Google Chrome" --args "https://mail.google.com/mail/u/1"
+    browse "https://mail.google.com/mail/u/1"
 }
 function cicdboard() {
-    open -na "Google Chrome" --args "$JIRA_URL/secure/RapidBoard.jspa?rapidView=457&view=planning.nodetail"
+    browse "$JIRA_URL/secure/RapidBoard.jspa?rapidView=457&view=planning.nodetail"
 }
 function cicddashboard() {
-    open -na "Google Chrome" --args "$JIRA_URL/secure/Dashboard.jspa?selectPageId=13131"
+    browse "$JIRA_URL/secure/Dashboard.jspa?selectPageId=13131"
 }
 function issues() {
     jira issue jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
 }
 function calendar() {
-    open -na "Google Chrome" --args "https://calendar.google.com/calendar/r?tab=mc"
+    browse "https://calendar.google.com/calendar/r?tab=mc"
 }
 function asana() {
-    open -na "Google Chrome" --args "https://app.asana.com"
+    browse "https://app.asana.com"
+}
+function confluencetasks() {
+    browse "$CONFLUENCE_URL/plugins/inlinetasks/mytasks.action"
+}
+function trello_web() {
+    browse "$TRELLO_BOARD_URL"
 }
 function bookmarks() {
-    open -na "Google Chrome" --args "https://github.com/MorganGeek/bookmarks/blob/master/README.md"
+    browse "https://github.com/MorganGeek/bookmarks/blob/master/README.md"
 }
 function spotify() {
-    open -na "Google Chrome" --args "https://open.spotify.com/search/$*"
+    browse "https://open.spotify.com/search/$*"
 }
 function lob() {
-    open -na "Google Chrome" --args "https://lobste.rs"
+    browse "https://lobste.rs"
 }
 function logtalk() {
     path_swilgt=$(find /usr/local/Cellar/logtalk -name "*swilgt.sh" 2>/dev/null)
     sh "$path_swilgt"
 }
 function archive() {
-    open -na "Google Chrome" --args "https://web.archive.org/web/*/$*"
+    browse "https://web.archive.org/web/*/$*"
 }
 function git_listobjectsbysize() {
     tempFile=$(mktemp)
@@ -102,6 +111,15 @@ function top_commands() {
 function top_commands_full() {
     local filter="$1"
     history | \cat | awk '{$1=$1};1' | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | grep "$filter" | sort -nr | nl | head -n50
+}
+function suggest_aliases() {
+    while read -r line
+    do
+        local matching_aliases=$(ag "$line")
+        if [ ! -z "$matching_aliases" ]; then
+            echo "there is an alias for $line :\n$matching_aliases\n"
+        fi
+    done < <(top_commands_full | awk '{ $1=""; $2=""; $3="";  print}' | awk 'NF' | awk '{$1=$1};1' | awk -v COUNT=1 'NF>COUNT' |  head -20)
 }
 function istherenewissues() {
     LASTISSUE=$(newissues | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' | awk 'FNR==2{print $2}')
@@ -399,7 +417,7 @@ function rssadd {
     newsboat
 }
 function bookmarkadd {
-    ansible 127.0.0.1 -m lineinfile -a "path=~/Code/bookmarks/README.md insertafter='"$1"' line='* "$2"'"
+    ansible 127.0.0.1 -m lineinfile -a "path=$HOME/Code/bookmarks/README.md insertafter='"$1"' line='* "$2"'"
 }
 function backupgithub {
     curl -sL "https://api.github.com/users/$1/repos" | jq -r '.[] | .ssh_url' | xargs -n1 git clone --mirror --no-hardlinks

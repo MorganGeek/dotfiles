@@ -128,9 +128,12 @@ export BW_SESSION=""
 export JENKINS_URL=""
 export JENKINS_SECRET=""
 export JIRA_URL=""
+export CONFLUENCE_URL=""
 export PROXY_HOST=""
 export COLORPIC_APIKEY=""
 export VAULT_PASSWORD_FILE=""
+export DEFAULT_BROWSER=${DEFAULT_BROWSER:-'Google Chrome'}
+export TRELLO_BOARD_URL=""
 
 if test -f "$HOME/.scripts/secrets.sh"; then
     chmod +x "$HOME/.scripts/secrets.sh"
