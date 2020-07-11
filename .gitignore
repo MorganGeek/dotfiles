@@ -18,6 +18,9 @@ private_dot_config/gh/state.yml
 # no secrets
 private_dot_config/gh/hosts.yml
 
+# no symbolic links
+.pre-commit-config.yaml
+
 # newsboat (rss reader)
 *newsboat/cache.db
 *newsboat/history.cmdline

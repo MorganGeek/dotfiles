@@ -1,50 +1,100 @@
+---
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.5.0
-    hooks:
-    -   id: trailing-whitespace
-    -   id: end-of-file-fixer
-    -   id: check-yaml
-    -   id: check-added-large-files
-    -   id: check-merge-conflict
-    -   id: pretty-format-json
-    -   id: check-symlinks
-    -   id: detect-aws-credentials
-    -   id: detect-private-key
-    -   id: flake8
-    -   id: requirements-txt-fixer
-    -   id: sort-simple-yaml
-- repo: git://github.com/antonbabenko/pre-commit-terraform
-  rev: v1.27.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
-  hooks:
-    - id: terraform_fmt
-    - id: terraform_docs
-    - id: terragrunt_fmt
-    - id: terraform_tflint
-      args: ['--deep']
-    - id: terraform_validate
-- repo: https://github.com/jumanjihouse/pre-commit-hooks
-  sha: 1.11.2
-  hooks:
-    - id: shellcheck
-    - id: shfmt
-    - id: script-must-have-extension
-    - id: git-check
-    - id: forbid-binary
-    - id: bundler-audit
--   repo: https://github.com/cesar-rodriguez/terrascan
-    rev: v0.2.0
-    hooks:
-    -   id: terrascan
-        pass_filenames: false
-        args: [-l=infra] #NOTE: that this is the directory you created earlier to host your terraform
-        verbose: true
--   repo: https://github.com/askulkarni2/pre-commit-docker-jenkinslint
-    rev: master
-    hooks:
-    -   id: docker-jenkinslint
-        language: docker_image
-        entry: --entrypoint /usr/local/bin/run-jflint.sh askulkarni2/jenkinslint
-        files: Jenkinsfile
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v3.1.0
+      hooks:
+          - id: check-yaml
+          - id: check-added-large-files
+          - id: check-case-conflict
+          - id: check-executables-have-shebangs
+          - id: check-json
+          - id: check-merge-conflict
+          - id: check-symlinks
+          - id: check-yaml
+          - id: check-xml
+          - id: detect-aws-credentials
+          - id: detect-private-key
+          - id: end-of-file-fixer
+          - id: flake8
+          - id: mixed-line-ending
+          - id: pretty-format-json
+          - id: requirements-txt-fixer
+          - id: sort-simple-yaml
+          - id: trailing-whitespace
+    - repo: git://github.com/antonbabenko/pre-commit-terraform
+      rev: v1.31.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+      hooks:
+          - id: terraform_fmt
+          - id: terragrunt_fmt
+          - id: terraform_docs
+          - id: terraform_docs_without_aggregate_type_defaults
+          - id: terraform_tflint
+            args: [--deep]
+          - id: terraform_validate
+          - id: terraform_tfsec
+            #- repo: https://github.com/ansible/ansible-lint.git
+            # rev: v4.1.0
+            #  hooks:
+            #- id: ansible-lint
+            #      files: \.(yaml|yml)$
+    - repo: git@github.com:jorisroovers/gitlint.git
+      rev: v0.13.1
+      hooks:
+          - id: gitlint
+    - repo: https://github.com/jumanjihouse/pre-commit-hooks
+      rev: 1.11.2
+      hooks:
+          - id: shellcheck
+          - id: shfmt
+          - id: script-must-have-extension
+          - id: git-check
+          - id: forbid-binary
+          - id: bundler-audit
+          - id: markdownlint
+    - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
+      rev: 0.0.11
+      hooks:
+          - id: yamlfmt
+    - repo: https://github.com/cesar-rodriguez/terrascan
+      rev: v0.2.1
+      hooks:
+          - id: terrascan
+            pass_filenames: false
+            args: [-l=infra] #NOTE: that this is the directory you created earlier to host your terraform
+            verbose: true
+    - repo: https://github.com/askulkarni2/pre-commit-docker-jenkinslint
+      rev: 88dd7702e44bbc4dc742b37897e1ded7fe99dfba
+      hooks:
+          - id: docker-jenkinslint
+            language: docker_image
+            entry: --entrypoint /usr/local/bin/run-jflint.sh askulkarni2/jenkinslint
+            files: Jenkinsfile
+    - repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
+      rev: v1.1.1
+      hooks:
+          - id: htmlhint
+            args: [--config, .htmlhintrc]
+          - id: htmllint
+          - id: markdown-toc
+            args: [--indent, '    ', -i]
+          - id: dockerfile_lint
+            args: [--json, --verbose, --dockerfile]
+    - repo: https://github.com/lovesegfault/beautysh
+      rev: 6.0.1
+      hooks:
+          - id: beautysh
+    - repo: https://github.com/mattlqx/pre-commit-search-and-replace
+      rev: v1.0.3
+      hooks:
+          - id: search-and-replace
+    - repo: https://github.com/codingjoe/relint
+      rev: 1.2.0
+      hooks:
+          - id: relint
+
+    - repo: git@github.com:Vimjas/vint.git
+      rev: v0.4a1
+      hooks:
+          - id: vint
