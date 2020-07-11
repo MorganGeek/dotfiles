@@ -21,6 +21,9 @@ private_dot_config/gh/hosts.yml
 # no symbolic links
 .pre-commit-config.yaml
 
+# no temp files
+dot_scripts/version*
+
 # newsboat (rss reader)
 *newsboat/cache.db
 *newsboat/history.cmdline
