@@ -5,7 +5,6 @@ repos:
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v3.1.0
       hooks:
-          - id: check-yaml
           - id: check-added-large-files
           - id: check-case-conflict
           - id: check-executables-have-shebangs
@@ -95,6 +94,13 @@ repos:
           - id: relint
 
     - repo: git@github.com:Vimjas/vint.git
-      rev: v0.4a1
+      rev: master
       hooks:
           - id: vint
+  # install with `pre-commit install -t commit-msg`
+    - repo: https://github.com/talos-systems/conform
+      rev: master
+      hooks:
+          - id: conform
+            stages:
+                - commit-msg

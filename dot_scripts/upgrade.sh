@@ -3,14 +3,17 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 sdk selfupdate
 
+# Upgrade
+echo "Upgrading apps"
+
 # Upgrading HomeBrew stuff
 case "$(uname -s)" in
-  Darwin)
-    echo "(Mac OS X) Homebrew upgrading stuff"
-    brew update
-    #brew upgrade
-    brew outdated | xargs brew upgrade
-    ;;
+    Darwin)
+        echo "(Mac OS X) Homebrew upgrading stuff"
+        brew update
+        #brew upgrade
+        brew outdated | xargs brew upgrade
+        ;;
 esac
 
 bundle update --all
@@ -25,3 +28,4 @@ pip freeze >~/requirements.txt
 vim +PluginUpdate +qall >/dev/null
 rustup-update
 npm update -g moro
+pre-commit autoupdate

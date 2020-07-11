@@ -270,13 +270,16 @@ function checkov { docker run -i --rm -v "$(pwd):/tf" bridgecrew/checkov -d /tf 
 function vimat {
     vim +/$1 $2
 }
+function installhooks {
+    pre-commit install --install-hooks --overwrite --allow-missing-config
+}
 function copyhooks {
-   cp -f ~/.git-template/.pre-commit-config.yaml ./
-   pre-commit install --install-hooks --overwrite --allow-missing-config
-   pre-commit run -a
+    cp -f ~/.git-template/.pre-commit-config.yaml ./
+    installhooks;
+    runhooks;
 }
 function httperr {
-   curl -s "https://http.cat/$1" | imgcat
+    curl -s "https://http.cat/$1" | imgcat
 }
 function terragrunt_color {
     BOLD=$(tput bold)
@@ -383,6 +386,14 @@ function brewadd {
     brew install "$1"
     ansible 127.0.0.1 -m lineinfile -a "path=~/Brewfile line='brew \"$1\"'"
 }
+function pipadd {
+    pip install "$1"
+    pip freeze > "$HOME/requirements.txt"
+}
+function goadd {
+    ansible 127.0.0.1 -m lineinfile -a "path=~/.scripts/godeps.sh line='go get -u -v $1'"
+    go get -u -v "$1"
+}
 function rssadd {
     ansible 127.0.0.1 -m lineinfile -a "path=~/.newsboat/urls line='"$1"'"
     newsboat
@@ -445,4 +456,7 @@ function file_getpairs {
 }
 function file_dups {
     \cat "$1" | sort | uniq -c | sort -nr
+}
+function foreach_run {
+    find . -name "$1" -exec "$2" {} \;
 }

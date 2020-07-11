@@ -1,0 +1,10 @@
+#- search: /Something [bB]ad/
+#  replacement: Something Good
+#- search: foobar
+#  insensitive: true
+#  replacement: FOOBAR
+- search: collibra
+  insensitive: true
+- search: ~/Code
+- search: TODO
+- search: FIXME

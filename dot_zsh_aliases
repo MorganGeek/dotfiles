@@ -15,7 +15,7 @@ alias goto='git go'
 alias master='goto master'
 alias develop='goto develop'
 alias gg='git config -l | grep -i' # search git config for ...
-alias ucommit='PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit'
+alias ucommit='PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit --no-verify'
 
 # Docker
 alias lzd='lazydocker'
@@ -105,6 +105,7 @@ alias sshpub='cat ~/.ssh/id_ed25519.pub'
 alias ssla="openssl x509 -alias -noout -in"  # Usage : ssla <cert>
 alias encrypt='ansible-vault encrypt **/vault.yml --vault-password-file=$VAULT_PASSWORD_FILE'
 alias decrypt='ansible-vault decrypt **/vault.yml --vault-password-file=$VAULT_PASSWORD_FILE'
+alias bitwarden-cli='bw'
 alias newpass='bw generate --special --uppercase --lowercase --number --length 30'
 
 # Network
@@ -174,6 +175,7 @@ alias latency='curl cheat.sh/latency'
 
 # Misc
 alias bash="/usr/local/bin/bash"
+#alias date="gdate"
 alias current_year='`echo date +"%Y"`'
 alias headers='curl -I --compress'  # Find out if remote server supports gzip / mod_deflate or not #
 alias https='http --default-scheme=https' # useful alias stealed from a colleague. http is provided by httpie
@@ -183,6 +185,10 @@ alias root='sudo -i'
 alias ':q'='exit'
 alias current_hour='date +"%H:%M"'
 alias current_time='current_hour'
+alias runhooks='pre-commit run -a'
+alias whatyear='current_year'
+alias whathour='current_time'
+alias whattime='whathour'
 
 # Linters
 alias checken="aspell check -d en"

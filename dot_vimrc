@@ -57,6 +57,8 @@ Plugin 'mbbill/undotree'
 Plugin 'farmergreg/vim-lastplace'
 " Add icons to your plugins
 Plugin 'ryanoasis/vim-devicons'
+" Prettier to auto format some files
+Plugin 'mitermayer/vim-prettier'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -97,12 +99,23 @@ let g:ale_use_global_executables = 1
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_open_list = 1
+"\   'yaml': ['prettier'],
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'python': ['black'],
 \   'rust': ['rustfmt'],
 \   'Jenkinsfile': ['checkci'],
 \}
+
+" when running at every change you may want to disable quickfix
+let g:prettier#quickfix_enabled = 1
+let g:prettier#quickfix_auto_focus = 1
+let g:prettier#config#print_width = '30'
+let g:prettier#exec_cmd_path = "/usr/local/bin/prettier"
+let g:prettier#autoformat = 0
+let g:prettier#autoformat_require_pragma = 0
+
+"autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 " Enable syntax highlighting
 syntax on
@@ -173,6 +186,8 @@ let g:syntastic_javascript_checkers = [ 'jshint' ]
 let g:syntastic_ocaml_checkers = ['merlin']
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_shell_checkers = ['shellcheck']
+let g:syntastic_yaml_checkers = ['yamllint']
+let g:syntastic_vim_checkers = ['vint']
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}

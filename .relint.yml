@@ -1,0 +1,4 @@
+- name: No FIXME
+  pattern: 'FIXME'
+- name: No TODO
+  pattern: 'TODO'

@@ -1,7 +1,8 @@
+ansicolor==0.2.6
 appdirs==1.4.3
 appnope==0.1.0
 argcomplete==1.10.0
-arrow==0.15.7
+arrow==0.15.5
 asn1crypto==1.2.0
 astroid==2.3.3
 attrs==19.3.0
@@ -9,6 +10,7 @@ Automat==0.8.0
 autopep8==1.4.4
 backcall==0.1.0
 beautifulsoup4==4.8.1
+beautysh==6.0.1
 black==19.10b0
 bleach==3.1.4
 bs4==0.0.1
@@ -30,6 +32,7 @@ docutils==0.15.2
 entrypoints==0.3
 flake8==3.7.9
 future==0.18.2
+gitlint==0.13.1
 google-api-python-client==1.7.11
 google-auth==1.7.0
 google-auth-httplib2==0.0.3
@@ -107,6 +110,7 @@ rainbowstream==1.5.2
 readme-renderer==24.0
 rebound-cli==2.0.0
 regex==2019.11.1
+relint==1.2.1
 requests==2.22.0
 requests-futures==1.0.0
 requests-toolbelt==0.9.1
@@ -115,6 +119,7 @@ rtv==1.27.0
 Scrapy==1.8.0
 semver==2.9.0
 service-identity==18.1.0
+sh==1.12.14
 six==1.13.0
 slacker==0.13.0
 soupsieve==1.9.5
@@ -132,6 +137,7 @@ typed-ast==1.4.0
 uritemplate==3.0.0
 urllib3==1.25.6
 urwid==2.0.1
+vim-vint==0.3.21
 virtualenv==16.7.7
 virtualenv-clone==0.5.3
 w3lib==1.21.0
@@ -139,4 +145,5 @@ wcwidth==0.1.7
 webencodings==0.5.1
 websocket-client==0.56.0
 wrapt==1.11.2
+yamllint==1.23.0
 zope.interface==4.6.0
