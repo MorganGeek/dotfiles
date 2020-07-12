@@ -14,7 +14,7 @@ alias origin='setorigin'
 alias goto='git go'
 alias master='goto master'
 alias develop='goto develop'
-alias gg='git config -l | grep -i' # search git config for ...
+alias gg='git config -l | grip' # search git config for ...
 alias ucommit='PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit --no-verify'
 
 # Docker
@@ -68,14 +68,14 @@ alias feeds='rss'
 alias ddg='ddgr'
 alias goo='googler'
 alias se='sr -elvi'
-alias eg='env | grep -i' # search env variables for pattern
+alias eg='env | grip' # search env variables for pattern
 alias engines='sr -elvi'
 alias grep='rg'
 alias grip='grep -i'
 alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
 alias ygg="torrengo -s ygg"
-alias ag='alias | grep -i' # search for patten among aliases
-alias hg='history | grep -i' # search for pattern among history
+alias ag='alias | grip'   # search for patten among aliases
+alias hg='history | grip' # search for pattern among history
 alias hist='history'
 alias codestats='tokei'
 alias dups='file_dups'
@@ -102,7 +102,7 @@ alias mgmt='ssh $(whoami)@$PROXY_HOST -i ~/.ssh/id_ed25519'
 alias m='mgmt'
 alias tunnel='ssh -D 8000 -N $(whoami)@$PROXY_HOST -i ~/.ssh/id_ed25519'
 alias sshpub='cat ~/.ssh/id_ed25519.pub'
-alias ssla="openssl x509 -alias -noout -in"  # Usage : ssla <cert>
+alias ssla="openssl x509 -alias -noout -in" # Usage : ssla <cert>
 alias encrypt='ansible-vault encrypt **/vault.yml --vault-password-file=$VAULT_PASSWORD_FILE'
 alias decrypt='ansible-vault decrypt **/vault.yml --vault-password-file=$VAULT_PASSWORD_FILE'
 alias bitwarden-cli='bw'
@@ -113,7 +113,7 @@ alias ip='echo $(curl ident.me -4 2>/dev/null)'
 alias ipinfo='curl "ipinfo.io/"$(ip)'
 alias getips='\egrep "\b(([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(1[0-9][0-9]|2[0-4][0-9]|25[0-5]|[0-9]{1,2})\b"'
 alias ping='prettyping -c 5 --nolegend' # Stop after sending count ECHO_REQUEST packets
-alias fastping='ping -c 100 -i.2' # don't wait interval 1 second, go fast
+alias fastping='ping -c 100 -i.2'       # don't wait interval 1 second, go fast
 
 # Downloads
 alias get="curl -O -L" # Download file and save it with filename of remote file
@@ -134,7 +134,7 @@ alias ctrl-c='pbcopy'
 alias s=ls
 alias sl=ll
 alias ls='lsd'
-alias lsg='ll | grep -i'  # show me files matching "ls grep"
+alias lsg='ll | grip'     # show me files matching "ls grep"
 alias lh='ls -alt | head' # see the last modified files
 alias tree='ls --almost-all --tree'
 alias v=vi
@@ -143,10 +143,10 @@ alias x='extract'
 # Also, clear Apple’s System Logs to improve shell startup speed.
 # Finally, clear download history from quarantine. https://mths.be/bum
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
-alias ve='vim ~/.vimrc' # vimrc editing
-alias ze='vim ~/.zshrc' # zsh profile editing
+alias ve='vim ~/.vimrc'         # vimrc editing
+alias ze='vim ~/.zshrc'         # zsh profile editing
 alias zf='vim ~/.zsh_functions' # edit zsh_functions
-alias za='vim ~/.zsh_aliases' # edit zsh_aliases
+alias za='vim ~/.zsh_aliases'   # edit zsh_aliases
 alias dots='cd $HOME/Code/dotfiles'
 alias dotfiles='dots'
 alias code='cd $HOME/Code'
@@ -156,7 +156,7 @@ alias gochezmoi='cd ~/.local/share/chezmoi'
 alias systeminfo='neofetch'
 alias monitoring='glances'
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend" # Lock the screen (when going AFK)
-alias reload="exec ${SHELL} -l" # Reload the shell (i.e. invoke as a login shell)
+alias reload="exec ${SHELL} -l"                                                                       # Reload the shell (i.e. invoke as a login shell)
 alias sc="source $HOME/.zshrc"
 alias lastlogin="log show --style syslog  --last 1d | awk '/Enter/ && /unlockUIBecomesActive/ {print \$1 \" \" \$2}'"
 alias loginhistory='lastlogin'
@@ -177,15 +177,16 @@ alias latency='curl cheat.sh/latency'
 alias bash="/usr/local/bin/bash"
 #alias date="gdate"
 alias current_year='`echo date +"%Y"`'
-alias headers='curl -I --compress'  # Find out if remote server supports gzip / mod_deflate or not #
+alias headers='curl -I --compress'        # Find out if remote server supports gzip / mod_deflate or not #
 alias https='http --default-scheme=https' # useful alias stealed from a colleague. http is provided by httpie
-alias path='echo -e ${PATH//:/\\n}' # Explode and display current PATH
-alias p='ps -ef | grep -i '         # Show matching processes. Usage : p <process name>
+alias path='echo -e ${PATH//:/\\n}'       # Explode and display current PATH
+alias p='ps -ef | grip '                  # Show matching processes. Usage : p <process name>
 alias root='sudo -i'
 alias ':q'='exit'
 alias current_hour='date +"%H:%M"'
 alias current_time='current_hour'
 alias runhooks='pre-commit run -a'
+alias tryhook='pre-commit try-repo .'
 alias whatyear='current_year'
 alias whathour='current_time'
 alias whattime='whathour'
@@ -193,6 +194,7 @@ alias whattime='whathour'
 # Linters
 alias checken="aspell check -d en"
 alias checkfr="aspell check -d fr"
+alias fixallscripts="shfmt -w -l -i 2 -ci **/*.sh"
 
 # Development
 alias gw='./gradlew'

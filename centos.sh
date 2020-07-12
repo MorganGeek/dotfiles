@@ -53,7 +53,7 @@ chmod 755 /bin/git-ftp
 yum install golang golang-godoc golang-vet golang-src golang-pkg-linux-amd64 -y
 echo "export GOPATH=\"$HOME/go\"" >>~/.zshrc
 echo "export PATH=\"$GOPATH/bin:$PATH\"" >>~/.zshrc
-. ~/.zshrc
+. "$HOME/.zshrc"
 
 # Install Hugo
 mkdir "$HOME/src"
@@ -72,8 +72,8 @@ yum -y install filezilla
 
 # Install Plantuml
 curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o /usr/local/bin/plantuml.jar &&
-  echo 'java -jar /usr/local/bin/plantuml.jar $@' >/usr/local/bin/plantuml &&
-  chmod +x /usr/local/bin/plantuml
+echo 'java -jar /usr/local/bin/plantuml.jar $@' >/usr/local/bin/plantuml &&
+chmod +x /usr/local/bin/plantuml
 
 # Using pyenv to be able to install specific python versions https://stackoverflow.com/questions/49794432/how-to-setup-a-pipenv-python-3-6-project-if-os-python-version-is-3-5
 curl https://pyenv.run | bash
@@ -167,21 +167,21 @@ sudo curl -o /usr/local/bin/googler https://raw.githubusercontent.com/jarun/goog
 
 # Install BAT (cat with more power)
 wget https://github.com/sharkdp/bat/releases/download/v0.11.0/bat-v0.11.0-x86_64-unknown-linux-musl.tar.gz &&
-  tar -xzvf bat-v0.11.0-x86_64-unknown-linux-musl.tar.gz &&
-  mv bat-v0.11.0-x86_64-unknown-linux-musl/bat /usr/local/bin/ &&
-  rm -rf bat-v0.11.0-x86_64-unknown-linux-musl*
+tar -xzvf bat-v0.11.0-x86_64-unknown-linux-musl.tar.gz &&
+mv bat-v0.11.0-x86_64-unknown-linux-musl/bat /usr/local/bin/ &&
+rm -rf bat-v0.11.0-x86_64-unknown-linux-musl*
 
 # Install fselect
 cargo install fselect
 
 # surfraw
 git clone --depth 1 https://gitlab.com/surfraw/Surfraw.git &&
-  cd Surfraw &&
-  ./prebuild &&
-  ./configure &&
-  make && make install &&
-  cd .. &&
-  rm -rf Surfraw
+cd Surfraw &&
+./prebuild &&
+./configure &&
+make && make install &&
+cd .. &&
+rm -rf Surfraw
 
 # Dictionary
 yum -y install dictd

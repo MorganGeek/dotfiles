@@ -1,3 +1,7 @@
+# Introduction
+
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+
 ## Prerequisites
 
 ### Centos
@@ -34,13 +38,13 @@ run `zsh .scripts/upgrade.sh`
 -   Install pip and pipenv
 -   Install AWS-CLI
 
-### If Yubico is installed, run this :
+### If Yubico is installed, run this
 
 `sudo ansible-playbook ~/.scripts/ansible/macsecure_playbook.yaml`
 
 #### In cases of `\n` errors with zsh
 
-https://github.com/robbyrussell/oh-my-zsh/issues/6764#issuecomment-384045008
+[Source](https://github.com/robbyrussell/oh-my-zsh/issues/6764#issuecomment-384045008)
 
 ```
 cd $ZSH

@@ -131,6 +131,11 @@ export COLORPIC_APIKEY=""
 export VAULT_PASSWORD_FILE=""
 export DEFAULT_BROWSER=${DEFAULT_BROWSER:-'Google Chrome'}
 export TRELLO_BOARD_URL=""
+export COMPANY_NAME=""
+export GIT_PERSONAL_EMAIL=""
+export GIT_PERSONAL_USER=""
+export GIT_PRO_EMAIL=""
+export GIT_PRO_USER=""
 
 if test -f "$HOME/.scripts/secrets.sh"; then
     chmod +x "$HOME/.scripts/secrets.sh"

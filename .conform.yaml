@@ -1,21 +1,22 @@
+---
 policies:
-  - type: commit
-    spec:
-      header:
-        length: 89
-        imperative: true
-        case: lower
-        invalidLastCharacters: .
-      body:
-        required: false
-      dco: true
-      gpg: false
-      spellcheck:
-        locale: US
-      maximumOfOneCommit: true
-      conventional:
-        types:
-          - "type"
-        scopes:
-          - "scope"
-        descriptionLength: 72
+    - type: commit
+      spec:
+          header:
+              length: 89
+              imperative: true
+              case: lower
+              invalidLastCharacters: .
+          body:
+              required: false
+          dco: true
+          gpg: false
+          spellcheck:
+              locale: US
+          maximumOfOneCommit: true
+          conventional:
+              types:
+                  - type
+              scopes:
+                  - scope
+              descriptionLength: 72

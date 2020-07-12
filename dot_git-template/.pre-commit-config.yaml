@@ -16,12 +16,15 @@ repos:
           - id: detect-aws-credentials
           - id: detect-private-key
           - id: end-of-file-fixer
-          - id: flake8
           - id: mixed-line-ending
           - id: pretty-format-json
           - id: requirements-txt-fixer
           - id: sort-simple-yaml
           - id: trailing-whitespace
+    - repo: https://gitlab.com/pycqa/flake8.git
+      rev: master
+      hooks:
+          - id: flake8
     - repo: git://github.com/antonbabenko/pre-commit-terraform
       rev: v1.31.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
       hooks:
@@ -63,13 +66,6 @@ repos:
             pass_filenames: false
             args: [-l=infra] #NOTE: that this is the directory you created earlier to host your terraform
             verbose: true
-    - repo: https://github.com/askulkarni2/pre-commit-docker-jenkinslint
-      rev: 88dd7702e44bbc4dc742b37897e1ded7fe99dfba
-      hooks:
-          - id: docker-jenkinslint
-            language: docker_image
-            entry: --entrypoint /usr/local/bin/run-jflint.sh askulkarni2/jenkinslint
-            files: Jenkinsfile
     - repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
       rev: v1.1.1
       hooks:
@@ -92,7 +88,6 @@ repos:
       rev: 1.2.0
       hooks:
           - id: relint
-
     - repo: git@github.com:Vimjas/vint.git
       rev: master
       hooks:
@@ -104,3 +99,18 @@ repos:
           - id: conform
             stages:
                 - commit-msg
+    - repo: local
+      hooks:
+          - id: check-committer
+            name: Check Committer Identity
+            entry: pre-commit-verify-committer
+            language: system
+            always_run: true
+            files: ''
+    - repo: https://github.com/askulkarni2/pre-commit-docker-jenkinslint
+      rev: 88dd7702e44bbc4dc742b37897e1ded7fe99dfba
+      hooks:
+          - id: docker-jenkinslint
+            language: docker_image
+            entry: --entrypoint /usr/local/bin/run-jflint.sh askulkarni2/jenkinslint
+            files: Jenkinsfile

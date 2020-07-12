@@ -8,28 +8,28 @@ green=$(tput setaf 76)
 tan=$(tput setaf 3)
 blue=$(tput setaf 38)
 header() {
-  printf "\n${bold}${purple}==========  %s  ==========${reset}\n" "$@"
+    printf "\n${bold}${purple}==========  %s  ==========${reset}\n" "$@"
 }
 arrow() {
-  printf " ➜ $@\n"
+    printf " ➜ $@\n"
 }
 success() {
-  printf "${green} ✔ %s${reset}\n" "$@"
+    printf "${green} ✔ %s${reset}\n" "$@"
 }
 error() {
-  printf "${red} ✖ %s${reset}\n" "$@"
+    printf "${red} ✖ %s${reset}\n" "$@"
 }
 warning() {
-  printf "${tan} ➜ %s${reset}\n" "$@"
+    printf "${tan} ➜ %s${reset}\n" "$@"
 }
 underline() {
-  printf "${underline}${bold}%s${reset}\n" "$@"
+    printf "${underline}${bold}%s${reset}\n" "$@"
 }
 bold() {
-  printf "${bold}%s${reset}\n" "$@"
+    printf "${bold}%s${reset}\n" "$@"
 }
 note() {
-  printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n" "$@"
+    printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n" "$@"
 }
 # Browser interaction utilities
 function browse() {
@@ -98,39 +98,39 @@ function git_listobjectsbysize() {
     done
 
     # sort files by SHA1, de-dupe list and finally re-sort by filesize
-    sort --key 3 "$tempFile" | \
-        uniq | \
+    sort --key 3 "$tempFile" |
+        uniq |
         sort --key 4 --numeric-sort --reverse
     # remove temp file
     rm -f "$tempFile"
 }
 function top_commands() {
     local filter="$1"
-    history | \cat | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a; }' | grep -v "./" | column -c3 -s " " -t | grep "$filter" | sort -nr | nl | head -n50
+    local max_results=${2:-'50'}
+    history | \cat | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a; }' | grep -v "./" | column -c3 -s " " -t | grep "$filter" | sort -nr | nl | head "-n$max_results"
 }
 function top_commands_full() {
     local filter="$1"
-    history | \cat | awk '{$1=$1};1' | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | grep "$filter" | sort -nr | nl | head -n50
+    local max_results=${2:-'50'}
+    history | \cat | awk '{$1=$1};1' | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | grep "$filter" | sort -nr | nl | head "-n$max_results"
 }
 function suggest_aliases() {
+    local search_input_size=${1:-'50'}
     header "alias recommendations"
-    while read -r line
-    do
+    while read -r line; do
         local matching_aliases=$(ag "$line")
         if [ ! -z "$matching_aliases" ]; then
             success "there is an alias for $line :"
-            while read -r alias_line
-            do
+            while read -r alias_line; do
                 arrow "$alias_line"
             done < <(echo "$matching_aliases")
             echo
         fi
-    done < <(top_commands_full | awk '{ $1=""; $2=""; $3="";  print}' | awk 'NF' | awk '{$1=$1};1' | awk -v COUNT=1 'NF>COUNT' |  head -20)
+    done < <(top_commands_full "" "$search_input_size" | awk '{ $1=""; $2=""; $3="";  print}' | awk 'NF' | awk '{$1=$1};1' | awk -v COUNT=1 'NF>COUNT' | head "-$search_input_size")
 }
 function istherenewissues() {
     LASTISSUE=$(newissues | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' | awk 'FNR==2{print $2}')
-    if [[ -f "$HOME/.newjiraissue" ]]
-    then
+    if [[ -f "$HOME/.newjiraissue" ]]; then
         previous_jira_issue=$(\cat "$HOME/.newjiraissue" | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g') # the sed part is for removing output colors
         if [ "$LASTISSUE" != "$previous_jira_issue" ]; then
             newissues
@@ -138,28 +138,24 @@ function istherenewissues() {
             success "no new issue"
         fi
     fi
-    echo "$LASTISSUE" > "$HOME/.newjiraissue"
+    echo "$LASTISSUE" >"$HOME/.newjiraissue"
 }
 function aboutpage() {
     year=$(echo "$*" | egrep -Eo '\b[[:digit:]]{4}\b' | head -n1)
-    if [ -z "$year" ]
-    then
+    if [ -z "$year" ]; then
         year=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "date|datetime" -A 1 | \grep -Eo '\b[[:digit:]]{4}\b' | head -n1)
     fi
     author=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "author" -A 1 | \grep -Eo '([A-Z][A-Za-z]+\s([A-Za-z ]+)*)' | head -n1)
     title=$(curl -sSL "$*" | tr '<' '<\n' | \grep title -A 1 | head -n1 | sed -E 's/.*<title>(.*)<\/title>.*/\1/' | sed "s/ [^[:alnum:]]*$author//")
     yearint=$(($year + 0))
-    currentyear=$(echo `date +"%Y"`)
-    if [ ! -z "$author" ]
-    then
+    currentyear=$(echo $(date +"%Y"))
+    if [ ! -z "$author" ]; then
         echo "by $author"
     fi
-    if [ ! -z "$title" ]
-    then
+    if [ ! -z "$title" ]; then
         echo "-> $title"
     fi
-    if [[ $yearint -ge 1970 && $yearint -le $currentyear ]]
-    then
+    if [[ $yearint -ge 1970 && $yearint -le $currentyear ]]; then
         echo "$yearint"
     fi
     if [ ! -z "$title" ] && [ ! -z "$author" ] && [[ $yearint -ge 1970 && $yearint -le $currentyear ]]; then
@@ -174,7 +170,7 @@ function col() {
 }
 # Skip first x words in line
 # via https://blog.developer.atlassian.com/ten-tips-for-wonderful-bash-productivity/
-function skip {
+function skip() {
     n=$(($1 + 1))
     cut -d' ' -f$n-
 }
@@ -199,12 +195,12 @@ cmd_loc="find . -type f \( \
 
 # Unique lines of code
 # Via https://text.causal.agency/004-uloc.txt
-function uloc {
+function uloc() {
     eval "$cmd_loc | LANG=C LC_CTYPE=C sort -u | wc -l"
 }
 
 # Top lines of code
-function toploc {
+function toploc() {
     eval "$cmd_loc | LANG=C LC_CTYPE=C cut -c 1-100 | LANG=C LC_CTYPE=C sort | uniq -c | LANG=C LC_CTYPE=C sort -nr | head -50"
 }
 
@@ -218,16 +214,17 @@ function cd() {
 }
 function mouse() {
     case "$(uname -s)" in
-        Darwin)
-            sh ~/.scripts/mouse_bluetooth.sh
-            ;;
+    Darwin)
+        sh ~/.scripts/mouse_bluetooth.sh
+        ;;
     esac
 }
 function meteo() {
     curl "fr.wttr.in/$*"
 }
 function how_in() {
-    where="$1"; shift
+    where="$1"
+    shift
     IFS=+ curl "cht.sh/${where}/$*"
 }
 function rate() {
@@ -235,42 +232,38 @@ function rate() {
 }
 function transfer() {
     # check arguments
-    if [ $# -eq 0 ];
-    then
+    if [ $# -eq 0 ]; then
         warning "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"
         return 1
     fi
 
     # get temporarily filename, output is written to this file show progress can be showed
-    tmpfile=$( mktemp -t transferXXX )
+    tmpfile=$(mktemp -t transferXXX)
 
     # upload stdin or file
     file=$1
 
-    if tty -s;
-    then
+    if tty -s; then
         basefile=$(basename "$file" | sed -e 's/[^a-zA-Z0-9._-]/-/g')
 
-        if [ ! -e $file ];
-        then
+        if [ ! -e $file ]; then
             error "File $file doesn't exists."
             return 1
         fi
 
-        if [ -d $file ];
-        then
+        if [ -d $file ]; then
             # zip directory and transfer
-            zipfile=$( mktemp -t transferXXX.zip )
-            cd $(dirname $file) && zip -r -q - $(basename $file) >> $zipfile
-            curl --progress-bar --upload-file "$zipfile" "https://transfer.sh/$basefile.zip" >> $tmpfile
+            zipfile=$(mktemp -t transferXXX.zip)
+            cd $(dirname $file) && zip -r -q - $(basename $file) >>$zipfile
+            curl --progress-bar --upload-file "$zipfile" "https://transfer.sh/$basefile.zip" >>$tmpfile
             rm -f $zipfile
         else
             # transfer file
-            curl --progress-bar --upload-file "$file" "https://transfer.sh/$basefile" >> $tmpfile
+            curl --progress-bar --upload-file "$file" "https://transfer.sh/$basefile" >>$tmpfile
         fi
     else
         # transfer pipe
-        curl --progress-bar --upload-file "-" "https://transfer.sh/$file" >> $tmpfile
+        curl --progress-bar --upload-file "-" "https://transfer.sh/$file" >>$tmpfile
     fi
     # cat output link
     cat $tmpfile
@@ -285,27 +278,27 @@ function whichfunc() {
 }
 
 # git shortcuts
-function gcrb {
-   branch=$1
-   git checkout -b $branch origin/$branch
+function gcrb() {
+    branch=$1
+    git checkout -b $branch origin/$branch
 }
-function terraform-compliance { docker run --rm -v "$(pwd):/target" -i -t eerkunt/terraform-compliance "$@"; }
-function checkov { docker run -i --rm -v "$(pwd):/tf" bridgecrew/checkov -d /tf "$@" ; }
-function vimat {
+function terraform-compliance() { docker run --rm -v "$(pwd):/target" -i -t eerkunt/terraform-compliance "$@"; }
+function checkov() { docker run -i --rm -v "$(pwd):/tf" bridgecrew/checkov -d /tf "$@"; }
+function vimat() {
     vim +/$1 $2
 }
-function installhooks {
+function installhooks() {
     pre-commit install --install-hooks --overwrite --allow-missing-config
 }
-function copyhooks {
+function copyhooks() {
     cp -f ~/.git-template/.pre-commit-config.yaml ./
-    installhooks;
-    runhooks;
+    installhooks
+    runhooks
 }
-function httperr {
+function httperr() {
     curl -s "https://http.cat/$1" | imgcat
 }
-function terragrunt_color {
+function terragrunt_color() {
     BOLD=$(tput bold)
     BLACK=$(tput setaf 0)
     RED=$(tput setaf 1)
@@ -331,9 +324,7 @@ function terragrunt_color {
         -e "s/\(  *.*:  *\".*\"\)/${GREEN}\1${RESET}/"
 }
 
-
-
-function git-project {
+function git-project() {
     if [ -d "$REPO_PATH" ]; then
         REPO_PATH="$(pwd)"
     fi
@@ -343,37 +334,36 @@ function git-project {
         cd "$dir" || exit
     fi
 }
-function jenkins-cli {
+function jenkins-cli() {
     local script_location=$(find $HOME/code/jenkins-cloudbees-core -name "jenkins-cli.sh")
     eval "$script_location $*"
 }
-function passwords {
+function passwords() {
     bw list items --search "$1" | jq -c '.[] | .name + " " + .login.username + ":" + .login.password + " " +  .login.uris[0].uri'
 }
-function password {
+function password() {
     bw get password "$1"
 }
-function vaultgetsecret {
+function vaultgetsecret() {
     local secret=$(grep -A 500 "ANSIBLE_VAULT" "$1" | awk '{$1=$1;print}' | \grep -Eo "^[0-9a-z^ ]+$")
     local secret_string=$(echo "\$ANSIBLE_VAULT;1.1;AES256\n$secret")
     echo "$secret_string" | awk '{$1=$1;print}' | ansible-vault decrypt --vault-password-file=$VAULT_PASSWORD_FILE
 }
-function setorigin {
+function setorigin() {
     gra origin "$1" 2>/dev/null
     grset origin "$1"
-    if [[ $string =~ "collibra" ]]; then
+    if [[ $string =~ "$COMPANY_NAME" ]]; then
         copyhooks
     fi
 }
-function gitpushcurrentremote {
+function gitpushcurrentremote() {
     gitpushallremote "$(git_current_branch)"
 }
-function gitpushallremote {
+function gitpushallremote() {
     local param_branch="$1"
     grv
-    grv | grep push | awk '{print $1}' | while read -r remote
-    do
-        if  [ -z "$param_branch" ]; then
+    grv | grep push | awk '{print $1}' | while read -r remote; do
+        if [ -z "$param_branch" ]; then
             arrow "pushing all branches to $remote"
             git push --all "$remote"
         else
@@ -382,14 +372,14 @@ function gitpushallremote {
         fi
     done
 }
-function clone {
+function clone() {
     local folder=$(basename $1 | sed 's/\.git.*//g')
     arrow "git project identified as $folder"
     if gcls "$1"; then
         if [[ -n "$folder" ]]; then
             cd "$folder" || exit
-            if [[ $string =~ "collibra" ]]; then
-              copyhooks
+            if [[ "$string:u" =~ "$COMPANY_NAME:u" ]]; then
+                copyhooks
             fi
         else
             error "unable to change current directory to : $folder"
@@ -398,7 +388,7 @@ function clone {
         error "unable to clone repository url : $1"
     fi
 }
-function colorpic {
+function colorpic() {
     local picture_url="$1"
     arrow "Colorizing $picture_url"
     local result_url=$(\curl -F "image=@$picture_url" -H "api-key:$COLORPIC_APIKEY" https://api.deepai.org/api/colorizer -s | jq '.output_url' | strings)
@@ -406,36 +396,36 @@ function colorpic {
     arrow "Display in progress..."
     eval "\curl -s $result_url | imgcat"
 }
-function brewadd {
+function brewadd() {
     brew install "$1"
     ansible 127.0.0.1 -m lineinfile -a "path=~/Brewfile line='brew \"$1\"'"
 }
-function pipadd {
+function pipadd() {
     pip install "$1"
-    pip freeze > "$HOME/requirements.txt"
+    pip freeze >"$HOME/requirements.txt"
 }
-function goadd {
+function goadd() {
     ansible 127.0.0.1 -m lineinfile -a "path=~/.scripts/godeps.sh line='go get -u -v $1'"
     go get -u -v "$1"
 }
-function rssadd {
+function rssadd() {
     ansible 127.0.0.1 -m lineinfile -a "path=~/.newsboat/urls line='"$1"'"
     newsboat
 }
-function bookmarkadd {
+function bookmarkadd() {
     ansible 127.0.0.1 -m lineinfile -a "path=$HOME/Code/bookmarks/README.md insertafter='"$1"' line='* "$2"'"
 }
-function backupgithub {
+function backupgithub() {
     curl -sL "https://api.github.com/users/$1/repos" | jq -r '.[] | .ssh_url' | xargs -n1 git clone --mirror --no-hardlinks
 }
 # Make a directory and cd to it
-function take {
+function take() {
     mkdir -p $@ && cd ${@:$#}
 }
-function endofday {
+function endofday() {
     local planned_end=$(moro status 2>&1 | \grep -Eo "Working until ([0-9:]+) will make.*" | uniq | \grep -Eo "([0-9]+:[0-9]+)")
     local max_hour="$planned_end"
-    local min_hour=`current_time`
+    local min_hour=$(current_time)
     if [ -z "$planned_end" ]; then
         local clockout=$(moro report 2>&1 | \grep -Eo "Clock out.*([0-9:]+)" | \grep -Eo "([0-9]+:[0-9]+)")
         max_hour="$clockout"
@@ -448,13 +438,13 @@ function endofday {
         moro report
     fi
 }
-function convtimetodate {
+function convtimetodate() {
     date -j -f '%H:%M' "$1" +'%Y/%m/%d %H:%M'
 }
-function convtimetotimestamp {
+function convtimetotimestamp() {
     date -j -f '%H:%M' "$1" +'%s'
 }
-function is_earlier {
+function is_earlier() {
     local first=$(convtimetotimestamp "$1")
     local second=$(convtimetotimestamp "$2")
     if [ "$second" -gt "$first" ]; then
@@ -463,34 +453,34 @@ function is_earlier {
         false
     fi
 }
-function gitydiff {
+function gitydiff() {
     local path_to_file="$1"
     git show "HEAD:$path_to_file" | colordiff -y - "$path_to_file"
 }
-function dl_stopwords {
+function dl_stopwords() {
     curl -Lks https://raw.githubusercontent.com/MorganGeek/bookmarks/master/stopwords.txt -o "$HOME/stopwords.txt"
 }
-function file_getwords {
-    dl_stopwords;
+function file_getwords() {
+    dl_stopwords
     \cat "$1" | tr '[:upper:]' '[:lower:]' | \grep -o -E '\w{3,}' | \grep --invert-match --word-regexp --fixed-strings --file="$HOME/stopwords.txt" | \sed 's/s$//g' | \sed 's/ing$//g' | sort | uniq -c | sort --numeric-sort --reverse
 }
-function file_getpairs {
-    dl_stopwords;
+function file_getpairs() {
+    dl_stopwords
     \cat "$1" | tr '[:upper:]' '[:lower:]' | \grep -o -E '\w{3,} \w{3,}' | \grep --invert-match --word-regexp --fixed-strings --file="$HOME/stopwords.txt" | \sed 's/s$//g' | \sed 's/ing$//g' | sort | uniq -c | sort --numeric-sort --reverse
 }
-function file_dups {
+function file_dups() {
     \cat "$1" | sort | uniq -c | sort -nr
 }
-function foreach_run {
+function foreach_run() {
     find . -name "$1" -exec "$2" {} \;
 }
 # input should be something like : 1-10 to generate one number between 1 and 10
-function chance {
+function chance() {
     [[ $(shuf -i "$1" -n 1) == 1 ]]
 }
-function runiflucky {
+function runiflucky() {
     if chance "1-10"; then
-        if alias "$1" 2> /dev/null || (compgen -A function | grep "$1" && compgen -A function "$1" 1>/dev/null); then
+        if alias "$1" 2>/dev/null || (compgen -A function | grep "$1" && compgen -A function "$1" 1>/dev/null); then
             eval "$1"
         fi
     fi
