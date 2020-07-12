@@ -125,6 +125,8 @@ function suggest_aliases() {
                 arrow "$alias_line"
             done < <(echo "$matching_aliases")
             echo
+        else
+            warning "no alias for $line"
         fi
     done < <(top_commands_full "" "$search_input_size" | awk '{ $1=""; $2=""; $3="";  print}' | awk 'NF' | awk '{$1=$1};1' | awk -v COUNT=1 'NF>COUNT' | head "-$search_input_size")
 }
@@ -329,7 +331,7 @@ function git-project() {
         REPO_PATH="$(pwd)"
     fi
     local preview='lsd --color always --icon always --group-dirs first {}'
-    local dir=$(find $REPO_PATH -maxdepth 3 -type d -name ".git" | sed 's#.git$##' | fzf --select-1 --query="$*" --preview "$preview")
+    local dir=$(find "$REPO_PATH" -maxdepth 3 -type d -name ".git" | sed 's#.git$##' | fzf --select-1 --query="$*" --preview "$preview")
     if [[ -n "$dir" ]]; then
         cd "$dir" || exit
     fi
@@ -375,10 +377,13 @@ function gitpushallremote() {
 function clone() {
     local folder=$(basename $1 | sed 's/\.git.*//g')
     arrow "git project identified as $folder"
+    arrow "cloning repository ..."
     if gcls "$1"; then
+        success "repository cloned"
         if [[ -n "$folder" ]]; then
             cd "$folder" || exit
             if [[ "$string:u" =~ "$COMPANY_NAME:u" ]]; then
+                arrow "copying pre-commit hooks ..."
                 copyhooks
             fi
         else
@@ -398,22 +403,22 @@ function colorpic() {
 }
 function brewadd() {
     brew install "$1"
-    ansible 127.0.0.1 -m lineinfile -a "path=~/Brewfile line='brew \"$1\"'"
+    adhoc lineinfile -a "path=~/Brewfile line='brew \"$1\"'"
 }
 function pipadd() {
     pip install "$1"
     pip freeze >"$HOME/requirements.txt"
 }
 function goadd() {
-    ansible 127.0.0.1 -m lineinfile -a "path=~/.scripts/godeps.sh line='go get -u -v $1'"
+    adhoc lineinfile -a "path=~/.scripts/godeps.sh line='go get -u -v $1'"
     go get -u -v "$1"
 }
 function rssadd() {
-    ansible 127.0.0.1 -m lineinfile -a "path=~/.newsboat/urls line='"$1"'"
+    adhoc lineinfile -a "path=~/.newsboat/urls line='"$1"'"
     newsboat
 }
 function bookmarkadd() {
-    ansible 127.0.0.1 -m lineinfile -a "path=$HOME/Code/bookmarks/README.md insertafter='"$1"' line='* "$2"'"
+    adhoc lineinfile -a "path=$HOME/Code/bookmarks/README.md insertafter='"$1"' line='* "$2"'"
 }
 function backupgithub() {
     curl -sL "https://api.github.com/users/$1/repos" | jq -r '.[] | .ssh_url' | xargs -n1 git clone --mirror --no-hardlinks

@@ -151,6 +151,7 @@ alias dots='cd $HOME/Code/dotfiles'
 alias dotfiles='dots'
 alias code='cd $HOME/Code'
 alias gochezmoi='cd ~/.local/share/chezmoi'
+alias blog='z morgangeek-blog'
 
 # System Utils
 alias systeminfo='neofetch'
@@ -174,6 +175,8 @@ alias help='tldr'
 alias latency='curl cheat.sh/latency'
 
 # Misc
+alias adhoc="ansible --one-line 127.0.0.1 -m"
+alias ans='adhoc'
 alias bash="/usr/local/bin/bash"
 #alias date="gdate"
 alias current_year='`echo date +"%Y"`'
