@@ -80,6 +80,8 @@ alias hist='history'
 alias codestats='tokei'
 alias dups='file_dups'
 alias pairs='file_getpairs'
+alias filter_pairs="tr '[:upper:]' '[:lower:]' | \grep -o -E '\w{3,} \w{3,}' | \grep --invert-match --word-regexp --fixed-strings --file=\"\$HOME/stopwords.txt\" | \sed 's/s$//g' | \sed 's/ing$//g' | sort | uniq -c | sort --numeric-sort --reverse"
+alias sort_count="sort | uniq -c | sort --numeric-sort --reverse"
 alias words='file_getwords'
 alias fd="\fd"
 alias wiki='wikit'
