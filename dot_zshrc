@@ -30,7 +30,6 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_tim
 POWERLEVEL9K_SHOW_CHANGESET=true
 POWERLEVEL9K_CHANGESET_HASH_LENGTH=8
 
-
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
 POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=''
 
@@ -38,12 +37,10 @@ POWERLEVEL9K_TIME_FOREGROUND='245'
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='245'
 POWERLEVEL9K_STATUS_OK_FOREGROUND='green'
 POWERLEVEL9k_STATUS_ERROR_FOREGROUND='red'
-POWERLEVEL9k_STATUS_ERROR_FOREGROUND='red'
 
 POWERLEVEL9K_TIME_BACKGROUND='clear'
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='clear'
 POWERLEVEL9K_STATUS_OK_BACKGROUND='clear'
-POWERLEVEL9K_STATUS_ERROR_BACKGROUND='clear'
 POWERLEVEL9K_STATUS_ERROR_BACKGROUND='clear'
 POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND='clear'
 
@@ -151,8 +148,8 @@ eval "$(fasd --init auto)"
 
 #cm apply
 
-# check if we have new jira issues
-istherenewissues
+# randomly check if we have new jira issues
+runiflucky "istherenewissues"
 
 case "$(uname -s)" in
   Darwin)
@@ -164,8 +161,6 @@ esac
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!! https://github.com/sdkman/sdkman-cli/issues/613
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
-#sdk use java 8.0.202-zulu
 
 case "$(uname -s)" in
    Darwin)

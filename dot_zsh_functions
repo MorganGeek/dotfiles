@@ -113,11 +113,17 @@ function top_commands_full() {
     history | \cat | awk '{$1=$1};1' | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | grep "$filter" | sort -nr | nl | head -n50
 }
 function suggest_aliases() {
+    header "alias recommendations"
     while read -r line
     do
         local matching_aliases=$(ag "$line")
         if [ ! -z "$matching_aliases" ]; then
-            echo "there is an alias for $line :\n$matching_aliases\n"
+            success "there is an alias for $line :"
+            while read -r alias_line
+            do
+                arrow "$alias_line"
+            done < <(echo "$matching_aliases")
+            echo
         fi
     done < <(top_commands_full | awk '{ $1=""; $2=""; $3="";  print}' | awk 'NF' | awk '{$1=$1};1' | awk -v COUNT=1 'NF>COUNT' |  head -20)
 }
@@ -477,4 +483,15 @@ function file_dups {
 }
 function foreach_run {
     find . -name "$1" -exec "$2" {} \;
+}
+# input should be something like : 1-10 to generate one number between 1 and 10
+function chance {
+    [[ $(shuf -i "$1" -n 1) == 1 ]]
+}
+function runiflucky {
+    if chance "1-10"; then
+        if alias "$1" 2> /dev/null || (compgen -A function | grep "$1" && compgen -A function "$1" 1>/dev/null); then
+            eval "$1"
+        fi
+    fi
 }
