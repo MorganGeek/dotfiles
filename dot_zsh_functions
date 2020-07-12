@@ -483,6 +483,25 @@ function foreach_run() {
 function chance() {
     [[ $(shuf -i "$1" -n 1) == 1 ]]
 }
+function gitignorefor() {
+    local language=${1:-''}
+    if [ ! -d "$HOME/Code/gitignore" ]; then
+        arrow "cloning https://github.com/github/gitignore into $REPO_PATH/gitignore"
+        git clone "https://github.com/github/gitignore" "$REPO_PATH/gitignore"
+    fi
+    local gitignore_file=$(fd "$language" "$REPO_PATH/gitignore" | head -n1)
+    if [ ! -z "$gitignore_file" ]; then
+        success "matched gitignore file : $gitignore_file"
+        if [ ! -f "$(pwd)/.gitignore" ]; then
+            arrow "you don't have a $(pwd)/.gitignore file, but that's not an issue :-) ..."
+        fi
+        arrow "copying the file content to your $(pwd)/.gitignore file"
+        adhoc blockinfile -a "block='{{ lookup('file', '$gitignore_file') }}' dest='$(pwd)/.gitignore' create=yes"
+    else
+        error "no gitignore file found for $language"
+    fi
+}
+
 function runiflucky() {
     if chance "1-10"; then
         if alias "$1" 2>/dev/null || (compgen -A function | grep "$1" && compgen -A function "$1" 1>/dev/null); then
