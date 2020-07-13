@@ -11,7 +11,7 @@ header() {
     printf "\n${bold}${purple}==========  %s  ==========${reset}\n" "$@"
 }
 arrow() {
-    printf " ➜ $@\n"
+    printf " ➜ %s\n" "$@"
 }
 success() {
     printf "${green} ✔ %s${reset}\n" "$@"
@@ -31,6 +31,7 @@ bold() {
 note() {
     printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n" "$@"
 }
+
 # Browser interaction utilities
 function browse() {
     open -na "$DEFAULT_BROWSER" --args "$1"
@@ -59,9 +60,6 @@ function cicdboard() {
 function cicddashboard() {
     browse "$JIRA_URL/secure/Dashboard.jspa?selectPageId=13131"
 }
-function issues() {
-    jira issue jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
-}
 function calendar() {
     browse "https://calendar.google.com/calendar/r?tab=mc"
 }
@@ -83,27 +81,34 @@ function spotify() {
 function lob() {
     browse "https://lobste.rs"
 }
+function archive() {
+    browse "https://web.archive.org/web/*/$*"
+}
+
+# Jira utilities
+function issues() {
+    jira issue jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
+}
+function istherenewissues() {
+    LASTISSUE=$(newissues | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' | awk 'FNR==2{print $2}')
+    if [[ -f "$HOME/.newjiraissue" ]]; then
+        previous_jira_issue=$(\cat "$HOME/.newjiraissue" | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g') # the sed part is for removing output colors
+        if [ "$LASTISSUE" != "$previous_jira_issue" ]; then
+            newissues
+        else
+            success "no new issue"
+        fi
+    fi
+    echo "$LASTISSUE" >"$HOME/.newjiraissue"
+}
+
+# Prolog / Logtalk
 function logtalk() {
     path_swilgt=$(find /usr/local/Cellar/logtalk -name "*swilgt.sh" 2>/dev/null)
     sh "$path_swilgt"
 }
-function archive() {
-    browse "https://web.archive.org/web/*/$*"
-}
-function git_listobjectsbysize() {
-    tempFile=$(mktemp)
-    IFS=$'\n'
-    for commitSHA1 in $(git rev-list --all); do
-        git ls-tree -r --long "$commitSHA1" >>"$tempFile"
-    done
 
-    # sort files by SHA1, de-dupe list and finally re-sort by filesize
-    sort --key 3 "$tempFile" |
-        uniq |
-        sort --key 4 --numeric-sort --reverse
-    # remove temp file
-    rm -f "$tempFile"
-}
+# History / Aliases helpers
 function top_commands() {
     local filter="$1"
     local max_results=${2:-'50'}
@@ -113,6 +118,11 @@ function top_commands_full() {
     local filter="$1"
     local max_results=${2:-'50'}
     history | \cat | awk '{$1=$1};1' | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | grep "$filter" | sort -nr | nl | head "-n$max_results"
+}
+# Where is a function defined?
+function whichfunc() {
+    whence -v $1
+    type -a $1
 }
 function suggest_aliases() {
     local search_input_size=${1:-'50'}
@@ -130,18 +140,8 @@ function suggest_aliases() {
         fi
     done < <(top_commands_full "" "$search_input_size" | awk '{ $1=""; $2=""; $3="";  print}' | awk 'NF' | awk '{$1=$1};1' | awk -v COUNT=1 'NF>COUNT' | head "-$search_input_size")
 }
-function istherenewissues() {
-    LASTISSUE=$(newissues | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' | awk 'FNR==2{print $2}')
-    if [[ -f "$HOME/.newjiraissue" ]]; then
-        previous_jira_issue=$(\cat "$HOME/.newjiraissue" | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g') # the sed part is for removing output colors
-        if [ "$LASTISSUE" != "$previous_jira_issue" ]; then
-            newissues
-        else
-            success "no new issue"
-        fi
-    fi
-    echo "$LASTISSUE" >"$HOME/.newjiraissue"
-}
+
+# Web Crawling
 function aboutpage() {
     year=$(echo "$*" | egrep -Eo '\b[[:digit:]]{4}\b' | head -n1)
     if [ -z "$year" ]; then
@@ -177,6 +177,7 @@ function skip() {
     cut -d' ' -f$n-
 }
 
+# Code search / stats helpers
 cmd_loc="find . -type f \( \
         -name '*.py' \
         -o -name '*.rb' \
@@ -194,18 +195,22 @@ cmd_loc="find . -type f \( \
         -o -name '*.gradle' \
         -o -name '*.properties' \
         \) -exec \cat \{\} \; | LANG=C LC_CTYPE=C sed -e 's/^[ \t]*//;s/[ \t]*$//'"
-
 # Unique lines of code
 # Via https://text.causal.agency/004-uloc.txt
 function uloc() {
     eval "$cmd_loc | LANG=C LC_CTYPE=C sort -u | wc -l"
 }
-
 # Top lines of code
 function toploc() {
     eval "$cmd_loc | LANG=C LC_CTYPE=C cut -c 1-100 | LANG=C LC_CTYPE=C sort | uniq -c | LANG=C LC_CTYPE=C sort -nr | head -50"
 }
+function how_in() {
+    where="$1"
+    shift
+    IFS=+ curl "cht.sh/${where}/$*"
+}
 
+# File stats helpers
 # Find files bigger than X size and sort them by size
 function biggerthan() {
     find . -size "+$*" -type f -print0 | xargs -0 ls -Ssh | sort -z
@@ -221,17 +226,16 @@ function mouse() {
         ;;
     esac
 }
+
+# Information gathering
 function meteo() {
     curl "fr.wttr.in/$*"
-}
-function how_in() {
-    where="$1"
-    shift
-    IFS=+ curl "cht.sh/${where}/$*"
 }
 function rate() {
     curl "http://rate.sx/$*"
 }
+
+# Uploaders
 function transfer() {
     # check arguments
     if [ $# -eq 0 ]; then
@@ -273,33 +277,17 @@ function transfer() {
     # cleanup
     rm -f $tmpfile
 }
-# Where is a function defined?
-function whichfunc() {
-    whence -v $1
-    type -a $1
-}
 
-# git shortcuts
-function gcrb() {
-    branch=$1
-    git checkout -b $branch origin/$branch
-}
-function terraform-compliance() { docker run --rm -v "$(pwd):/target" -i -t eerkunt/terraform-compliance "$@"; }
 function checkov() { docker run -i --rm -v "$(pwd):/tf" bridgecrew/checkov -d /tf "$@"; }
 function vimat() {
     vim +/$1 $2
 }
-function installhooks() {
-    pre-commit install --install-hooks --overwrite --allow-missing-config
-}
-function copyhooks() {
-    cp -f ~/.git-template/.pre-commit-config.yaml ./
-    installhooks
-    runhooks
-}
 function httperr() {
     curl -s "https://http.cat/$1" | imgcat
 }
+
+# Config / Infra as code
+function terraform-compliance() { docker run --rm -v "$(pwd):/target" -i -t eerkunt/terraform-compliance "$@"; }
 function terragrunt_color() {
     BOLD=$(tput bold)
     BLACK=$(tput setaf 0)
@@ -325,21 +313,12 @@ function terragrunt_color() {
         -e "s/\(  *.*:  *\)\(\".*\"\)\( => \)\(\".*\"\)/${YELLOW}\1${RED}\2${BLACK}\3${GREEN}\4${RESET}/" \
         -e "s/\(  *.*:  *\".*\"\)/${GREEN}\1${RESET}/"
 }
-
-function git-project() {
-    if [ -d "$REPO_PATH" ]; then
-        REPO_PATH="$(pwd)"
-    fi
-    local preview='lsd --color always --icon always --group-dirs first {}'
-    local dir=$(find "$REPO_PATH" -maxdepth 3 -type d -name ".git" | sed 's#.git$##' | fzf --select-1 --query="$*" --preview "$preview")
-    if [[ -n "$dir" ]]; then
-        cd "$dir" || exit
-    fi
-}
 function jenkins-cli() {
     local script_location=$(find $HOME/code/jenkins-cloudbees-core -name "jenkins-cli.sh")
     eval "$script_location $*"
 }
+
+# Security / Secrets helpers
 function passwords() {
     bw list items --search "$1" | jq -c '.[] | .name + " " + .login.username + ":" + .login.password + " " +  .login.uris[0].uri'
 }
@@ -351,10 +330,46 @@ function vaultgetsecret() {
     local secret_string=$(echo "\$ANSIBLE_VAULT;1.1;AES256\n$secret")
     echo "$secret_string" | awk '{$1=$1;print}' | ansible-vault decrypt --vault-password-file=$VAULT_PASSWORD_FILE
 }
+
+### Git helpers
+function backupgithub() {
+    cd "$REPO_PATH"
+    curl -sL "https://api.github.com/users/$1/repos" | jq -r '.[] | .ssh_url' | xargs -n1 git clone --mirror --no-hardlinks
+}
+function gitydiff() {
+    local path_to_file="$1"
+    git show "HEAD:$path_to_file" | colordiff -y - "$path_to_file"
+}
+function gcrb() {
+    branch=$1
+    git checkout -b $branch origin/$branch
+}
+function installhooks() {
+    pre-commit install --install-hooks --overwrite --allow-missing-config
+}
+function copyhooks() {
+    cp -f ~/.git-template/.pre-commit-config.yaml ./
+    installhooks
+    runhooks
+}
+function git_listobjectsbysize() {
+    tempFile=$(mktemp)
+    IFS=$'\n'
+    for commitSHA1 in $(git rev-list --all); do
+        git ls-tree -r --long "$commitSHA1" >>"$tempFile"
+    done
+
+    # sort files by SHA1, de-dupe list and finally re-sort by filesize
+    sort --key 3 "$tempFile" |
+        uniq |
+        sort --key 4 --numeric-sort --reverse
+    # remove temp file
+    rm -f "$tempFile"
+}
 function setorigin() {
     gra origin "$1" 2>/dev/null
     grset origin "$1"
-    if [[ $string =~ "$COMPANY_NAME" ]]; then
+    if [[ "$1" =~ *"$COMPANY_NAME"* ]]; then
         copyhooks
     fi
 }
@@ -382,7 +397,7 @@ function clone() {
         success "repository cloned"
         if [[ -n "$folder" ]]; then
             cd "$folder" || exit
-            if [[ "$string:u" =~ "$COMPANY_NAME:u" ]]; then
+            if [[ "$1:u" =~ *"$COMPANY_NAME:u"* ]]; then
                 arrow "copying pre-commit hooks ..."
                 copyhooks
             fi
@@ -393,6 +408,36 @@ function clone() {
         error "unable to clone repository url : $1"
     fi
 }
+function git-project() {
+    if [ -d "$REPO_PATH" ]; then
+        REPO_PATH="$(pwd)"
+    fi
+    local preview='lsd --color always --icon always --group-dirs first {}'
+    local dir=$(find "$REPO_PATH" -maxdepth 3 -type d -name ".git" | sed 's#.git$##' | fzf --select-1 --query="$*" --preview "$preview")
+    if [[ -n "$dir" ]]; then
+        cd "$dir" || exit
+    fi
+}
+function gitignorefor() {
+    local language=${1:-''}
+    if [ ! -d "$HOME/Code/gitignore" ]; then
+        arrow "cloning https://github.com/github/gitignore into $REPO_PATH/gitignore"
+        git clone "https://github.com/github/gitignore" $_"
+    fi
+    local gitignore_file=$(fd "$language" "$REPO_PATH/gitignore" | head -n1)
+    if [ ! -z "$gitignore_file" ]; then
+        success "matched gitignore file : $gitignore_file"
+        if [ ! -f "$(pwd)/.gitignore" ]; then
+            arrow "you don't have a $(pwd)/.gitignore file, but that's not an issue :-) ..."
+        fi
+        arrow "copying the file content to your $(pwd)/.gitignore file"
+        adhoc blockinfile -a "block='{{ lookup('file', '$gitignore_file') }}' dest='$(pwd)/.gitignore' create=yes"
+    else
+        error "no gitignore file found for $language"
+    fi
+}
+
+# Miscellaneous helpers
 function colorpic() {
     local picture_url="$1"
     arrow "Colorizing $picture_url"
@@ -400,6 +445,20 @@ function colorpic() {
     success "Generated $result_url"
     arrow "Display in progress..."
     eval "\curl -s $result_url | imgcat"
+}
+
+function bookmarkadd() {
+    adhoc lineinfile -a "path=$HOME/Code/bookmarks/README.md insertafter='"$1"' line='* "$2"'"
+}
+function rssadd() {
+    adhoc lineinfile -a "path=~/.newsboat/urls line='"$1"'"
+    newsboat
+}
+
+# Package / Dependencies management helpers
+function adhocbis() {
+    local ansible_output=$(adhoc "$*")
+    echo $ansible_output | sed 's/127.0.0.1.*SUCCESS/WOKE/g'
 }
 function brewadd() {
     brew install "$1"
@@ -413,20 +472,14 @@ function goadd() {
     adhoc lineinfile -a "path=~/.scripts/godeps.sh line='go get -u -v $1'"
     go get -u -v "$1"
 }
-function rssadd() {
-    adhoc lineinfile -a "path=~/.newsboat/urls line='"$1"'"
-    newsboat
-}
-function bookmarkadd() {
-    adhoc lineinfile -a "path=$HOME/Code/bookmarks/README.md insertafter='"$1"' line='* "$2"'"
-}
-function backupgithub() {
-    curl -sL "https://api.github.com/users/$1/repos" | jq -r '.[] | .ssh_url' | xargs -n1 git clone --mirror --no-hardlinks
-}
+
+
 # Make a directory and cd to it
 function take() {
-    mkdir -p $@ && cd ${@:$#}
+    mkdir -p "$@" && cd "${@:$#}"
 }
+
+# Date / Time management helpers
 function endofday() {
     local planned_end=$(moro status 2>&1 | \grep -Eo "Working until ([0-9:]+) will make.*" | uniq | \grep -Eo "([0-9]+:[0-9]+)")
     local max_hour="$planned_end"
@@ -458,10 +511,7 @@ function is_earlier() {
         false
     fi
 }
-function gitydiff() {
-    local path_to_file="$1"
-    git show "HEAD:$path_to_file" | colordiff -y - "$path_to_file"
-}
+
 function dl_stopwords() {
     curl -Lks https://raw.githubusercontent.com/MorganGeek/bookmarks/master/stopwords.txt -o "$HOME/stopwords.txt"
 }
@@ -483,25 +533,6 @@ function foreach_run() {
 function chance() {
     [[ $(shuf -i "$1" -n 1) == 1 ]]
 }
-function gitignorefor() {
-    local language=${1:-''}
-    if [ ! -d "$HOME/Code/gitignore" ]; then
-        arrow "cloning https://github.com/github/gitignore into $REPO_PATH/gitignore"
-        git clone "https://github.com/github/gitignore" "$REPO_PATH/gitignore"
-    fi
-    local gitignore_file=$(fd "$language" "$REPO_PATH/gitignore" | head -n1)
-    if [ ! -z "$gitignore_file" ]; then
-        success "matched gitignore file : $gitignore_file"
-        if [ ! -f "$(pwd)/.gitignore" ]; then
-            arrow "you don't have a $(pwd)/.gitignore file, but that's not an issue :-) ..."
-        fi
-        arrow "copying the file content to your $(pwd)/.gitignore file"
-        adhoc blockinfile -a "block='{{ lookup('file', '$gitignore_file') }}' dest='$(pwd)/.gitignore' create=yes"
-    else
-        error "no gitignore file found for $language"
-    fi
-}
-
 function runiflucky() {
     if chance "1-10"; then
         if alias "$1" 2>/dev/null || (compgen -A function | grep "$1" && compgen -A function "$1" 1>/dev/null); then
