@@ -1,91 +1,28 @@
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias zshconfig="mate $HOME/.zshrc"
+# alias ohmyzsh="mate $HOME/.oh-my-zsh"
 #
 
-# Git, dotfiles, ripgrep, Node.JS
-alias cm='chezmoi'
-alias gcls='git clone --depth 1 --recurse-submodules'
-alias gpar='gitpushallremote'
-alias gpcr='gitpushcurrentremote'
-alias lg='lazygit'
-alias neworigin='setorigin'
-alias origin='setorigin'
-alias goto='git go'
-alias master='goto master'
-alias develop='goto develop'
-alias gg='git config -l | grip' # search git config for ...
-alias ucommit='PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit --no-verify'
+# Git
+source "$HOME/.aliases/git.sh"
 
 # Docker
 alias lzd='lazydocker'
 
 # PM : Jira & trello & asana & moro
-alias jirasearch='issues'
-alias cicdlist="jira issue jql \"project = 'CICD' AND resolution = Unresolved\""
-alias backlogs="jira issue jql \"status = New AND project IN (CICD) AND Created > -2w ORDER BY Priority DESC\""
-alias bakclogs='backlogs'
-alias support="jira issue jql \"project in (CICD) AND (Created > -2w AND resolution = Unresolved AND (type = 'Engineering Incident' AND status not in ('Waiting for external information') OR type IN ('Engineering Request', 'Task', 'User Story') AND status in ('New', 'To be picked next')) OR resolution != Unresolved AND status = 'In Progress') ORDER BY key DESC\""
-alias guardian="support"
-alias lastissues='jira issue jql "project IN (CICD) AND Created > -2w ORDER BY Created DESC, Priority DESC"'
-alias workingon="jira issue jql \"assignee = currentUser() AND resolution = Unresolved AND status not in ('In Review', 'Done', 'In Testing', 'Waiting For Build') OR QA = currentUser() AND status = 'In Testing' ORDER BY updated DESC, priority DESC\""
-alias toreview='jira issue jql "project in (CICD) AND Updated > -2w AND issue.property[development].openprs > 0 ORDER BY Created DESC, Priority ASC"'
-alias newissues="jira issue jql \"project IN (CICD) AND Created > -2w AND resolution = Unresolved AND status not in ('In Progress') ORDER BY Created DESC, Priority DESC\""
-alias n='newissues'
-alias backlog=cicdlist
-alias bakclog='backlog'
-alias b='backlog'
-alias mybacklog="jira issue ls && asana && confluencetasks && trello_web"
-alias mb='mybacklog'
-alias myissues='mb'
-alias me='mb'
-alias j='jira issue open'
-alias trello='3llo'
-alias work='moro'
+source "$HOME/.aliases/backlog.sh"
 
 # News
-alias hack='hacker'
-alias crypto='curl rate.sx'
-alias weather='weather "?lang=fr&"'
+source "$HOME/.aliases/news.sh"
 
 # Twitter
-alias twitter='\t'
-alias tsearch='twitter search all'
-alias tweets='tsearch --long -a -d'
-alias tsearchfav='twitter search favorites'
-alias tsearchtimeline='twitter search timeline'
-alias tstream='rainbowstream'
-alias mystream='tstream'
+source "$HOME/.aliases/twitter.sh"
 
 # RSS
-alias addfeed='rssadd'
-alias addrss='rssadd'
-alias rss='newsboat'
-alias feed='rss'
-alias feeds='rss'
+source "$HOME/.aliases/rss.sh"
 
 # Search
-alias ddg='ddgr'
-alias goo='googler'
-alias se='sr -elvi'
-alias eg='env | grip' # search env variables for pattern
-alias engines='sr -elvi'
-alias grep='rg'
-alias grip='grep -i'
-alias usernames="python3 $HOME/Code/sherlock/sherlock.py --rank --print-found"
-alias ygg="torrengo -s ygg"
-alias ag='alias | grip'   # search for patten among aliases
-alias hg='history | grip' # search for pattern among history
-alias hist='history'
-alias codestats='tokei'
-alias dups='file_dups'
-alias pairs='file_getpairs'
-alias filter_pairs="tr '[:upper:]' '[:lower:]' | \grep -o -E '\w{3,} \w{3,}' | \grep --invert-match --word-regexp --fixed-strings --file=\"\$HOME/stopwords.txt\" | \sed 's/s$//g' | \sed 's/ing$//g' | sort | uniq -c | sort --numeric-sort --reverse"
-alias sort_count="sort | uniq -c | sort --numeric-sort --reverse"
-alias words='file_getwords'
-alias fd="\fd"
-alias wiki='wikit'
-alias dico='dict'
+source "$HOME/.aliases/search.sh"
 
 # Events
 alias agenda='calendar'
@@ -93,76 +30,23 @@ alias mails="gmail && gmail2"
 alias mailperso="gmail2"
 alias mailpro="gmail"
 
-# Viewing files
-alias cat='bat --style=plain --color "always"'
-alias preview="fzf --preview 'bat --color \"always\" --style=plain {}' --cycle "
-alias markdown2='pandoc README.md | lynx -stdin -dump'
-alias markdown='glow'
-
 # Management / Security / SSH / SSL
-alias mgmt='ssh $(whoami)@$PROXY_HOST -i ~/.ssh/id_ed25519'
-alias m='mgmt'
-alias tunnel='ssh -D 8000 -N $(whoami)@$PROXY_HOST -i ~/.ssh/id_ed25519'
-alias sshpub='cat ~/.ssh/id_ed25519.pub'
-alias ssla="openssl x509 -alias -noout -in" # Usage : ssla <cert>
-alias encrypt='ansible-vault encrypt **/vault.yml --vault-password-file=$VAULT_PASSWORD_FILE'
-alias decrypt='ansible-vault decrypt **/vault.yml --vault-password-file=$VAULT_PASSWORD_FILE'
-alias bitwarden-cli='bw'
-alias newpass='bw generate --special --uppercase --lowercase --number --length 30'
+source "$HOME/.aliases/secure.sh"
 
 # Network
-alias ip='echo $(curl ident.me -4 2>/dev/null)'
-alias ipinfo='curl "ipinfo.io/"$(ip)'
-alias getips='\egrep "\b(([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}(1[0-9][0-9]|2[0-4][0-9]|25[0-5]|[0-9]{1,2})\b"'
-alias ping='prettyping -c 5 --nolegend' # Stop after sending count ECHO_REQUEST packets
-alias fastping='ping -c 100 -i.2'       # don't wait interval 1 second, go fast
+source "$HOME/.aliases/network.sh"
 
 # Downloads
 alias get="curl -O -L" # Download file and save it with filename of remote file
 
 # Files & folder tricks
-alias biggerthan10='biggerthan 10M'
-alias c='cat'
-alias h='cd $HOME'
-alias cp='cp -i' # confirmation before overwrite #
-alias del='rm -rf'
-alias mv='mv -i' # confirmation before overwrite
-alias mkcd='take'
-alias rm='gomi'
-alias df='df -H'
-alias diff='colordiff --side-by-side --ignore-space-change --width=200 --suppress-common-lines  --recursive'
-alias du='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
-alias ctrl-c='pbcopy'
-alias s=ls
-alias sl=ll
-alias ls='lsd'
-alias lsg='ll | grip'     # show me files matching "ls grep"
-alias lh='ls -alt | head' # see the last modified files
-alias tree='ls --almost-all --tree'
-alias v=vi
-alias x='extract'
-# Empty the Trash on all mounted volumes and the main HDD.
-# Also, clear Apple’s System Logs to improve shell startup speed.
-# Finally, clear download history from quarantine. https://mths.be/bum
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
-alias ve='vim ~/.vimrc'         # vimrc editing
-alias ze='vim ~/.zshrc'         # zsh profile editing
-alias zf='vim ~/.zsh_functions' # edit zsh_functions
-alias za='vim ~/.zsh_aliases'   # edit zsh_aliases
-alias dots='cd $HOME/Code/dotfiles'
-alias dotfiles='dots'
-alias code='cd $HOME/Code'
-alias gochezmoi='cd ~/.local/share/chezmoi'
-alias blog='z morgangeek-blog'
+source "$HOME/.aliases/files.sh"
 
 # System Utils
 alias systeminfo='neofetch'
 alias monitoring='glances'
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend" # Lock the screen (when going AFK)
-alias reload="exec ${SHELL} -l"                                                                       # Reload the shell (i.e. invoke as a login shell)
+alias reload="exec ${SHELL} -l"     # Reload the shell (i.e. invoke as a login shell)
 alias sc="source $HOME/.zshrc"
-alias lastlogin="log show --style syslog  --last 1d | awk '/Enter/ && /unlockUIBecomesActive/ {print \$1 \" \" \$2}'"
-alias loginhistory='lastlogin'
 
 # Infrastructure
 alias awsls='awsls -profile default -region eu-west-1 --attributes tags aws_instance'
@@ -177,26 +61,7 @@ alias help='tldr'
 alias latency='curl cheat.sh/latency'
 
 # Misc
-alias adhoc="ansible --one-line 127.0.0.1 -m"
-alias ans='adhoc'
-alias bash="/usr/local/bin/bash"
-#alias date="gdate"
-alias away='moro break 10 && coffee'
-alias afk='away'
-alias current_year='`echo date +"%Y"`'
-alias headers='curl -I --compress'        # Find out if remote server supports gzip / mod_deflate or not #
-alias https='http --default-scheme=https' # useful alias stealed from a colleague. http is provided by httpie
-alias path='echo -e ${PATH//:/\\n}'       # Explode and display current PATH
-alias p='ps -ef | grip '                  # Show matching processes. Usage : p <process name>
-alias root='sudo -i'
-alias ':q'='exit'
-alias current_hour='date +"%H:%M"'
-alias current_time='current_hour'
-alias runhooks='pre-commit run -a'
-alias tryhook='pre-commit try-repo .'
-alias whatyear='current_year'
-alias whathour='current_time'
-alias whattime='whathour'
+source "$HOME/.aliases/misc.sh"
 
 # Linters
 alias checken="aspell check -d en"
@@ -210,8 +75,8 @@ alias gw='./gradlew'
 alias irc='weechat'
 
 # Terraform
-source $HOME/.aliases/terraform.sh
-source $HOME/.aliases/terragrunt.sh
+source "$HOME/.aliases/terraform.sh"
+source "$HOME/.aliases/terragrunt.sh"
 
 # Fun
 alias moon='curl "wttr.in/Moon?lang=fr"'
@@ -221,22 +86,18 @@ alias coffee="curl -L http://git.io/coffee"
 alias hotcoffee="curl -sL git.io/hotcoffee | sh"
 
 # Music
-source $HOME/.aliases/music.sh
+source "$HOME/.aliases/music.sh"
 
 # K8S
 alias k9s='COLORTERM=256bit k9s --all-namespaces'
 alias 9=k9s
 alias K=k9s
 
-# Show/hide hidden files in Finder
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-
-# Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-
-# Flush Directory Service cache
-alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+# Macos specifics
+case "$(uname -s)" in
+Darwin)
+    source "$HOME/.aliases/macos.sh"
+    ;;
+esac
 
 # This is the end ;( ... for now ;D
