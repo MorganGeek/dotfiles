@@ -455,6 +455,12 @@ function rssadd() {
     newsboat
 }
 
+# Via https://stackoverflow.com/a/58598185/2309958
+# capture the output of a command so it can be retrieved with ret
+function cap () { tee /tmp/capture.out}
+# return the output of the most recent command that was captured by cap
+function ret () { \cat /tmp/capture.out }
+
 # Package / Dependencies management helpers
 function adhocbis() {
     local ansible_output=$(adhoc "$*")
