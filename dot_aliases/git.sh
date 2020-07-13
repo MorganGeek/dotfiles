@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+alias commit='gc'
 alias gcls='git clone --depth 1 --recurse-submodules'
 alias gpar='gitpushallremote'
 alias gpcr='gitpushcurrentremote'
