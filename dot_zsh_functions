@@ -209,6 +209,34 @@ function how_in() {
     shift
     IFS=+ curl "cht.sh/${where}/$*"
 }
+# File name references in file
+function filerefs() {
+    \grep -Eo "\b([a-zA-Z.]+)\.([a-z]{2,4}\b)" "$1" \
+        | sort -u \
+        | egrep -vi "\.com|\.git|\.io|\net|\.org|\.se|\.me|\.fr|contributing\.md"
+}
+function invalid_file_refs() {
+    while read -r file_ref; do
+        arrow "processing $file_ref ..."
+        find . -name "$file_ref" 1>/dev/null
+        local exit_status=$?
+        if [ $exit_status -eq 1 ]; then
+            warning "$file_ref does not exist in the project"
+        else
+            success "$file_ref was found in the project"
+        fi
+        arrow "checking if $file_ref is present in the source code..."
+        source_refs=$(\grep "$file_ref" * -r -l | grep -v "$1" | wc -l 2>/dev/null | trim)
+        if [ "$source_refs" -eq 0 ]; then
+            error "$file_ref was not found in source code"
+        else
+            arrow "searching for $file_ref references in soure code..."
+            while read -r source_ref; do
+                success "$file_ref was found in $source_ref"
+            done < <(\grep "$file_ref" * -r -l)
+        fi
+    done < <(filerefs "$1")
+}
 
 # File stats helpers
 # Find files bigger than X size and sort them by size
