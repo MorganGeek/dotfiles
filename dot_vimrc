@@ -45,6 +45,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 " A plugin of NERDTree showing git status
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+" Vim plugin for intensely nerdy commenting powers
+" In order to use it for instance, for commenting a block of text... do as :
+" - Select several lines (using <V>)
+" - Press <SPACE> then <cs>
+Plugin 'preservim/nerdcommenter'
+
 " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks and partial hunks.
 Plugin 'airblade/vim-gitgutter'
 " Jenkinsfile DSL Vim Syntax
@@ -174,6 +180,8 @@ hi Search ctermfg=White
 hi Search ctermbg=DarkMagenta
 
 " test cheat.sh integration with VIM
+" In any source file, type a query "e.g : how to append ... in python" then
+" exit insert mode, and press <SPACE> then <KK>
 let mapleader=" "
 
 " map a specific key or shortcut to open NERDTree
