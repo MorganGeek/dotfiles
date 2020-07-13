@@ -16,7 +16,7 @@ alias sl=ll
 alias ls='lsd'
 alias lsg='ll | grip'     # show me files matching "ls grep"
 alias lh='ls -alt | head' # see the last modified files
-alias tree='ls --almost-all --tree'
+alias tree='ls --almost-all --tree -I .git'
 alias x='extract'
 
 # Projects shortcuts
