@@ -422,7 +422,7 @@ function gitignorefor() {
     local language=${1:-''}
     if [ ! -d "$HOME/Code/gitignore" ]; then
         arrow "cloning https://github.com/github/gitignore into $REPO_PATH/gitignore"
-        git clone "https://github.com/github/gitignore" $_"
+        git clone "https://github.com/github/gitignore $_"
     fi
     local gitignore_file=$(fd "$language" "$REPO_PATH/gitignore" | head -n1)
     if [ ! -z "$gitignore_file" ]; then
@@ -541,7 +541,7 @@ function chance() {
 }
 function runiflucky() {
     if chance "1-10"; then
-        if alias "$1" 2>/dev/null || (compgen -A function | grep "$1" && compgen -A function "$1" 1>/dev/null); then
+        if alias "$1" 2>/dev/null || (compgen -A function | grep "$1" 1>/dev/null && compgen -A function "$1" 1>/dev/null); then
             eval "$1"
         fi
     fi
