@@ -16,6 +16,8 @@ alias root='sudo -i'
 alias ':q'='exit'
 alias current_hour='date +"%H:%M"'
 alias current_time='current_hour'
+# FIXME : register the alias only if browser is Chrome based (Google Chrome/Brave/etc)
+alias meditate='browse chrome-extension://onjcfgnjjbnflacfbnjaapcbiecckilk/popup.html#fullscreen'
 alias runhooks='pre-commit run -a'
 alias tryhook='pre-commit try-repo .'
 alias whatyear='current_year'
