@@ -3,7 +3,7 @@
 # alias ohmyzsh="mate $HOME/.oh-my-zsh"
 #
 
-chmod +x "$HOME/.aliases/*"
+chmod +x $HOME/.aliases/*
 
 # Git
 source "$HOME/.aliases/git.sh"
