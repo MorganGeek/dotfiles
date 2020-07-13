@@ -19,6 +19,13 @@ alias current_time='current_hour'
 # FIXME : register the alias only if browser is Chrome based (Google Chrome/Brave/etc)
 alias meditate='browse chrome-extension://onjcfgnjjbnflacfbnjaapcbiecckilk/popup.html#fullscreen'
 alias runhooks='pre-commit run -a'
+# https://unix.stackexchange.com/a/205854/220566
+alias trim="awk '{\$1=\$1};1'"
+# via https://github.com/richinfante/dotfiles/blob/0e1df2d833257e3a3ca2e4fcc8f2f128d52b5d29/dotfiles/.profile_setup/30-aliases.sh
+alias lowercase='tr "[:upper:]" "[:lower:]"'
+alias uppercase='tr "[:lower:]" "[:upper:]"'
+alias to_lower='lowercase'
+alias to_upper='uppercase'
 alias tryhook='pre-commit try-repo .'
 alias whatyear='current_year'
 alias whathour='current_time'
