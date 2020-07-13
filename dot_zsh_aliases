@@ -3,6 +3,8 @@
 # alias ohmyzsh="mate $HOME/.oh-my-zsh"
 #
 
+chmod +x "$HOME/.aliases/*"
+
 # Git
 source "$HOME/.aliases/git.sh"
 
@@ -45,7 +47,7 @@ source "$HOME/.aliases/files.sh"
 # System Utils
 alias systeminfo='neofetch'
 alias monitoring='glances'
-alias reload="exec ${SHELL} -l"     # Reload the shell (i.e. invoke as a login shell)
+alias reload="exec ${SHELL} -l" # Reload the shell (i.e. invoke as a login shell)
 alias sc="source $HOME/.zshrc"
 
 # Infrastructure
