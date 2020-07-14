@@ -134,6 +134,27 @@ function whichfunc() {
     whence -v $1
     type -a $1
 }
+# TODO : suggest using long parameter names instead of short ones....
+function suggest_code_refactoring() {
+    #inspired by : \grep 'awk '\''{$1=$1};1'\' $HOME/Code/dotfiles/dot_zsh*
+    header "code refactoring suggestions"
+    while read -r line; do
+        local short_name=$(echo "$line" | sed -E "s/='.*//g")
+        local alias_value=$(echo "$line" | sed -E 's/[a-zA-Z_-]+=//g')
+        local alias_value_truncated=${alias_value:1:$((${#alias_value}-2))}
+        #arrow "looking for opportunities to use alias $short_name instead of $alias_value_truncated"
+        \grep "$alias_value_truncated" $HOME/Code/dotfiles/dot_zsh_funct* 2>/tmp/error.log #/dev/null
+        if [ $? -eq 0 ]; then
+            success "found $short_name --> $alias_value_truncated"
+            \grep "$alias_value_truncated" $HOME/Code/dotfiles/dot_zsh_funct* --color -n -H --line-buffered #2>/dev/null
+        else
+            local error_message=$(\cat /tmp/error.log)
+            if [ ! -z "$error_message" ]; then
+                error "issue occured when looking for $alias_value_truncated : $error_message"
+            fi
+        fi
+    done < <(alias | awk -v COUNT=1 'NF>COUNT') # list of all aliases, excluding the less interesting ones (where we use one word for another)
+}
 function suggest_aliases() {
     local search_input_size=${1:-'50'}
     header "alias recommendations"
