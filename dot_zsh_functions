@@ -91,6 +91,9 @@ function lob() {
 function archive() {
     browse "https://web.archive.org/web/*/$*"
 }
+function iknowwhatyoudownload() {
+    browse "https://iknowwhatyoudownload.com/en/peer/?ip=$*"
+}
 
 # Jira utilities
 function issues() {
