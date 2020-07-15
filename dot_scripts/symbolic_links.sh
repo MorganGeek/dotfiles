@@ -36,6 +36,12 @@ ln -snf "$HOME/Code/dotfiles/private_dot_config/wtf" "$HOME/.config/wtf"
 ln -snf "$HOME/Code/dotfiles/private_dot_config/yamllint" "$HOME/.config/yamllint"
 ln -snf "$HOME/Code/dotfiles/dot_git-template/.pre-commit-config.yaml" "$HOME/dotfiles/.pre-commit-config.yaml"
 
+# Aspell symbolic links
+ln -snf "$HOME/Code/dotfiles/dot_aspell.en.prepl" "$HOME/.aspell.en.prepl"
+ln -snf "$HOME/Code/dotfiles/dot_aspell.en.pws" "$HOME/.aspell.en.pws"
+ln -snf "$HOME/Code/dotfiles/dot_aspell.fr.prepl" "$HOME/.aspell.fr.prepl"
+ln -snf "$HOME/Code/dotfiles/dot_aspell.fr.pws" "$HOME/.aspell.fr.pws"
+
 # Other symbolic links + Install Docker Desktop for Mac
 case "$(uname -s)" in
 Darwin)
