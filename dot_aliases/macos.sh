@@ -19,3 +19,4 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv $HOME/.Trash; s
 # via https://github.com/richinfante/dotfiles/blob/0e1df2d833257e3a3ca2e4fcc8f2f128d52b5d29/dotfiles/.profile_setup/30-aliases.sh
 alias finder="open ."
 alias cls="clear; printf '\e[3J'"
+alias zoom="open -na 'zoom.us'"
