@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo '(Linux) Installing ruby'
+echo 'Installing ruby'
 curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
 curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
 curl -L get.rvm.io | bash -s stable
