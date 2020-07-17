@@ -483,8 +483,14 @@ function clone() {
             error "unable to change current directory to : $folder"
         fi
     else
-        error "unable to clone repository url : $1"
+        error "unable to clone repository from url : $1"
     fi
+}
+function fork() {
+    # FIXME : go to local copy of the repo after the fork
+    code
+    local folder=$(basename $1 | sed 's/\.git.*//g')
+    gh repo fork "$1"
 }
 function git-project() {
     if [ -d "$REPO_PATH" ]; then
