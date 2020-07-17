@@ -134,7 +134,9 @@ function whichfunc() {
     whence -v $1
     type -a $1
 }
-# TODO : suggest using long parameter names instead of short ones....
+
+source $HOME/Code/dotfiles/dot_scripts/suggest_readable_parameters.sh
+
 # TODO : suggest spelling fixes
 function suggest_code_refactoring() {
     #inspired by : \grep 'awk '\''{$1=$1};1'\' $HOME/Code/dotfiles/dot_zsh*
