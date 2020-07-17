@@ -278,6 +278,10 @@ function checkenlist() {
     aspell -d en list < "$1" | sort --unique --ignore-case
 }
 
+function checkenremote() {
+    curl -Lks "$1" > /tmp/file && checkenlist /tmp/file
+}
+
 # File stats helpers
 # Find files bigger than X size and sort them by size
 function biggerthan() {
