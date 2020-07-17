@@ -6,9 +6,9 @@ curl -s "https://get.sdkman.io" | bash
 
 # Install missing package (Linux)
 case "$(uname -s)" in
-    Linux)
-        source "/root/.sdkman/bin/sdkman-init.sh"
-        ;;
+Linux)
+    source "/root/.sdkman/bin/sdkman-init.sh"
+    ;;
 esac
 
 echo "SDKMan installing development tools"
