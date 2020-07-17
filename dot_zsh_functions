@@ -29,7 +29,7 @@ bold() {
     printf "${bold}%s${reset}\n" "$@"
 }
 note() {
-    printf "${underline}${bold}${blue}Note:${reset}  ${blue}%s${reset}\n" "$@"
+    printf "${underline}${bold}${blue}Note:${reset} ${blue}%s${reset}\n" "$@"
 }
 function substring() {
     local _length=${#1}
