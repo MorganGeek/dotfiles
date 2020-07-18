@@ -280,6 +280,14 @@ function checkenlist() {
 
 function checkenremote() {
     curl -Lks "$1" > /tmp/file && checkenlist /tmp/file
+
+# Time management
+function zoomtimeboxed() {
+    declare -i total_minutes=$1
+    declare -i total_seconds=$total_minutes*60
+    echo $total_seconds;
+    arrow "will start zoom and leave it after $total_minutes minutes ($total_seconds seconds)"
+    zoom; (sleep "$total_seconds" && nozoom) &
 }
 
 # File stats helpers
