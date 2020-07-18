@@ -11,8 +11,9 @@ function suggest_readable_parameters() {
             # TODO : bring support for shell functions aliased to anything providing a real manual
             # e.g : checkov should be taken into account but github should not
             # TODO : bring support for backslashed functions (e.g : \egrep)
+            # FIXME : alex --quiet is not detected
             # TODO : support research of command usage when parameters of command appear after command arguments, like : path_swilgt=$(find /usr/local/Cellar/logtalk -name "*swilgt.sh"dev/null)
-            # TODO : support sub commands like in git ls-tree where ls-tree is a subcommand with its own manual : git ls-tree -r --long
+            # TODO : support sub commands like in git ls-tree where ls-tree is a subcommand with its own manual : git ls-tree -r --long; or npm install -g <package> where -g is a valid option for npm install
 
             if [[ $(LC_ALL=C type "$command_name") != *"alias for"* && $(LC_ALL=C type "$command_name") != *"is a shell function"* ]] && [[ $($command_name --help &>/dev/null) -eq 0 || $(info $command_name &>/dev/null) -eq 0 ]]; then
                 while read -r command_usage; do

@@ -281,12 +281,13 @@ function invalid_file_refs() {
 # run write-good, proselint, and aspell in non interactive mode, to list all mispelled words found
 function checkenlist() {
     aspell -d en list < "$1" | sort --unique --ignore-case
-    write-good "$1" | sort --unique --ignore-case
-    proselint "$1" | sort --unique --ignore-case
+    write-good "$1"
+    proselint "$1"
+    alex -q --stdin < "$1"
 }
 
 function checkenremote() {
-    curl --location --insecure --silent "$1" > /tmp/file && checkenlist /tmp/file && write-good /tmp/file && proselint /tmp/file
+    curl --location --insecure --silent "$1" > /tmp/file && checkenlist /tmp/file && write-good /tmp/file && proselint /tmp/file && \cat /tmp/file > alex -q --stdin
 }
 
 # Time management

@@ -116,7 +116,7 @@ let g:ale_fixers = {
 \   'zsh' : ['shfmt'],
 \}
 
-let g:ale_linters = {'zsh': ['shellcheck'], 'text': ['writegood', 'proselint']}
+let g:ale_linters = {'zsh': ['shellcheck'], 'text': ['writegood', 'proselint', 'alex']}
 
 " when running at every change you may want to disable quickfix
 let g:prettier#quickfix_enabled = 1
