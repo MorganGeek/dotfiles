@@ -20,3 +20,4 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv $HOME/.Trash; s
 alias finder="open ."
 alias cls="clear; printf '\e[3J'"
 alias zoom="open -na 'zoom.us'"
+alias nozoom="pkill 'zoom.us'"
