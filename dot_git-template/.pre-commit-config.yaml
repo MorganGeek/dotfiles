@@ -114,3 +114,7 @@ repos:
             language: docker_image
             entry: --entrypoint /usr/local/bin/run-jflint.sh askulkarni2/jenkinslint
             files: Jenkinsfile
+    - repo: git@github.com:amperser/proselint.git
+      rev: 0.10.2
+      hooks:
+          - id: proselint

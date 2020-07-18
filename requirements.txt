@@ -18,7 +18,6 @@ cachetools==3.1.1
 certifi==2019.9.11
 cffi==1.13.2
 chardet==3.0.4
-Click==7.0
 colorama==0.4.1
 colorzero==1.1
 configobj==5.0.6
@@ -120,7 +119,6 @@ Scrapy==1.8.0
 semver==2.9.0
 service-identity==18.1.0
 sh==1.12.14
-six==1.13.0
 slacker==0.13.0
 soupsieve==1.9.5
 stashy==0.6
@@ -147,3 +145,6 @@ websocket-client==0.56.0
 wrapt==1.11.2
 yamllint==1.23.0
 zope.interface==4.6.0
+click==7.1.2
+proselint==0.10.2
+six==1.15.0
