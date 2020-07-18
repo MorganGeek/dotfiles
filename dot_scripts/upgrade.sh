@@ -22,7 +22,7 @@ bundle update --all
 zsh ~/.oh-my-zsh/tools/upgrade.sh
 sudo pip install --upgrade pip 2>/dev/null
 sudo pip3 install --upgrade pip 2>/dev/null
-pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U
+pip list --outdated --format=freeze G -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U
 pip freeze >~/requirements.txt
 # Update VIM plugins installed via Vundle https://github.com/VundleVim/Vundle.vim
 vim +PluginUpdate +qall >/dev/null

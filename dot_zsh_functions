@@ -122,12 +122,12 @@ function logtalk() {
 function top_commands() {
     local filter="$1"
     local max_results=${2:-'50'}
-    history | \cat | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a; }' | grep -v "./" | column -c3 -s " " -t | grep "$filter" | sort -nr | nl | head "-n$max_results"
+    history | \cat | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a; }' G --invert-match "./" | column -c3 -s " " -t G "$filter" | sort --numeric-sort --reverse | nl H "-n$max_results"
 }
 function top_commands_full() {
     local filter="$1"
     local max_results=${2:-'50'}
-    history | \cat | awk '{$1=$1};1' | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' | grep "$filter" | sort -nr | nl | head "-n$max_results"
+    history | \cat | awk '{$1=$1};1' | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' G "$filter" | sort --numeric-sort --reverse | nl H "-n$max_results"
 }
 # Where is a function defined?
 function whichfunc() {
@@ -145,10 +145,10 @@ function suggest_code_refactoring() {
         local short_name=$(echo "$line" | sed -E "s/='.*//g")
         local alias_value=$(echo "$line" | sed -E 's/[a-zA-Z_-]+=//g')
         local alias_value_truncated=${alias_value:1:$((${#alias_value} - 2))}
-        \fgrep $alias_value_truncated "$@" 2>/tmp/error.log | \grep -v "alias $short_name=" 1>/dev/null
+        \fgrep -d skip $alias_value_truncated "$@" 2>/tmp/error.log | \grep --invert-match "alias $short_name=" 1>/dev/null
         if [ $? -eq 0 ]; then
             success "found $short_name --> $alias_value_truncated"
-            \fgrep "$alias_value_truncated" "$@" --color -n -H --line-buffered | \grep -v "alias $short_name="
+            \fgrep -d skip "$alias_value_truncated" "$@" --color -n -H --line-buffered | \grep --invert-match "alias $short_name="
         else
             local error_message=$(\cat /tmp/error.log)
             if [ -n "$error_message" ]; then
@@ -171,17 +171,17 @@ function suggest_aliases() {
         else
             warning "no alias for $line"
         fi
-    done < <(top_commands_full "" "$search_input_size" | awk '{ $1=""; $2=""; $3="";  print}' | awk 'NF' | awk '{$1=$1};1' | awk -v COUNT=1 'NF>COUNT' | head "-$search_input_size")
+    done < <(top_commands_full "" "$search_input_size" | awk '{ $1=""; $2=""; $3="";  print}' | awk 'NF' | awk '{$1=$1};1' | awk -v COUNT=1 'NF>COUNT' H "-$search_input_size")
 }
 
 # Web Crawling
 function aboutpage() {
-    year=$(echo "$*" | egrep -Eo '\b[[:digit:]]{4}\b' | head -n1)
+    year=$(echo "$*" | egrep --extended-regexp --only-matching '\b[[:digit:]]{4}\b' H -n1)
     if [ -z "$year" ]; then
-        year=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "date|datetime" -A 1 | \grep -Eo '\b[[:digit:]]{4}\b' | head -n1)
+        year=$(curl --silent --show-error --location "$*" | tr '<' '\r' | \egrep --ignore-case "date|datetime" -A 1 | \grep --extended-regexp --only-matching '\b[[:digit:]]{4}\b' H -n1)
     fi
-    author=$(curl -sSL "$*" | tr '<' '\r' | \egrep -i "author" -A 1 | \grep -Eo '([A-Z][A-Za-z]+\s([A-Za-z ]+)*)' | head -n1)
-    title=$(curl -sSL "$*" | tr '<' '<\n' | \grep title -A 1 | head -n1 | sed -E 's/.*<title>(.*)<\/title>.*/\1/' | sed "s/ [^[:alnum:]]*$author//")
+    author=$(curl --silent --show-error --location "$*" | tr '<' '\r' | \egrep --ignore-case "author" -A 1 | \grep --extended-regexp --only-matching '([A-Z][A-Za-z]+\s([A-Za-z ]+)*)' H -n1)
+    title=$(curl --silent -SL "$*" | tr '<' '<\n' | \grep title -A 1 H -n1 | sed -E 's/.*<title>(.*)<\/title>.*/\1/' | sed "s/ [^[:alnum:]]*$author//")
     yearint=$(($year + 0))
     currentyear=$(echo $(date +"%Y"))
     if [ ! -z "$author" ]; then
@@ -231,11 +231,14 @@ cmd_loc="find . -type f \( \
 # Unique lines of code
 # Via https://text.causal.agency/004-uloc.txt
 function uloc() {
-    eval "$cmd_loc | LANG=C LC_CTYPE=C sort -u | wc -l"
+    eval "$cmd_loc | LANG=C LC_CTYPE=C sort --unique | wc -l"
 }
 # Top lines of code
 function toploc() {
-    eval "$cmd_loc | LANG=C LC_CTYPE=C cut -c 1-100 | LANG=C LC_CTYPE=C sort | uniq -c | LANG=C LC_CTYPE=C sort -nr | head -50"
+    eval "$cmd_loc | LANG=C LC_CTYPE=C cut -c 1-100 | LANG=C LC_CTYPE=C sort | uniq -c | LANG=C LC_CTYPE=C sort --numeric-sort --reverse H -50"
+}
+function historyloc() {
+    top_commands_full "" 5000 topshellloc
 }
 function how_in() {
     where="$1"
@@ -244,11 +247,13 @@ function how_in() {
 }
 # File name references in file
 function filerefs() {
-    \grep -Eo "\b([a-zA-Z.]+)\.([a-z]{2,4}\b)" "$1" \
-        | sort -u \
-        | egrep -vi "\.com|\.git|\.io|\net|\.org|\.se|\.me|\.fr|contributing\.md"
+    FILENAME=${1:-README*)}
+    \grep --extended-regexp --only-matching "\b([a-zA-Z.-]+)\.([a-z]{2,4}\b)" $FILENAME \
+        | sort --unique \
+        | egrep --invert-match --ignore-case "\.com|\.git|\.io|\net|\.org|\.se|\.me|\.fr|contributing\.md"
 }
 function invalid_file_refs() {
+    FILENAME=${1:-"README.*"}
     while read -r file_ref; do
         arrow "processing $file_ref ..."
         find . -name "$file_ref" 1>/dev/null
@@ -259,7 +264,7 @@ function invalid_file_refs() {
             success "$file_ref was found in the project"
         fi
         arrow "checking if $file_ref is present in the source code..."
-        source_refs=$(\grep "$file_ref" * -r -l | grep -v "$1" | wc -l 2>/dev/null | trim)
+        source_refs=$(\grep "$file_ref" * -r -l G --invert-match "$FILENAME" | wc -l 2>/dev/null | trim)
         if [ "$source_refs" -eq 0 ]; then
             error "$file_ref was not found in source code"
         else
@@ -268,7 +273,7 @@ function invalid_file_refs() {
                 success "$file_ref was found in $source_ref"
             done < <(\grep "$file_ref" * -r -l)
         fi
-    done < <(filerefs "$1")
+    done < <(filerefs "$FILENAME")
 }
 
 
@@ -279,7 +284,8 @@ function checkenlist() {
 }
 
 function checkenremote() {
-    curl -Lks "$1" > /tmp/file && checkenlist /tmp/file
+    curl --location --insecure --silent "$1" > /tmp/file && checkenlist /tmp/file
+}
 
 # Time management
 function zoomtimeboxed() {
@@ -293,11 +299,11 @@ function zoomtimeboxed() {
 # File stats helpers
 # Find files bigger than X size and sort them by size
 function biggerthan() {
-    find . -size "+$*" -type f -print0 | xargs -0 ls -Ssh | sort -z
+    find . -size "+$*" -type f -print0 | xargs -0 ls -Ssh | sort --zero-terminated
 }
 # To automatically ls when changing directory
 function cd() {
-    builtin cd "$@" && ls -latr
+    builtin cd "$@" && ll -atr
 }
 function mouse() {
     case "$(uname -s)" in
@@ -369,7 +375,7 @@ function vimat() {
     vim +/$1 $2
 }
 function httperr() {
-    curl -s "https://http.cat/$1" | imgcat
+    curl --silent "https://http.cat/$1" | imgcat
 }
 
 # Config / Infra as code
@@ -412,7 +418,7 @@ function password() {
     bw get password "$1"
 }
 function vaultgetsecret() {
-    local secret=$(grep -A 500 "ANSIBLE_VAULT" "$1" | awk '{$1=$1;print}' | \grep -Eo "^[0-9a-z^ ]+$")
+    local secret=$(grep -A 500 "ANSIBLE_VAULT" "$1" | awk '{$1=$1;print}' | \grep --extended-regexp --only-matching "^[0-9a-z^ ]+$")
     local secret_string=$(echo "\$ANSIBLE_VAULT;1.1;AES256\n$secret")
     echo "$secret_string" | awk '{$1=$1;print}' | ansible-vault decrypt --vault-password-file=$VAULT_PASSWORD_FILE
 }
@@ -420,16 +426,17 @@ function vaultgetsecret() {
 ### Git helpers
 function backupgithub() {
     cd "$REPO_PATH"
-    curl -sL "https://api.github.com/users/$1/repos" | jq -r '.[] | .ssh_url' | xargs -n1 git clone --mirror --no-hardlinks
+    curl --silent --location "https://api.github.com/users/$1/repos" | jq -r '.[] | .ssh_url' | xargs -n1 git clone --mirror --no-hardlinks
 }
 function gitydiff() {
     local path_to_file="$1"
-    git show "HEAD:$path_to_file" | colordiff -y - "$path_to_file"
+    gsh "HEAD:$path_to_file" | colordiff -y - "$path_to_file"
 }
 function gcrb() {
     branch=$1
-    git checkout -b $branch origin/$branch
+    gcb $branch origin/$branch
 }
+
 function installhooks() {
     pre-commit install --install-hooks --overwrite --allow-missing-config
 }
@@ -465,13 +472,13 @@ function gitpushcurrentremote() {
 function gitpushallremote() {
     local param_branch="$1"
     grv
-    grv | grep push | awk '{print $1}' | while read -r remote; do
+    grv G push | awk '{print $1}' | while read -r remote; do
         if [ -z "$param_branch" ]; then
             arrow "pushing all branches to $remote"
-            git push --all "$remote"
+            gp --all "$remote"
         else
             arrow "pushing $param_branch to $remote"
-            git push "$remote" "$param_branch"
+            gp "$remote" "$param_branch"
         fi
     done
 }
@@ -516,7 +523,7 @@ function gitignorefor() {
         arrow "cloning https://github.com/github/gitignore into $REPO_PATH/gitignore"
         git clone "https://github.com/github/gitignore $_"
     fi
-    local gitignore_file=$(fd "$language" "$REPO_PATH/gitignore" | head -n1)
+    local gitignore_file=$(fd "$language" "$REPO_PATH/gitignore" H -n1)
     if [ ! -z "$gitignore_file" ]; then
         success "matched gitignore file : $gitignore_file"
         if [ ! -f "$(pwd)/.gitignore" ]; then
@@ -536,7 +543,7 @@ function colorpic() {
     local result_url=$(\curl -F "image=@$picture_url" -H "api-key:$COLORPIC_APIKEY" https://api.deepai.org/api/colorizer -s | jq '.output_url' | strings)
     success "Generated $result_url"
     arrow "Display in progress..."
-    eval "\curl -s $result_url | imgcat"
+    eval "\curl --silent $result_url | imgcat"
 }
 
 function bookmarkadd() {
@@ -571,19 +578,18 @@ function goadd() {
     go get -u -v "$1"
 }
 
-
 # Make a directory and cd to it
 function take() {
-    mkdir -p "$@" && cd "${@:$#}"
+    md -p "$@" && cd "${@:$#}"
 }
 
 # Date / Time management helpers
 function endofday() {
-    local planned_end=$(moro status 2>&1 | \grep -Eo "Working until ([0-9:]+) will make.*" | uniq | \grep -Eo "([0-9]+:[0-9]+)")
+    local planned_end=$(moro status 2>&1 | \grep --extended-regexp --only-matching "Working until ([0-9:]+) will make.*" | uniq | \grep --extended-regexp --only-matching "([0-9]+:[0-9]+)")
     local max_hour="$planned_end"
     local min_hour=$(current_time)
     if [ -z "$planned_end" ]; then
-        local clockout=$(moro report 2>&1 | \grep -Eo "Clock out.*([0-9:]+)" | \grep -Eo "([0-9]+:[0-9]+)")
+        local clockout=$(moro report 2>&1 | \grep --extended-regexp --only-matching "Clock out.*([0-9:]+)" | \grep --extended-regexp --only-matching "([0-9]+:[0-9]+)")
         max_hour="$clockout"
     fi
     if is_earlier "$min_hour" "$max_hour"; then
@@ -611,11 +617,11 @@ function is_earlier() {
 }
 
 function dl_stopwords() {
-    curl -Lks https://raw.githubusercontent.com/MorganGeek/bookmarks/master/stopwords.txt -o "$HOME/stopwords.txt"
+    curl --location --insecure --silent https://raw.githubusercontent.com/MorganGeek/bookmarks/master/stopwords.txt -o "$HOME/stopwords.txt"
 }
 function file_getwords() {
     dl_stopwords
-    \cat "$1" | tr '[:upper:]' '[:lower:]' | \grep -o -E '\w{3,}' | \grep --invert-match --word-regexp --fixed-strings --file="$HOME/stopwords.txt" | \sed 's/s$//g' | \sed 's/ing$//g' | sort_count
+    \cat "$1" | tr '[:upper:]' '[:lower:]' | \grep --extended-regexp --only-matching '\w{3,}' | \grep --invert-match --word-regexp --fixed-strings --file="$HOME/stopwords.txt" | \sed 's/s$//g' | \sed 's/ing$//g' | sort_count
 }
 function file_getpairs() {
     dl_stopwords
@@ -633,7 +639,7 @@ function chance() {
 }
 function runiflucky() {
     if chance "1-10"; then
-        if alias "$1" 2>/dev/null || (compgen -A function | grep "$1" 1>/dev/null && compgen -A function "$1" 1>/dev/null); then
+        if alias "$1" 2>/dev/null || (compgen -A function G "$1" 1>/dev/null && compgen -A function "$1" 1>/dev/null); then
             eval "$1"
         fi
     fi

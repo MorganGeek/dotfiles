@@ -21,3 +21,4 @@ alias words='file_getwords'
 alias fd="\fd"
 alias wiki='wikit'
 alias dico='dict'
+alias topshellloc='| tr "|" "\n" | grep -v "function" | \grep -Eo "(.*)" | trim | sort | uniq -c | sort -nr'

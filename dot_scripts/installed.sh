@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-npm list -g --depth 0
+source $HOME/Code/dotfiles/dot_zsh_aliases
+npmlist
