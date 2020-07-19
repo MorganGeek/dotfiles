@@ -174,6 +174,38 @@ function suggest_aliases() {
     done < <(top_commands_full "" "$search_input_size" | awk '{ $1=""; $2=""; $3="";  print}' | awk 'NF' | awk '{$1=$1};1' | awk -v COUNT=1 'NF>COUNT' H "-$search_input_size")
 }
 
+# Sound management
+# Inspired by https://apple.stackexchange.com/a/213048/231885 for switching devices
+# and https://coderwall.com/p/22p0ja/set-get-osx-volume-mute-from-the-command-line for volume management
+function mute_device() {
+    local current_device=$(SwitchAudioSource -c)
+    local target_device="$1"
+    if SwitchAudioSource -a | grep "$target_device" 1>/dev/null; then
+        SwitchAudioSource -s "$1" 1>/dev/null
+        osascript -e 'set volume output muted true'
+        success "device $target_device muted"
+        SwitchAudioSource -s "$current_device" 1>/dev/null
+        if [ "$current_device" != "$target_device" ]; then
+            arrow "switching back to $current_device"
+        fi
+        arrow "currently using $target_device"
+    else
+        error "sound device not found : $target_device (maybe it's disconnected ?)"
+    fi
+}
+function switch_device() {
+    local target_device="$1"
+    if SwitchAudioSource -a | grep "$target_device" 1>/dev/null; then
+        if SwitchAudioSource -s "$1" 1>/dev/null; then
+            success "switched to $target_device"
+        else
+            error "failed to switch to $target_device"
+        fi
+    else
+        error "sound device not found : $target_device (maybe it's disconnected ?)"
+    fi
+}
+
 # Web Crawling
 function aboutpage() {
     year=$(echo "$*" | egrep --extended-regexp --only-matching '\b[[:digit:]]{4}\b' H -n1)
