@@ -27,3 +27,4 @@ dot_scripts/version*
 # newsboat (rss reader)
 *newsboat/cache.db
 *newsboat/history.cmdline
+*private_dot_newsboat/queue
