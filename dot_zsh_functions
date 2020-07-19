@@ -444,7 +444,8 @@ function installhooks() {
     pre-commit install --install-hooks --overwrite --allow-missing-config
 }
 function copyhooks() {
-    cp -f ~/.git-template/.pre-commit-config.yaml ./
+    FILENAME=${1:-"$HOME/.git-template/.pre-commit-config.yaml"}
+    cp -f "$FILENAME" ./.pre-commit-config.yaml
     installhooks
     runhooks
 }
@@ -465,8 +466,12 @@ function git_listobjectsbysize() {
 function setorigin() {
     gra origin "$1" 2>/dev/null
     grset origin "$1"
-    if [[ "$1" =~ *"$COMPANY_NAME"* ]]; then
+    success "updated origin to $1"
+    arrow "copying pre-commit hooks ..."
+    if [[ "$1" =~ "$COMPANY_NAME" ]]; then
         copyhooks
+    else
+        copyhooks "$HOME/.git-template/.pre-commit-minimal-config.yaml"
     fi
 }
 function gitpushcurrentremote() {
@@ -493,9 +498,11 @@ function clone() {
         success "repository cloned"
         if [[ -n "$folder" ]]; then
             cd "$folder" || exit
-            if [[ "$1:u" =~ *"$COMPANY_NAME:u"* ]]; then
-                arrow "copying pre-commit hooks ..."
+            arrow "copying pre-commit hooks ..."
+            if [[ "$1:u" =~ "$COMPANY_NAME:u" ]]; then
                 copyhooks
+            else
+                copyhooks "$HOME/.git-template/.pre-commit-minimal-config.yaml"
             fi
         else
             error "unable to change current directory to : $folder"
