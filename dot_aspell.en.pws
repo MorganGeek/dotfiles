@@ -1,4 +1,4 @@
-personal_ws-1.1 en 201 
+personal_ws-1.1 en 203
 APIs
 Applitools
 BDD
@@ -58,6 +58,7 @@ Postgres
 PrismJS
 README
 ROI
+RSS
 RabbitMQ
 Repl
 Repo
@@ -72,6 +73,7 @@ UI
 UX
 Vundle
 YAGNI
+YAML
 ansiweatherrc
 async
 autocompiled

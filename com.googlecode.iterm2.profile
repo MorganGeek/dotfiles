@@ -33,6 +33,7 @@
   "Guid" : "15B87686-16CF-448A-9B73-5E38F56A2179",
   "Rows" : 25,
   "Default Bookmark" : "No",
+  "Blend" : 0.050000000000000003,
   "Cursor Guide Color" : {
     "Red Component" : 0.70213186740875244,
     "Color Space" : "sRGB",
@@ -284,8 +285,7 @@
   },
   "Window Type" : 0,
   "Cursor Boost" : 0,
-  "Background Image Location" : "",
-  "Blur" : false,
+  "Blur" : true,
   "Badge Color" : {
     "Red Component" : 1,
     "Color Space" : "sRGB",
@@ -307,6 +307,7 @@
     "Blue Component" : 0.63137254901960782,
     "Green Component" : 0.63137254901960782
   },
+  "Background Image Is Tiled" : false,
   "Name" : "MorganGeek",
   "Cursor Text Color" : {
     "Red Component" : 0.027450980392156862,
@@ -322,7 +323,7 @@
     "Blue Component" : 0.58823529411764708,
     "Green Component" : 0.58039215686274515
   },
-  "Transparency" : 0,
+  "Transparency" : 0.081466132614213205,
   "Ansi 1 Color" : {
     "Red Component" : 0.86274509803921573,
     "Color Space" : "sRGB",
