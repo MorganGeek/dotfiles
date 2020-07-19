@@ -26,6 +26,6 @@ pip list --outdated --format=freeze G -v '^\-e' | cut -d = -f 1 | xargs -n1 pip 
 pip freeze >~/requirements.txt
 # Update VIM plugins installed via Vundle https://github.com/VundleVim/Vundle.vim
 vim +PluginUpdate +qall >/dev/null
-rustup-update
+rustup update
 npm update -g moro
 pre-commit autoupdate
