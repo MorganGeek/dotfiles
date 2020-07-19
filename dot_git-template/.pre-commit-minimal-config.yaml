@@ -1,0 +1,19 @@
+---
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+    - repo: local
+      hooks:
+          - id: check-committer
+            name: Check Committer Identity
+            entry: pre-commit-verify-committer
+            language: system
+            always_run: true
+            files: ''
+    - repo: https://github.com/askulkarni2/pre-commit-docker-jenkinslint
+      rev: 88dd7702e44bbc4dc742b37897e1ded7fe99dfba
+      hooks:
+          - id: docker-jenkinslint
+            language: docker_image
+            entry: --entrypoint /usr/local/bin/run-jflint.sh askulkarni2/jenkinslint
+            files: Jenkinsfile
