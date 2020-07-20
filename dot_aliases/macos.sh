@@ -26,6 +26,6 @@ alias switch_headset='mute_speakers && switch_device "Plantronics BT600"'
 alias switch_speakers='mute_headset && switch_device "Haut-parleurs MacBook Pro"'
 # Meeting management
 alias zoom="switch_headset && open -na 'zoom.us'"
-alias nozoom="pkill 'zoom.us'"
+alias nozoom="pkill 'zoom.us' && success 'zoom has been stopped'"
 alias zoom30='zoomtimeboxed 30'
 alias zoom60='zoomtimeboxed 60'
