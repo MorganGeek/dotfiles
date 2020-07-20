@@ -1,5 +1,6 @@
-personal_ws-1.1 en 203
+personal_ws-1.1 en 217
 APIs
+Ansible
 Applitools
 BDD
 BINDIR
@@ -56,6 +57,7 @@ PRs
 PluginInstall
 Postgres
 PrismJS
+PyPI
 README
 ROI
 RSS
@@ -74,7 +76,11 @@ UX
 Vundle
 YAGNI
 YAML
+ansible
+ansible's
 ansiweatherrc
+apache
+args
 async
 autocompiled
 autoload
@@ -98,6 +104,7 @@ config
 copyhooks
 customizable
 darwin
+dest
 dev
 dockerized
 dotfiles
@@ -120,6 +127,7 @@ gulpfile
 headspace
 homebrew
 htop
+idempotency
 init
 integrations
 ipsum
@@ -156,6 +164,7 @@ npm
 parallelization
 parallelize
 parallelizing
+parseable
 pipenv
 powerlevel
 pre
@@ -163,6 +172,7 @@ presentational
 py
 pyenv
 qall
+rebase
 reconnection
 repo
 repos
@@ -178,6 +188,7 @@ semver
 serverless
 sherlock
 snf
+src
 stderr
 stdout
 subcommands
@@ -196,9 +207,12 @@ url
 usr
 vimrc
 webpage
+whitespace
 whoami
 wikit
 wtf
+yaml
 yamllint
+yml
 zsh
 zshrc
