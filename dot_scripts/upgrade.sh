@@ -8,12 +8,12 @@ echo "Upgrading apps"
 
 # Upgrading HomeBrew stuff
 case "$(uname -s)" in
-    Darwin)
-        echo "(Mac OS X) Homebrew upgrading stuff"
-        brew update
-        #brew upgrade
-        brew outdated | xargs brew upgrade
-        ;;
+Darwin)
+    echo "(Mac OS X) Homebrew upgrading stuff"
+    brew update
+    #brew upgrade
+    brew outdated | xargs brew upgrade
+    ;;
 esac
 
 bundle update --all
