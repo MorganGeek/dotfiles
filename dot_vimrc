@@ -65,6 +65,10 @@ Plugin 'farmergreg/vim-lastplace'
 Plugin 'ryanoasis/vim-devicons'
 " Prettier to auto format some files
 Plugin 'mitermayer/vim-prettier'
+" Enable OpenAI based text completion
+Plugin 'jessfraz/openai.vim'
+" TabNine for code completion
+Plugin 'zxqfl/tabnine-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
