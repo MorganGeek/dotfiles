@@ -10,6 +10,7 @@ ln -snf "$HOME/Code/dotfiles/dot_gitconfig" "$HOME/.gitconfig"
 ln -snf "$HOME/Code/dotfiles/dot_macos" "$HOME/.macos"
 ln -snf "$HOME/Code/dotfiles/dot_scripts" "$HOME/.scripts"
 ln -snf "$HOME/Code/dotfiles/dot_scripts/checkci.sh" /usr/local/bin/checkci
+ln -snf "$HOME/Code/dotfiles/dot_scripts/git-overview.py" /usr/local/bin/git-overview # via https://github.com/qznc/dot/blob/master/bin/git-overview
 ln -snf "$HOME/Code/dotfiles/dot_scripts/pre-commit-verify-committer.sh" /usr/local/bin/pre-commit-verify-committer
 ln -snf "$HOME/Code/dotfiles/dot_vimrc" "$HOME/.vimrc"
 # custom linters

@@ -12,6 +12,10 @@ Darwin)
     export PATH="$PATH:/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/:/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/Cellar/python/3.7.5/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/opt/python/bin/"
     ;;
 esac
+if ! test -f "/usr/bin/python2" || ! command -v python2 &>/dev/null; then
+    sudo ln -snf /usr/bin/python /usr/bin/python2
+fi
+
 echo "Upgrading pip"
 sudo pip install --upgrade pip
 echo "Pip installing stuff"
