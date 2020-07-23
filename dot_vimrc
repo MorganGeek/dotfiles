@@ -69,6 +69,8 @@ Plugin 'mitermayer/vim-prettier'
 Plugin 'jessfraz/openai.vim'
 " TabNine for code completion
 Plugin 'zxqfl/tabnine-vim'
+" read man pages from vim, e.g : SuperMan ls. inspired by https://catonmat.net/read-man-pages-with-vim
+Plugin 'jez/vim-superman'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
