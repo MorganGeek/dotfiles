@@ -94,7 +94,12 @@ function archive() {
 function iknowwhatyoudownload() {
     browse "https://iknowwhatyoudownload.com/en/peer/?ip=$*"
 }
-
+function vimium() {
+    browse "chrome-extension://dbepggeogbaibhgnhhndojpepiihcmeb/pages/options.html#"
+}
+function toby() {
+    browse "chrome-extension://gfdcgfhkelkdmglklfbndgopaihmoeci/toby.html"
+}
 # Jira utilities
 function issues() {
     jira issue jql "status = Open AND text ~ \"$*\" ORDER BY Created DESC"
