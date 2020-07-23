@@ -137,6 +137,8 @@ export GIT_PERSONAL_USER=""
 export GIT_PRO_EMAIL=""
 export GIT_PRO_USER=""
 
+source "$HOME/Code/dotfiles/dot_aliases/misc.sh"
+
 if test -f "$HOME/.scripts/secrets.sh"; then
     chmod +x "$HOME/.scripts/secrets.sh"
     source "$HOME/.scripts/secrets.sh"

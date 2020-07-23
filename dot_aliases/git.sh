@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 alias commit='gc'
+alias gpa='git add -p .'
 alias gcls='git clone --depth 1 --recurse-submodules'
 alias gpar='gitpushallremote'
 alias gpcr='gitpushcurrentremote'

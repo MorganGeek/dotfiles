@@ -7,6 +7,11 @@ alias bash="/usr/local/bin/bash"
 #alias date="gdate"
 alias away='moro break 10 && coffee'
 alias afk='away'
+
+# Protect the / directory - via https://github.com/JanEbbing/mytoolbox/blob/5440831fbd0d1575e595d931d4d35be187cf736e/.bash_aliases
+alias chown='gchown --preserve-root'
+alias chmod='gchmod --preserve-root'
+alias chgrp='gchgrp --preserve-root'
 alias current_year='`echo date +"%Y"`'
 alias headers='curl -I --compress'        # Find out if remote server supports gzip / mod_deflate or not #
 alias https='http --default-scheme=https' # useful alias stealed from a colleague. http is provided by httpie
