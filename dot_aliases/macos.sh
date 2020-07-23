@@ -29,3 +29,4 @@ alias zoom="switch_headset && open -na 'zoom.us'"
 alias nozoom="pkill 'zoom.us' && success 'zoom has been stopped'"
 alias zoom30='zoomtimeboxed 30'
 alias zoom60='zoomtimeboxed 60'
+alias unmute='osascript -e "set volume without output muted"'

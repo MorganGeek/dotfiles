@@ -198,6 +198,7 @@ function switch_device() {
     if SwitchAudioSource -a | grep "$target_device" 1>/dev/null; then
         if SwitchAudioSource -s "$1" 1>/dev/null; then
             success "switched to $target_device"
+            unmute
         else
             error "failed to switch to $target_device"
         fi
