@@ -319,7 +319,8 @@ function checkenlist() {
 }
 
 function checkenremote() {
-    curl --location --insecure --silent "$1" > /tmp/file && checkenlist /tmp/file && write-good --no-passive /tmp/file && proselint /tmp/file && \cat /tmp/file > alex -q --stdin
+    local target_url=$(echo "$1" | sed 's/github.com/raw.githubusercontent.com/g' | sed 's;blob/;;')
+    curl --location --insecure --silent "$target_url" > /tmp/file && checkenlist /tmp/file && write-good --no-passive /tmp/file && proselint /tmp/file && \cat /tmp/file > alex -q --stdin
 }
 
 # Time management
@@ -502,8 +503,10 @@ function setorigin() {
     arrow "copying pre-commit hooks ..."
     if [[ "$1" =~ "$COMPANY_NAME" ]]; then
         copyhooks
+        gitpro
     else
         copyhooks "$HOME/.git-template/.pre-commit-minimal-config.yaml"
+        gitperso
     fi
 }
 function gitpushcurrentremote() {
@@ -533,8 +536,10 @@ function clone() {
             arrow "copying pre-commit hooks ..."
             if [[ "$1:u" =~ "$COMPANY_NAME:u" ]]; then
                 copyhooks
+                gitpro
             else
                 copyhooks "$HOME/.git-template/.pre-commit-minimal-config.yaml"
+                gitperso
             fi
         else
             error "unable to change current directory to : $folder"

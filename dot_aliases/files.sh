@@ -39,3 +39,6 @@ alias ve='vim $HOME/.vimrc'         # vimrc editing
 alias ze='vim $HOME/.zshrc'         # zsh profile editing
 alias zf='vim $HOME/.zsh_functions' # edit zsh_functions
 alias za='vim $HOME/.zsh_aliases'   # edit zsh_aliases
+
+# Quick editing
+alias checkthis='arrow "type Ctrl+Z When done"; \cat > /tmp/file; arrow "Ok now we check your text..."; checkenlist /tmp/file'

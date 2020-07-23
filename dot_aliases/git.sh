@@ -11,3 +11,5 @@ alias master='goto master'
 alias develop='goto develop'
 alias gg='git config -l | grip' # search git config for ...
 alias ucommit='PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit --no-verify'
+alias gitperso='git config user.name "$GIT_PERSONAL_USER" && git config user.email "$GIT_PERSONAL_EMAIL" && success "using profile $(git whoami)"'
+alias gitpro='git config user.name "$GIT_PRO_USER" && git config user.email "$GIT_PRO_EMAIL" && success "using profile $(git whoami)"'
