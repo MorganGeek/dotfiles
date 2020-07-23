@@ -132,7 +132,7 @@ function top_commands() {
 function top_commands_full() {
     local filter="$1"
     local max_results=${2:-'50'}
-    history | \cat | awk '{$1=$1};1' | sed 's/^[0-9 TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' G "$filter" | sort --numeric-sort --reverse | nl H "-n$max_results"
+    history | \cat | awk '{$1=$1};1' | sed 's/^[0-9\* TAB]*//g' | awk '{CMD[$0]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "%\t" a; }' G "$filter" | sort --numeric-sort --reverse | nl H "-n$max_results"
 }
 # Where is a function defined?
 function whichfunc() {
