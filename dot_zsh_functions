@@ -559,10 +559,15 @@ function clone() {
     fi
 }
 function fork() {
-    # FIXME : go to local copy of the repo after the fork
-    code
+    code || exit
     local folder=$(basename $1 | sed 's/\.git.*//g')
-    gh repo fork "$1"
+    gh repo fork "$1" --clone && cd "$folder"
+    if [[ "$1:u" =~ "$COMPANY_NAME:u" ]]; then
+        gitpro
+    else
+        gitperso
+    fi
+    checkenlist README*
 }
 function git-project() {
     if [ -d "$REPO_PATH" ]; then
