@@ -43,6 +43,9 @@ ln -snf "$HOME/Code/dotfiles/dot_aspell.en.pws" "$HOME/.aspell.en.pws"
 ln -snf "$HOME/Code/dotfiles/dot_aspell.fr.prepl" "$HOME/.aspell.fr.prepl"
 ln -snf "$HOME/Code/dotfiles/dot_aspell.fr.pws" "$HOME/.aspell.fr.pws"
 
+# Vim spellcheck will be based on aspell :-)
+ln -snf "$HOME/Code/dotfiles/dot_aspell.en.pws" "$HOME/.vim/spell/en.utf-8.add"
+
 # Other symbolic links + Install Docker Desktop for Mac
 case "$(uname -s)" in
 Darwin)
