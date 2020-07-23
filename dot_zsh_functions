@@ -352,8 +352,12 @@ function mouse() {
 
 # Conversion
 function epub2pdf() {
-    local epub_file_name=$(echo $1 | sed 's/.epub$/.pdf/')
-    ebook-convert "$1" "$epub_file_name"
+    local output_file_name=$(echo $1 | sed 's/.epub$/.pdf/')
+    ebook-convert "$1" "$output_file_name"
+}
+function epub2mobi() {
+    local output_file_name=$(echo $1 | sed 's/.epub$/.mobi/')
+    ebook-convert "$1" "$output_file_name"
 }
 
 # Information gathering
