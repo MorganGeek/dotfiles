@@ -19,7 +19,7 @@ esac
 bundle update --all
 #gem update --system
 #gem update asciidoctor-pdf t
-zsh ~/.oh-my-zsh/tools/upgrade.sh
+zsh ~/.oh-my-zsh/tools/upgrade.sh || upgrade_oh_my_zsh
 sudo pip install --upgrade pip 2>/dev/null
 sudo pip3 install --upgrade pip 2>/dev/null
 pip list --outdated --format=freeze G -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U
