@@ -45,6 +45,8 @@ autoload -U compinit && compinit
 "$HOME/.scripts/install_weavescope.sh"
 "$HOME/.scripts/install_bashtop.sh"
 "$HOME/.scripts/install_awsls.sh"
+"$HOME/.scripts/install_bach.sh" # Bash testing framework
+"$HOME/.scripts/install_broot.sh"
 "$HOME/.scripts/configure_git_hooks.sh"
 "$HOME/.scripts/upgrade.sh"
 "$HOME/.scripts/reload.sh"
