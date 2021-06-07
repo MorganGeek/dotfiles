@@ -106,7 +106,7 @@ python-jenkins==1.5.0
 python-mpv==0.4.8
 python-vlc==3.0.10114
 pytz==2019.3
-PyYAML==5.1.2
+PyYAML==5.4
 pyzmq==18.1.0
 QScintilla==2.11.3
 qtconsole==4.5.5
