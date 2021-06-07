@@ -58,6 +58,7 @@ cask "dropbox"
 cask "rescuetime"
 cask "wireshark"
 cask "font-hack-nerd-font" # provides fonts used by vim-devicons https://vimawesome.com/plugin/vim-devicons https://github.com/ryanoasis/nerd-fonts#font-installation
+cask "yacreader"
 
 # Mac app store
 mas 'Keynote', id: 409183694
@@ -199,6 +200,12 @@ brew "fd"
 brew "git-delta"
 brew "sn0int"
 brew "prettier"
+brew "diffutils"
 brew "switchaudio-osx"
 brew "findutils"
 brew "git-extras"
+brew "broot"
+brew "jxplorer"
+brew "android-file-transfer"
+brew "aws-vault"
+brew "asciinema"
