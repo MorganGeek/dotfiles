@@ -113,19 +113,19 @@ let g:ale_completion_enabled = 1
 let g:ale_open_list = 1
 "\   'yaml': ['prettier'],
 
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': ['black'],
-\   'rust': ['rustfmt'],
-\   'Jenkinsfile': ['checkci'],
-\   'sh' : ['shfmt'],
-\   'zsh' : ['shfmt'],
-\}
+"let g:ale_fixers = {
+"\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+"\   'python': ['black'],
+"\   'rust': ['rustfmt'],
+"\   'Jenkinsfile': ['checkci'],
+"\   'sh' : ['shfmt'],
+"\   'zsh' : ['shfmt'],
+"\}
 
 let g:ale_linters = {'zsh': ['shellcheck'], 'text': ['writegood', 'proselint', 'alex']}
 
 " when running at every change you may want to disable quickfix
-let g:prettier#quickfix_enabled = 1
+let g:prettier#quickfix_enabled = 0
 let g:prettier#quickfix_auto_focus = 1
 let g:prettier#config#print_width = '30'
 let g:prettier#exec_cmd_path = "/usr/local/bin/prettier"
