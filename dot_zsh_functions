@@ -179,6 +179,45 @@ function suggest_aliases() {
     done < <(top_commands_full "" "$search_input_size" | awk '{ $1=""; $2=""; $3="";  print}' | awk 'NF' | awk '{$1=$1};1' | awk -v COUNT=1 'NF>COUNT' H "-$search_input_size")
 }
 
+# Download management
+function file_to_kindle() {
+    local source_file="$1"
+    if [[ "$source_file" =~ .*.epub$ ]]; then
+        if epub2mobi "$source_file" 2>/dev/null; then
+            source_file=$(echo $source_file | sed 's/.epub$/.mobi/')
+        fi
+    fi
+    file_to_mail "$source_file" "$KINDLE_ACCOUNT_EMAIL"
+}
+function getabook() {
+    local searchterm="$1"
+    if searchbook "$searchterm"; then
+        echo "new downloaded file"
+        grepsearchterm=$(echo "$searchterm" | sed 's/ /.*/g')
+        if find ~/Downloads/Books -mmin -2 | grip "$grepsearchterm.*(epub|mobi|pdf)$"; then
+            local matching_file=$(find ~/Downloads/Books -mmin -2 | grip "$grepsearchterm.*(epub|mobi|pdf)$" | head -1)
+            local downloaded_file=$(basename "$matching_file")
+            cd "$HOME/Downloads/Books" &>/dev/null || exit
+            success "file downloaded in your Books folder : $downloaded_file"
+            if file_to_kindle "$downloaded_file" 2>/dev/null; then
+                success "file sent to your kindle, please review your emails to approve the transfer"
+                mailperso
+            else
+                error "could not send your file $downloaded_file to your email address, please check your folder"
+                open ~/Downloads/Books
+            fi
+        else
+            error "could not find a matching file in your download folder"
+        fi
+    else
+        error ":'( the automatic download failed for $1, does this book exists ? check yourself or retry"
+        browse "https://libgen.lc/search.php?req=$1"
+    fi
+}
+
+# Mail management
+source $HOME/Code/dotfiles/dot_scripts/sendmail.sh
+
 # Sound management
 # Inspired by https://apple.stackexchange.com/a/213048/231885 for switching devices
 # and https://coderwall.com/p/22p0ja/set-get-osx-volume-mute-from-the-command-line for volume management
