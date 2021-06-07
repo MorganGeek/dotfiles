@@ -1,2 +1,4 @@
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+source /Users/morganwattiez/.config/broot/launcher/bash/br
