@@ -119,7 +119,7 @@ relint==1.2.1
 requests-futures==1.0.0
 requests-toolbelt==0.9.1
 requests==2.24.0
-rsa==3.4.2
+rsa==4.7
 rtv==1.27.0
 Scrapy==1.8.0
 semver==2.9.0
@@ -251,7 +251,7 @@ python-vlc==3.0.10114
 pyzmq==18.1.0
 regex==2019.11.1
 requests==2.24.0
-rsa==3.4.2
+rsa==4.7
 sh==1.12.14
 six==1.15.0
 soupsieve==2.0.1
