@@ -6,3 +6,5 @@ go get -u -v github.com/juliensalinas/torrengo
 go get -u -v github.com/asciimoo/wuzz                           # Interactive CLI tool for HTTP inspection
 go get -u -v github.com/keilerkonzept/terraform-module-versions # detect new terraform modules versions
 go get -u -v github.com/talos-systems/conform
+go get -u -v github.com/ciehanski/libgen-cli
+go get -u -v github.com/ajbosco/reads/cmd/reads
