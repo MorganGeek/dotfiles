@@ -46,3 +46,6 @@ alias za='vim $HOME/.zsh_aliases'   # edit zsh_aliases
 
 # Quick editing
 alias checkthis='arrow "type Ctrl+Z When done"; \cat > /tmp/file; arrow "Ok now we check your text..."; checkenlist /tmp/file'
+
+# Linting
+alias checkreadme='checkenlist README*'
