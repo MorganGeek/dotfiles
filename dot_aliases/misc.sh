@@ -13,6 +13,11 @@ alias chown='gchown --preserve-root'
 alias chmod='gchmod --preserve-root'
 alias chgrp='gchgrp --preserve-root'
 alias current_year='`echo date +"%Y"`'
+alias ftk='file_to_kindle'
+alias send_to_kindle='file_to_kindle'
+alias stk='send_to_kindle'
+alias tokindle='file_to_kindle'
+alias kindle='to_kindle'
 alias headers='curl -I --compress'        # Find out if remote server supports gzip / mod_deflate or not #
 alias https='http --default-scheme=https' # useful alias stealed from a colleague. http is provided by httpie
 alias path='echo -e ${PATH//:/\\n}'       # Explode and display current PATH
