@@ -43,6 +43,9 @@ function substring() {
 function browse() {
     open -na "$DEFAULT_BROWSER" --args "$1"
 }
+function incognito() {
+    open -na "$DEFAULT_BROWSER" --args --incognito "$1"
+}
 function google() {
     browse "https://www.google.com/search?q=$*"
 }
@@ -139,9 +142,7 @@ function whichfunc() {
     whence -v $1
     type -a $1
 }
-
-source $HOME/Code/dotfiles/dot_scripts/suggest_readable_parameters.sh
-
+source "$HOME/Code/dotfiles/dot_scripts/suggest_readable_parameters.sh"
 # TODO : suggest spelling fixes
 function suggest_code_refactoring() {
     #inspired by : \grep 'awk '\''{$1=$1};1'\' $HOME/Code/dotfiles/dot_zsh*
@@ -166,7 +167,7 @@ function suggest_aliases() {
     local search_input_size=${1:-'50'}
     header "alias recommendations"
     while read -r line; do
-        local matching_aliases=$(ag "$line")
+        local matching_aliases=$(ag --multiline "$line")
         if [ ! -z "$matching_aliases" ]; then
             success "there is an alias for $line :"
             while read -r alias_line; do
@@ -224,7 +225,7 @@ source $HOME/Code/dotfiles/dot_scripts/sendmail.sh
 function mute_device() {
     local current_device=$(SwitchAudioSource -c)
     local target_device="$1"
-    if SwitchAudioSource -a | grep "$target_device" 1>/dev/null; then
+    if SwitchAudioSource -a G "$target_device" 1>/dev/null; then
         SwitchAudioSource -s "$1" 1>/dev/null
         osascript -e 'set volume output muted true'
         success "device $target_device muted"
@@ -232,14 +233,14 @@ function mute_device() {
         if [ "$current_device" != "$target_device" ]; then
             arrow "switching back to $current_device"
         fi
-        arrow "currently using $target_device"
+        arrow "currently using $current_device"
     else
         error "sound device not found : $target_device (maybe it's disconnected ?)"
     fi
 }
 function switch_device() {
     local target_device="$1"
-    if SwitchAudioSource -a | grep "$target_device" 1>/dev/null; then
+    if SwitchAudioSource -a G "$target_device" 1>/dev/null; then
         if SwitchAudioSource -s "$1" 1>/dev/null; then
             success "switched to $target_device"
             unmute
@@ -364,12 +365,22 @@ function checkenlist() {
 }
 
 function checkenremote() {
-    local target_url=$(echo "$1" | sed 's/github.com/raw.githubusercontent.com/g' | sed 's;blob/;;')
-    if [[ "$target_url" =~ "githubusercontent.com" && ! "$target_url" =~ "README" ]]; then
-        target_url=$(echo "$target_url/master/README.md")
+    local target_url="$1"
+    if [[ ! "$target_url" =~ "githubusercontent.com" && ! "$target_url" =~ "README" && ! "$target_url" =~ "readme" ]]; then
+        arrow "no readme found"
+        local guess_readme_url=$(http "$target_url" | \grep -ioP 'href="\K.*REAdme.(md|rst)(?=")' | head -1)
+        arrow "does https://github.com${guess_readme_url} exist "
+        arrow "guess url : $guess_readme_url"
+        if http --check-status "https://github.com${guess_readme_url}" &>/dev/null; then
+            target_url="https://github.com${guess_readme_url}"
+            arrow "target url changed to ${target_url}"
+        else
+            arrow "https://github.com${guess_readme_url} do not exist"
+        fi
     fi
+    target_url=$(echo "$target_url" | sed 's/github.com/raw.githubusercontent.com/g' | sed 's;blob/;;')
     arrow "checking $target_url"
-    curl --location --insecure --silent "$target_url" > /tmp/file && checkenlist /tmp/file && write-good --no-passive /tmp/file && proselint /tmp/file && \cat /tmp/file > alex -q --stdin
+    curl --location --insecure --silent "$target_url" > /tmp/file && checkenlist /tmp/file #&& write-good --no-passive /tmp/file && proselint /tmp/file && \cat /tmp/file > alex -q --stdin
 }
 
 # Time management
@@ -610,7 +621,8 @@ function fork() {
     else
         gitperso
     fi
-    checkenlist README*
+    checkreadme
+    # TODO : check all the codebase for spelling mistakes in info/debug/error messages etc.
 }
 function git-project() {
     if [ -d "$REPO_PATH" ]; then
@@ -748,4 +760,14 @@ function runiflucky() {
             eval "$1"
         fi
     fi
+}
+function aws-login() {
+    profile_list=$(aws-vault list --profiles | fzf --ansi)
+    login_url=$(export AWS_SESSION_TOKEN_TTL=3h && aws-vault login $profile_list -s)
+    echo "$login_url $1"
+    browse "$login_url $1" 1>/dev/null 2>&1 &
+}
+function aws-exec() {
+    profile_list=$(aws-vault list --profiles | fzf --ansi)
+    aws-vault exec $profile_list
 }

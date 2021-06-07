@@ -5,3 +5,6 @@ Host *
  IdentityFile ~/.ssh/id_ed25519
  IdentityFile ~/.ssh/id_rsa
  ServerAliveInterval 3600
+
+Match all
+Include banyan.config
