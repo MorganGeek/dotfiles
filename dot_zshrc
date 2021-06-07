@@ -183,3 +183,5 @@ export PATH="/usr/local/opt/grep/libexec/gnubin:$GOPATH/bin:$RUSTPATH:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source /Users/morganwattiez/.config/broot/launcher/bash/br
