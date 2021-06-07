@@ -20,6 +20,9 @@ alias lh='ls -alt | head' # see the last modified files
 alias tree='ls --almost-all --tree -I .git'
 alias x='extract'
 
+# Searching
+alias searchbook="libgen-cli search --output $HOME/Downloads/Books"
+
 # Projects shortcuts
 alias code='cd $HOME/Code'
 alias blog='z morgangeek-blog'
