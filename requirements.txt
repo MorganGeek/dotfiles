@@ -73,7 +73,7 @@ pbr==5.4.3
 pexpect==4.7.0
 pickleshare==0.7.5
 pigpio==1.44
-Pillow==6.2.1
+Pillow==8.2.0
 pipenv==2018.11.26
 pkginfo==1.5.0.1
 pocket==0.3.6
@@ -226,7 +226,7 @@ pbr==5.4.3
 pexpect==4.7.0
 pickleshare==0.7.5
 pigpio==1.44
-Pillow==6.2.1
+Pillow==8.2.0
 pipenv==2018.11.26
 pkginfo==1.5.0.1
 pocket==0.3.6
